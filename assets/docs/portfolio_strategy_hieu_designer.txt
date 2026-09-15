@@ -1,0 +1,18 @@
+# PHÂN TÍCH & QUY TRÌNH XÂY DỰNG WEBSITE PORTFOLIO CÁ NHÂN
+Portfolio định hướng: HIẾU — Creative / Graphic Designer
+
+1. MỤC TIÊU CỦA WEBSITE
+- Đối tượng: Nhà tuyển dụng, khách hàng và đối tác tiềm năng
+- Mục đích: Thể hiện năng lực, tư duy sáng tạo và kinh nghiệm thiết kế
+- Thông điệp: Tôi có khả năng tạo ra các giải pháp thiết kế trực quan và chuyên nghiệp
+- Hành động mong muốn: Xem dự án → Xem CV → Liên hệ phỏng vấn
+
+2. CẤU TRÚC WEBSITE ĐỀ XUẤT
+- HOME — Giới thiệu và tạo ấn tượng đầu tiên (Hero section với typography lớn, Selected Work preview)
+- ABOUT ME — Giới thiệu bản thân, kinh nghiệm và kỹ năng
+- SELECTED WORK — Các dự án tiêu biểu (Branding, Social Media, UI/Website)
+- PROJECT DETAIL — Case Study chi tiết (Bối cảnh, Vấn đề, Giải pháp, Thành phẩm)
+- CONTACT — Email, mạng xã hội và lời mời liên hệ
+
+3. ĐỊNH HƯỚNG UI/UX
+- Phong cách: Modern + Minimal + Creative (Dark/Light mode tinh tế, high contrast, typography táo bạo).

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>CAO NGỌC MINH — Graphic Designer | Portfolio</title>
+  <meta name="description" content="Portfolio của Cao Ngọc Minh - Graphic Designer. Khám phá chất liệu hình ảnh, nâng tầm bản sắc thương hiệu. Chuyên thiết kế nhận diện thương hiệu, Menu, POSM, ấn phẩm bao bì và Digital Marketing."/>
+  
+  <!-- Roboto Font Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#FFFFFF",
+            "accent": "#00DF89",
+            "accent-lime": "#A3E635",
+            "surface": "#0A362D",
+            "surface-dim": "#04201A",
+            "surface-card": "rgba(10, 54, 45, 0.75)",
+            "on-surface": "#FFFFFF",
+            "on-surface-variant": "#B8D3CB",
+            "outline": "rgba(0, 223, 137, 0.25)",
+            "background": "#05261F"
+          },
+          fontFamily: {
+            "sans": ["Roboto", "sans-serif"],
+            "roboto": ["Roboto", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body class="bg-[#05261F] font-roboto text-white antialiased selection:bg-[#00DF89] selection:text-[#04201A]">
+
+  <!-- Header / Thanh Điều Hướng -->
+  <header class="fixed top-0 w-full z-50 glass-nav transition-all">
+    <div class="h-16 sm:h-20 max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a class="font-roboto text-xl sm:text-2xl font-black tracking-wider uppercase text-white hover:text-white/80 transition-colors flex items-center leading-none" href="index.html">
+        MINH<span class="text-[#00DF89]">.</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a class="text-sm font-roboto uppercase tracking-wider text-white font-bold transition-colors border-b-2 border-[#00DF89] pb-1" href="index.html">Trang Chủ</a>
+        <a class="text-sm font-roboto uppercase tracking-wider text-[#B8D3CB] hover:text-white transition-colors font-medium" href="pages/selected-work.html">Dự Án Tiêu Biểu</a>
+        <a class="text-sm font-roboto uppercase tracking-wider text-[#B8D3CB] hover:text-white transition-colors font-medium" href="pages/about.html">Giới Thiệu</a>
+        <a class="text-sm font-roboto uppercase tracking-wider text-[#B8D3CB] hover:text-white transition-colors font-medium" href="pages/case-study-vortex.html">Case Study</a>
+        <a class="text-sm font-roboto uppercase tracking-wider text-[#B8D3CB] hover:text-white transition-colors font-medium" href="pages/contact.html">Liên Hệ</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden sm:flex items-center space-x-3">
+        <a class="btn-outline-pill px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center gap-1.5" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined text-sm">download</span>
+          <span>Tải CV</span>
+        </a>
+        <a class="btn-accent-gradient inline-flex items-center px-5 py-2.5 rounded-xl font-bold text-xs tracking-wider uppercase shadow-lg shadow-[#00DF89]/20" href="pages/contact.html">
+          <span>Liên Hệ</span>
+          <span class="material-symbols-outlined text-sm ml-1">arrow_outward</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle Button (Symmetrical & perfectly centered) -->
+      <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-[#0A362D] text-white hover:text-[#00DF89] border border-[#00DF89]/30 active:scale-95 transition-all shadow-sm shrink-0" aria-label="Mở Menu">
+        <span class="material-symbols-outlined text-[22px] leading-none select-none">menu</span>
+      </button>
+    </div>
+
+    <!-- Dropdown Menu Mobile -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#04201A]/95 backdrop-blur-xl border-b border-[#00DF89]/20 px-5 py-5 space-y-3.5 shadow-2xl">
+      <a class="block font-roboto uppercase text-sm tracking-wider text-white font-bold py-1 border-l-2 border-[#00DF89] pl-3" href="index.html">Trang Chủ</a>
+      <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="pages/selected-work.html">Dự Án Tiêu Biểu</a>
+      <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="pages/about.html">Giới Thiệu</a>
+      <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="pages/case-study-vortex.html">Case Study</a>
+      <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="pages/contact.html">Liên Hệ</a>
+      <div class="pt-3 border-t border-[#00DF89]/15 flex flex-col gap-2.5">
+        <a class="btn-outline-pill w-full justify-center py-3 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined text-sm">download</span>
+          <span>Tải CV / Hồ Sơ (Drive)</span>
+        </a>
+        <a class="btn-accent-gradient inline-flex w-full justify-center items-center py-3 font-bold text-xs tracking-wider uppercase rounded-xl shadow-lg shadow-[#00DF89]/20" href="pages/contact.html">
+          <span>Liên Hệ Ngay</span>
+          <span class="material-symbols-outlined text-sm ml-1">arrow_outward</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Nội Dung Chính -->
+  <main class="w-full pt-16 sm:pt-20 min-h-screen font-roboto">
+    <div class="flex flex-col w-full">
+
+      <!-- Hero Section -->
+      <section class="relative w-full min-h-[85vh] flex flex-col justify-center px-4 sm:px-8 overflow-hidden bg-[#05261F] pt-6 pb-12 sm:pb-16">
+        
+        <!-- Vầng Sáng Trang Trí Ambient Glow -->
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-[#00DF89]/12 rounded-full blur-[90px] sm:blur-[140px] pointer-events-none animate-pulse-glow"></div>
+        <div class="absolute bottom-10 right-10 w-60 sm:w-96 h-60 sm:h-96 bg-[#0A362D]/60 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto w-full z-10 pt-4 sm:pt-12">
+          
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            <!-- Cột Trái: Thông Tin, Nút Bấm & Thống Kê -->
+            <div class="lg:col-span-7 flex flex-col items-start">
+              <div class="flex items-center space-x-2.5 mb-4 sm:mb-6">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#00DF89] animate-ping"></span>
+                <span class="font-roboto text-[11px] sm:text-xs font-bold text-white/90 tracking-widest uppercase bg-[#072C24] px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-[#00DF89]/30">SẴN SÀNG NHẬN DỰ ÁN & PHỎNG VẤN</span>
+              </div>
+
+              <h1 class="font-roboto text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-black text-white uppercase tracking-tight leading-[1.12] mb-4 sm:mb-6">
+                CAO NGỌC MINH <br/><span class="gradient-mint-lime">GRAPHIC DESIGNER</span>
+              </h1>
+
+              <p class="text-base sm:text-2xl font-medium text-white mb-2 sm:mb-3 leading-snug">
+                Khám phá chất liệu hình ảnh — Nâng tầm bản sắc thương hiệu.
+              </p>
+              <p class="text-sm sm:text-lg text-[#B8D3CB] leading-relaxed max-w-2xl font-normal mb-6 sm:mb-8">
+                Nghiên cứu ý tưởng, sáng tạo ấn phẩm truyền thông, thiết kế Menu & POSM, bao bì sản phẩm và giao diện hình ảnh Digital Marketing chuyên nghiệp.
+              </p>
+
+              <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto mb-8 sm:mb-10">
+                <a class="btn-accent-gradient inline-flex items-center justify-center px-6 py-3.5 font-roboto font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl shadow-xl shadow-[#00DF89]/20 hover:scale-105 active:scale-95 transition-all text-center" href="pages/selected-work.html">
+                  <span>Xem Dự Án Tiêu Biểu</span>
+                  <span class="material-symbols-outlined ml-2 text-base">arrow_forward</span>
+                </a>
+                <a class="btn-outline-pill inline-flex items-center justify-center px-6 py-3.5 font-roboto font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl hover:border-[#00DF89] active:scale-95 transition-all text-center" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
+                  <span class="material-symbols-outlined mr-2 text-base">download</span>
+                  <span>Tải CV / Hồ Sơ (Drive)</span>
+                </a>
+              </div>
+
+              <!-- Lưới Thống Kê Nhanh (Số Chạy Tự Động) -->
+              <div class="grid grid-cols-2 gap-4 sm:gap-12 pt-6 sm:pt-8 border-t border-[#00DF89]/20 w-full max-w-lg">
+                <div class="flex flex-col bg-[#072C24]/60 sm:bg-transparent p-3 sm:p-0 rounded-xl sm:rounded-none border border-[#00DF89]/15 sm:border-0">
+                  <span class="counter-number font-roboto text-3xl sm:text-5xl font-black text-[#00DF89]" data-target="6" data-suffix="+ Năm" data-pad="2" data-duration="1600">06+ Năm</span>
+                  <span class="font-roboto text-[11px] sm:text-xs text-[#B8D3CB] uppercase tracking-wider mt-1 sm:mt-2 font-medium">Kinh Nghiệm Thực Chiến</span>
+                </div>
+                <div class="flex flex-col bg-[#072C24]/60 sm:bg-transparent p-3 sm:p-0 rounded-xl sm:rounded-none border border-[#00DF89]/15 sm:border-0">
+                  <span class="counter-number font-roboto text-3xl sm:text-5xl font-black text-[#00DF89]" data-target="50" data-suffix="+" data-pad="1" data-duration="2000">50+</span>
+                  <span class="font-roboto text-[11px] sm:text-xs text-[#B8D3CB] uppercase tracking-wider mt-1 sm:mt-2 font-medium">Dự Án Đã Thực Hiện</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cột Phải: Ảnh Visual Nghệ Thuật Nổi Bật -->
+            <div class="lg:col-span-5 relative mt-4 lg:mt-0 w-full max-w-md mx-auto lg:max-w-none">
+              <div class="relative w-full h-[360px] sm:h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-[#072C24] border border-[#00DF89]/30 group">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('assets/images/cao-ngoc-minh-portrait.jpg')"></div>
+                
+                <!-- Lớp gradient phủ nhẹ ở chân ảnh -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#04201A] via-transparent to-transparent opacity-80"></div>
+                
+                <!-- Badge góc trên ảnh -->
+                <div class="absolute top-3.5 left-3.5 flex gap-2">
+                  <span class="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] sm:text-xs font-bold text-[#00DF89] uppercase border border-[#00DF89]/30 flex items-center gap-1.5 shadow-md">
+                    <span class="w-2 h-2 rounded-full bg-[#00DF89] animate-pulse"></span>
+                    Portfolio 2026
+                  </span>
+                </div>
+
+                <!-- Thẻ thông tin dưới góc ảnh -->
+                <div class="absolute bottom-3.5 left-3.5 right-3.5 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#04201A]/90 backdrop-blur border border-[#00DF89]/30">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <span class="font-roboto text-[11px] font-bold text-[#00DF89] uppercase tracking-wider block">Cao Ngọc Minh</span>
+                      <span class="font-roboto text-xs text-[#B8D3CB]">Graphic & Visual Designer</span>
+                    </div>
+                    <span class="text-xs font-bold text-white bg-[#00DF89]/20 px-2.5 py-1 rounded-lg border border-[#00DF89]/40">Hà Nội</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Marquee Ticker Bar (Chạy liên tục không ngừng) -->
+      <section class="marquee-container w-full py-3.5 sm:py-4 bg-[#031B16] border-y border-[#00DF89]/20 overflow-hidden flex items-center select-none">
+        <div class="animate-marquee flex whitespace-nowrap items-center space-x-6 sm:space-x-8 text-xs sm:text-sm font-bold tracking-widest text-[#B8D3CB] uppercase">
+          <!-- Set 1 -->
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> BRAND IDENTITY</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> MENU & POSM</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> E-COMMERCE VISUALS</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> DIGITAL MARKETING</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> PHOTOSHOP</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> ILLUSTRATOR</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> INDESIGN</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> FIGMA</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> ANTIGRAVITY</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> PACKAGING DESIGN</span>
+          
+          <!-- Set 2 (Lặp lại liền mạch) -->
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> BRAND IDENTITY</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> MENU & POSM</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> E-COMMERCE VISUALS</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> DIGITAL MARKETING</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> PHOTOSHOP</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> ILLUSTRATOR</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> INDESIGN</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> FIGMA</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> ANTIGRAVITY</span>
+          <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> PACKAGING DESIGN</span>
+        </div>
+      </section>
+
+      <!-- Phần Xem Trước Dự Án Tiêu Biểu -->
+      <section class="w-full py-14 sm:py-24 px-4 sm:px-8 bg-[#04201A]">
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4 sm:gap-6">
+            <div>
+              <span class="font-roboto text-xs font-bold text-[#00DF89] uppercase tracking-widest mb-1.5 block">DANH MỤC CHỌN LỌC</span>
+              <h2 class="font-roboto text-2xl sm:text-4xl font-black text-white uppercase">Dự Án Tiêu Biểu</h2>
+            </div>
+            <a class="inline-flex items-center font-roboto text-xs sm:text-sm uppercase tracking-wider text-[#00DF89] hover:text-white transition-colors group font-bold" href="pages/selected-work.html">
+              <span>Xem Tất Cả 12 Dự Án</span>
+              <span class="material-symbols-outlined ml-1.5 text-base group-hover:translate-x-1.5 transition-transform">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- Lưới Thẻ Dự Án -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Dự Án 1: Ulibee Product Campaign -->
+            <a class="group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all duration-300 border border-[#00DF89]/20 hover:border-[#00DF89]/60" href="pages/case-study-vortex.html">
+              <div class="relative w-full h-64 sm:h-80 overflow-hidden bg-[#04201A]">
+                <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('assets/images/ulibee-product-campaign-kv.jpg')"></div>
+                <div class="absolute top-3.5 left-3.5 flex gap-2">
+                  <span class="px-3 py-1 bg-[#04201A]/90 backdrop-blur-md rounded-full font-roboto text-[10px] sm:text-[11px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">FMCG · Digital Marketing</span>
+                </div>
+              </div>
+              <div class="p-5 sm:p-6 flex flex-col justify-between flex-grow">
+                <div>
+                  <h3 class="font-roboto text-lg sm:text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Ulibee — Product Campaign</h3>
+                  <p class="text-xs sm:text-sm text-[#B8D3CB] line-clamp-2 leading-relaxed">Thiết kế Key Visual quảng bá Nước Tẩy Đa Năng Sinh Học Ulibee: công nghệ Nhật Bản, enzyme sinh học an toàn và làm sạch vượt trội x3.</p>
+                </div>
+                <div class="flex items-center justify-between mt-5 pt-3.5 border-t border-[#00DF89]/15">
+                  <span class="font-roboto text-[11px] sm:text-xs text-[#B8D3CB] uppercase tracking-wider font-medium">2024 - 2025 • Case Study Nổi Bật</span>
+                  <span class="material-symbols-outlined text-[#00DF89] text-base group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">north_east</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Dự Án 2: Nét Quê - Brand Identity -->
+            <a class="group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all duration-300 border border-[#00DF89]/20 hover:border-[#00DF89]/60" href="pages/case-study-net-que.html">
+              <div class="relative w-full h-64 sm:h-80 overflow-hidden bg-[#04201A]">
+                <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('assets/images/net-que-isometric-mockup.jpg')"></div>
+                <div class="absolute top-3.5 left-3.5 flex gap-2">
+                  <span class="px-3 py-1 bg-[#04201A]/90 backdrop-blur-md rounded-full font-roboto text-[10px] sm:text-[11px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Branding & Cultural Identity</span>
+                </div>
+              </div>
+              <div class="p-5 sm:p-6 flex flex-col justify-between flex-grow">
+                <div>
+                  <h3 class="font-roboto text-lg sm:text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Nét Quê — Brand Identity</h3>
+                  <p class="text-xs sm:text-sm text-[#B8D3CB] line-clamp-2 leading-relaxed">Xây dựng bộ nhận diện thương hiệu Nét Quê mang đậm bản sắc văn hóa Việt Nam, kết hợp đỏ đô – trắng cùng hoa văn truyền thống và phong cách hiện đại.</p>
+                </div>
+                <div class="flex items-center justify-between mt-5 pt-3.5 border-t border-[#00DF89]/15">
+                  <span class="font-roboto text-[11px] sm:text-xs text-[#B8D3CB] uppercase tracking-wider font-medium">2024 • Case Study Nổi Bật</span>
+                  <span class="material-symbols-outlined text-[#00DF89] text-base group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">north_east</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Dự Án 3: Lamee - Brand Identity -->
+            <a class="group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all duration-300 border border-[#00DF89]/20 hover:border-[#00DF89]/60 md:col-span-2 lg:col-span-1" href="pages/case-study-lamee.html">
+              <div class="relative w-full h-64 sm:h-80 overflow-hidden bg-[#04201A]">
+                <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('assets/images/lamee-isometric-mockup.jpg')"></div>
+                <div class="absolute top-3.5 left-3.5 flex gap-2">
+                  <span class="px-3 py-1 bg-[#04201A]/90 backdrop-blur-md rounded-full font-roboto text-[10px] sm:text-[11px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Branding & Lifestyle</span>
+                </div>
+              </div>
+              <div class="p-5 sm:p-6 flex flex-col justify-between flex-grow">
+                <div>
+                  <h3 class="font-roboto text-lg sm:text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Lamee — Brand Identity</h3>
+                  <p class="text-xs sm:text-sm text-[#B8D3CB] line-clamp-2 leading-relaxed">Xây dựng bộ nhận diện thương hiệu Lamee phong cách sống xanh, hiện đại và thân thiện: xanh lá – vàng chanh – trắng cùng biểu tượng chiếc lá tự nhiên.</p>
+                </div>
+                <div class="flex items-center justify-between mt-5 pt-3.5 border-t border-[#00DF89]/15">
+                  <span class="font-roboto text-[11px] sm:text-xs text-[#B8D3CB] uppercase tracking-wider font-medium">2024 • Nhận Diện Thương Hiệu</span>
+                  <span class="material-symbols-outlined text-[#00DF89] text-base group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">north_east</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Phần Xem Trước Giới Thiệu (About Preview) -->
+      <section class="w-full py-14 sm:py-24 px-4 sm:px-8 bg-[#05261F]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div class="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-none">
+            <div class="relative w-full h-[340px] sm:h-[460px] rounded-2xl overflow-hidden shadow-2xl bg-[#072C24] border border-[#00DF89]/20">
+              <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/images/cao-ngoc-minh-portrait.jpg')"></div>
+            </div>
+            <div class="absolute -bottom-4 -right-4 bg-[#04201A] text-white p-4 sm:p-6 rounded-2xl shadow-xl hidden sm:block max-w-xs border border-[#00DF89]/30">
+              <p class="font-roboto font-black uppercase text-xs tracking-wider mb-1 text-[#00DF89]">Slogan Nghề Nghiệp</p>
+              <p class="text-xs text-[#B8D3CB] leading-relaxed font-bold">“Khám phá chất liệu hình ảnh — Nâng tầm bản sắc thương hiệu.”</p>
+            </div>
+          </div>
+          <div class="lg:col-span-7 flex flex-col">
+            <span class="font-roboto text-xs font-bold text-[#00DF89] uppercase tracking-widest mb-1.5">GIỚI THIỆU BẢN THÂN</span>
+            <h2 class="font-roboto text-2xl sm:text-4xl font-bold text-white uppercase mb-3 sm:mb-4 leading-snug">
+              Cao Ngọc Minh — Graphic Designer đam mê sáng tạo & chất liệu hình ảnh mới.
+            </h2>
+            <p class="text-sm sm:text-base text-[#B8D3CB] mb-4 leading-relaxed">
+              Chào Quý Anh/Chị, em là Cao Ngọc Minh (24 tuổi), vừa hoàn thành chặng đường học tập tại Trường Đại Học Mỏ - Địa Chất. Với niềm đam mê cháy bỏng dành cho nghệ thuật thị giác, em luôn nỗ lực tạo ra những sản phẩm thiết kế độc đáo, sáng tạo và mang đậm dấu ấn thương hiệu.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-6 p-3.5 sm:p-4 rounded-xl bg-[#072C24] border border-[#00DF89]/20 text-xs text-[#B8D3CB]">
+              <div class="flex items-center gap-2">
+                <span class="text-[#00DF89]">📅</span> <span>Ngày sinh: <strong>28/07/2002</strong></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[#00DF89]">📞</span> <span>Điện thoại: <strong>0327.430.794</strong></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[#00DF89]">✉️</span> <span>Email: <strong>mngoc12851@gmail.com</strong></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[#00DF89]">📍</span> <span>Khu vực: <strong>Bắc Từ Liêm, TP. Hà Nội</strong></span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-6 sm:mb-8">
+              <span class="px-3.5 py-1.5 rounded-xl bg-[#072C24] text-[#00DF89] font-roboto text-[11px] sm:text-xs font-bold border border-[#00DF89]/30">Photoshop</span>
+              <span class="px-3.5 py-1.5 rounded-xl bg-[#072C24] text-[#00DF89] font-roboto text-[11px] sm:text-xs font-bold border border-[#00DF89]/30">Illustrator</span>
+              <span class="px-3.5 py-1.5 rounded-xl bg-[#072C24] text-[#00DF89] font-roboto text-[11px] sm:text-xs font-bold border border-[#00DF89]/30">InDesign</span>
+              <span class="px-3.5 py-1.5 rounded-xl bg-[#072C24] text-[#00DF89] font-roboto text-[11px] sm:text-xs font-bold border border-[#00DF89]/30">Figma</span>
+              <span class="px-3.5 py-1.5 rounded-xl bg-[#072C24] text-[#00DF89] font-roboto text-[11px] sm:text-xs font-bold border border-[#00DF89]/30">Antigravity</span>
+            </div>
+            <div>
+              <a class="inline-flex items-center font-roboto text-xs sm:text-sm font-bold uppercase tracking-wider text-[#00DF89] hover:underline transition-colors group" href="pages/about.html">
+                <span>Xem Chi Tiết Kinh Nghiệm & Học Vấn</span>
+                <span class="material-symbols-outlined ml-1.5 text-base group-hover:translate-x-1.5 transition-transform">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#04201A] relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-tr from-[#00DF89]/5 via-transparent to-[#00DF89]/5 pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#00DF89]/10 border border-[#00DF89]/30 mb-5 sm:mb-6">
+            <span class="w-2 h-2 rounded-full bg-[#00DF89] animate-pulse"></span>
+            <span class="font-roboto text-[11px] sm:text-xs font-bold text-[#00DF89] uppercase tracking-widest">SẴN SÀNG HỢP TÁC & PHỎNG VẤN</span>
+          </div>
+          
+          <h2 class="font-roboto text-2xl sm:text-5xl lg:text-6xl font-black text-white uppercase mb-4 sm:mb-6 tracking-wide leading-tight sm:leading-[1.2] max-w-4xl">
+            Hãy cùng nhau tạo nên <br class="hidden sm:block"/>những ấn phẩm xuất sắc.
+          </h2>
+          
+          <p class="text-sm sm:text-lg text-[#B8D3CB] max-w-2xl mb-6 sm:mb-8 leading-relaxed font-normal">
+            Em rất hy vọng sẽ được đồng hành cùng Quý Anh/Chị trong các dự án sáng tạo và cơ hội nghề nghiệp sắp tới!
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center items-center">
+            <a class="btn-accent-gradient w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xl shadow-[#00DF89]/20 hover:scale-105 active:scale-95 transition-all" href="pages/contact.html">
+              <span>Liên Hệ Phỏng Vấn</span>
+              <span class="material-symbols-outlined text-base">mail</span>
+            </a>
+            <a class="btn-outline-pill w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider inline-flex items-center justify-center gap-2 hover:border-white active:scale-95 transition-all" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined text-base">download</span>
+              <span>Tải CV / Hồ Sơ (Drive)</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-[#031B16] py-10 sm:py-12 px-4 sm:px-8 border-t border-[#00DF89]/20 font-roboto">
+    <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
+      <span class="font-roboto text-xl sm:text-2xl font-black text-white uppercase tracking-wider">CAO NGỌC MINH<span class="text-[#00DF89]">.</span></span>
+      <p class="text-xs sm:text-sm text-[#B8D3CB] mt-1.5 max-w-md">Graphic Designer • Khám phá chất liệu hình ảnh - Nâng tầm bản sắc thương hiệu.</p>
+      <p class="text-[11px] sm:text-xs text-[#B8D3CB]/70 mt-2.5">© <span id="current-year">2026</span> Cao Ngọc Minh. Mọi quyền được bảo lưu.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
