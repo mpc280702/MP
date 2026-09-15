@@ -231,3 +231,43 @@ html {
   color: #04201A !important;
 }
 
+/* Rounded Active Nav Underline Indicators */
+.nav-link-active {
+  position: relative;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  padding-bottom: 0.25rem;
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #00DF89;
+  border-radius: 9999px;
+  box-shadow: 0 0 8px rgba(0, 223, 137, 0.5);
+}
+
+.nav-link-active-mobile {
+  position: relative;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  padding-left: 0.85rem;
+}
+
+.nav-link-active-mobile::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 0;
+  width: 3.5px;
+  height: 70%;
+  background-color: #00DF89;
+  border-radius: 9999px;
+  box-shadow: 0 0 8px rgba(0, 223, 137, 0.5);
+}
+
+
