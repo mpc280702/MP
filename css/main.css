@@ -40,22 +40,20 @@
 }
 
 /* Global Font Override to Roboto (preserving Material Symbols icons) */
-*, html, body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+html, body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, div, section, header, footer {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-span:not(.material-symbols-outlined) {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-}
-
-.material-symbols-outlined {
+.material-symbols-outlined,
+span.material-symbols-outlined,
+i.material-symbols-outlined {
   font-family: 'Material Symbols Outlined' !important;
-  font-weight: normal;
-  font-style: normal;
+  font-weight: normal !important;
+  font-style: normal !important;
   font-size: 20px;
   line-height: 1;
   letter-spacing: normal;
-  text-transform: none;
+  text-transform: none !important;
   display: inline-block;
   white-space: nowrap;
   word-wrap: normal;
@@ -63,6 +61,7 @@ span:not(.material-symbols-outlined) {
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
 
 body {
   background-color: var(--background);
