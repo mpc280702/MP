@@ -231,29 +231,49 @@ html {
   color: #04201A !important;
 }
 
-/* Rounded Active Nav Underline Indicators */
-.nav-link-active {
-  position: relative;
-  color: #FFFFFF !important;
-  font-weight: 700 !important;
-  padding-bottom: 0.25rem;
+/* Pill Capsule Navbar (Matching Target Mockup) */
+.nav-pill-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(4, 32, 26, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 0.35rem 0.45rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-.nav-link-active::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #00DF89;
+.nav-pill-item {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #DDE8E4;
+  padding: 0.5rem 1.15rem;
   border-radius: 9999px;
-  box-shadow: 0 0 8px rgba(0, 223, 137, 0.5);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  text-decoration: none !important;
+}
+
+.nav-pill-item:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-pill-item.nav-pill-active,
+.nav-pill-item.active {
+  background: rgba(11, 64, 52, 0.95) !important;
+  color: #00DF89 !important;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 223, 137, 0.15);
+  border: 1px solid rgba(0, 223, 137, 0.25);
 }
 
 .nav-link-active-mobile {
   position: relative;
-  color: #FFFFFF !important;
+  color: #00DF89 !important;
   font-weight: 700 !important;
   padding-left: 0.85rem;
 }
@@ -269,5 +289,6 @@ html {
   border-radius: 9999px;
   box-shadow: 0 0 8px rgba(0, 223, 137, 0.5);
 }
+
 
 

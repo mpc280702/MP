@@ -96,13 +96,20 @@ document.addEventListener('DOMContentLoaded', () => {
         (normalizedPath === '' || normalizedPath === 'index.html') &&
         (normalizedHref === 'index.html' || normalizedHref === './index.html' || normalizedHref === '../index.html')
       ) {
-        link.classList.add('text-primary', 'font-bold');
-        link.classList.remove('text-on-surface-variant');
-      } else if (normalizedPath && normalizedHref.includes(normalizedPath)) {
-        link.classList.add('text-primary', 'font-bold');
-        link.classList.remove('text-on-surface-variant');
+        if (link.classList.contains('nav-pill-item')) {
+          link.classList.add('nav-pill-active');
+        } else {
+          link.classList.add('nav-link-active-mobile');
+        }
+      } else if (normalizedPath && normalizedHref.includes(normalizedPath) && normalizedHref !== '../index.html' && normalizedHref !== 'index.html') {
+        if (link.classList.contains('nav-pill-item')) {
+          link.classList.add('nav-pill-active');
+        } else {
+          link.classList.add('nav-link-active-mobile');
+        }
       }
     }
   });
 });
+
 
