@@ -1,6 +1,6 @@
-# HIẾU — Creative / Graphic Designer Portfolio
+# CAO NGỌC MINH — Graphic Designer Portfolio
 
-Website portfolio cá nhân cao cấp dành cho **Hiếu (Creative & Graphic Designer / Art Director)**, được xây dựng với phong cách thiết kế hiện đại, typography táo bạo, dark mode sang trọng và tương tác mượt mà.
+Website portfolio cá nhân cao cấp dành cho **Cao Ngọc Minh (Graphic Designer & Digital Creator)**, được xây dựng với phong cách thiết kế hiện đại, typography táo bạo, dark mode sang trọng và tương tác mượt mà.
 
 ---
 
