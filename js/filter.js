@@ -2,19 +2,21 @@
  * SELECTED WORK FILTER SCRIPT (CAO NGỌC MINH)
  */
 
-function filterProjects(category) {
+function filterProjects(category, event) {
   const buttons = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.project-card');
 
+  // Find active button reliably
+  let activeBtn = event ? event.currentTarget : (window.event ? window.event.currentTarget : null);
+
   // Update button active state
   buttons.forEach(btn => {
-    btn.classList.remove('btn-accent-gradient', 'shadow-md');
-    btn.classList.add('bg-[#072C24]', 'text-[#B8D3CB]', 'border', 'border-[#00DF89]/20');
+    btn.classList.remove('btn-accent-gradient', 'shadow-md', 'bg-white', 'text-primary-green', 'text-[#04201A]');
+    btn.classList.add('bg-[#0B3B30]', 'text-[#DDE8E4]', 'border', 'border-white/15');
   });
 
-  const activeBtn = window.event ? window.event.currentTarget : null;
   if (activeBtn) {
-    activeBtn.classList.remove('bg-[#072C24]', 'text-[#B8D3CB]', 'border-[#00DF89]/20');
+    activeBtn.classList.remove('bg-[#0B3B30]', 'text-[#DDE8E4]', 'border-white/15');
     activeBtn.classList.add('btn-accent-gradient', 'shadow-md');
   }
 
@@ -36,4 +38,5 @@ function filterProjects(category) {
     countEl.textContent = visibleCount;
   }
 }
+
 

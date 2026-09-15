@@ -225,3 +225,9 @@ html {
   background-color: var(--accent);
   color: #04201A;
 }
+
+/* Primary Green Text Helper */
+.text-primary-green {
+  color: #04201A !important;
+}
+
