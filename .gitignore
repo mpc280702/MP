@@ -15,3 +15,4 @@ desktop.ini
 *.tmp
 *.bak
 .tempmediaStorage/
+.git_tools/
