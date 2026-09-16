@@ -182,10 +182,21 @@
                 </div>
               </div>
 
+              <!-- Hidden Honeypot Field for Bot Spam Protection -->
+              <div style="display:none !important;" aria-hidden="true">
+                <input type="text" name="_hp_security_check" id="hp-check" tabindex="-1" autocomplete="off" />
+              </div>
+
               <!-- Message / Brief -->
               <div>
                 <label class="block font-roboto text-xs uppercase tracking-wider text-white mb-2 font-bold" for="message">Mô Tả Công Việc / Lời Nhắn *</label>
                 <textarea class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm placeholder:text-[#B8D3CB]/50" id="message" name="Lời nhắn" placeholder="Chia sẻ đôi nét về vị trí công việc, yêu cầu thiết kế hoặc mục tiêu dự án..." required="" rows="4"></textarea>
+              </div>
+
+              <!-- Security Notice -->
+              <div class="flex items-center gap-2 text-[11px] text-[#B8D3CB]/80">
+                <span class="material-symbols-outlined text-xs text-[#00DF89]">verified_user</span>
+                <span>Thông tin được bảo mật và mã hóa theo <a href="privacy-security.html" class="text-[#00DF89] underline hover:text-white transition-colors">Chính sách bảo mật & NDA</a>.</span>
               </div>
 
               <!-- Submit Button -->
@@ -296,7 +307,17 @@
     <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
       <span class="font-roboto text-xl sm:text-2xl font-black text-white uppercase tracking-wider">CAO NGỌC MINH<span class="text-[#00DF89]">.</span></span>
       <p class="text-xs sm:text-sm text-[#B8D3CB] mt-1.5 max-w-md">Graphic Designer • Khám phá chất liệu hình ảnh - Nâng tầm bản sắc thương hiệu.</p>
-      <p class="text-[11px] sm:text-xs text-[#B8D3CB]/70 mt-2.5">© <span id="current-year">2026</span> Cao Ngọc Minh. Mọi quyền được bảo lưu.</p>
+      
+      <!-- Footer Nav Links -->
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-4 text-xs font-medium text-[#B8D3CB]">
+        <a href="../index.html" class="hover:text-[#00DF89] transition-colors">Trang Chủ</a>
+        <a href="selected-work.html" class="hover:text-[#00DF89] transition-colors">Dự Án</a>
+        <a href="about.html" class="hover:text-[#00DF89] transition-colors">Giới Thiệu</a>
+        <a href="contact.html" class="text-[#00DF89] font-bold">Liên Hệ</a>
+        <a href="privacy-security.html" class="hover:text-[#00DF89] transition-colors">Chính Sách Bảo Mật & Bản Quyền</a>
+      </div>
+
+      <p class="text-[11px] sm:text-xs text-[#B8D3CB]/70 mt-4">© <span id="current-year">2026</span> Cao Ngọc Minh. Mọi quyền được bảo lưu.</p>
     </div>
   </footer>
 

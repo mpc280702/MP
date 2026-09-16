@@ -1,8 +1,23 @@
 /**
  * CONTACT & BOOKING FORM SCRIPT (CAO NGỌC MINH)
+ * Tích hợp bảo mật: XSS Sanitization, Honeypot Spam Trap, Submission Cooldown
+ * & Tự động mở soạn thư Gmail / Sao chép nội dung
  */
 
 let lastFormattedBody = '';
+
+// XSS Sanitizer Helper
+function sanitizeInput(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    .trim()
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
+}
 
 function setInquiryType(btn) {
   const buttons = document.querySelectorAll('.inquiry-btn');
@@ -43,33 +58,78 @@ function copyMessageText() {
   });
 }
 
+// Security: Submission Cooldown state (Rate limiting)
+let lastSubmitTime = 0;
+const SUBMISSION_COOLDOWN_MS = 10000; // 10 seconds cooldown between submissions
+
 document.addEventListener('DOMContentLoaded', () => {
   updateLocalClock();
   setInterval(updateLocalClock, 1000);
 
   const contactForm = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  const btnIcon = document.getElementById('btn-icon');
+  const statusCard = document.getElementById('status-card');
+
   if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const submitBtn = document.getElementById('submit-btn');
-      const btnText = document.getElementById('btn-text');
-      const btnIcon = document.getElementById('btn-icon');
-      const statusCard = document.getElementById('status-card');
-
-      // Collect form field values
-      const inquiry = document.getElementById('selected-inquiry')?.value || 'Phỏng Vấn Tuyển Dụng';
-      const name = document.getElementById('name')?.value.trim() || '';
-      const email = document.getElementById('email')?.value.trim() || '';
-      const prefDate = document.getElementById('pref-date')?.value.trim() || 'Không cung cấp';
-      const prefTimeSelect = document.getElementById('pref-time');
-      const prefTime = prefTimeSelect ? prefTimeSelect.options[prefTimeSelect.selectedIndex]?.text : 'Linh hoạt';
-      const message = document.getElementById('message')?.value.trim() || '';
-
-      if (!name || !email || !message) {
-        alert('Vui lòng điền đầy đủ Họ tên, Email và Lời nhắn.');
+      // 1. Security Check: Honeypot field (Bot spam trap)
+      const honeypot = document.getElementById('hp-check');
+      if (honeypot && honeypot.value !== '') {
+        console.warn('Spam bot activity detected and blocked.');
+        contactForm.reset();
         return;
       }
+
+      // 2. Security Check: Client-side Rate Limiting / Cooldown
+      const now = Date.now();
+      if (now - lastSubmitTime < SUBMISSION_COOLDOWN_MS) {
+        const remainingSec = Math.ceil((SUBMISSION_COOLDOWN_MS - (now - lastSubmitTime)) / 1000);
+        alert(`Vui lòng chờ ${remainingSec} giây trước khi gửi yêu cầu tiếp theo.`);
+        return;
+      }
+
+      // 3. Extract & Sanitize Form Data
+      const rawInquiry = document.getElementById('selected-inquiry')?.value || 'Phỏng Vấn Tuyển Dụng';
+      const rawName = document.getElementById('name')?.value || '';
+      const rawEmail = document.getElementById('email')?.value || '';
+      const rawPhone = document.getElementById('pref-date')?.value || 'Không cung cấp';
+      const prefTimeSelect = document.getElementById('pref-time');
+      const rawTime = prefTimeSelect ? prefTimeSelect.options[prefTimeSelect.selectedIndex]?.text : 'Linh hoạt';
+      const rawMessage = document.getElementById('message')?.value || '';
+
+      const name = sanitizeInput(rawName);
+      const email = sanitizeInput(rawEmail);
+      const inquiry = sanitizeInput(rawInquiry);
+      const prefDate = sanitizeInput(rawPhone);
+      const prefTime = sanitizeInput(rawTime);
+      const message = sanitizeInput(rawMessage);
+
+      // 4. Strict Validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Vui lòng nhập địa chỉ email hợp lệ.');
+        document.getElementById('email')?.focus();
+        return;
+      }
+
+      if (name.length < 2) {
+        alert('Vui lòng nhập họ và tên hợp lệ.');
+        document.getElementById('name')?.focus();
+        return;
+      }
+
+      if (!message) {
+        alert('Vui lòng điền nội dung lời nhắn.');
+        document.getElementById('message')?.focus();
+        return;
+      }
+
+      // Update cooldown timestamp
+      lastSubmitTime = now;
 
       // Format clean message for email
       const emailSubject = `[Portfolio Cao Ngọc Minh] Lời nhắn từ ${name} - ${inquiry}`;
@@ -92,7 +152,7 @@ ${name} (${email})`;
       lastFormattedBody = emailBody;
 
       // Prepare URLs
-      const targetEmail = 'mngoc1285l@gmail.com';
+      const targetEmail = 'mngoc12851@gmail.com';
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
       const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
@@ -105,7 +165,7 @@ ${name} (${email})`;
       if (btnText) btnText.textContent = 'Đang mở Gmail...';
       if (btnIcon) btnIcon.textContent = 'outgoing_mail';
 
-      // 1. If running with local server, save a backup copy to messages.json
+      // 1. If running with local server, save a backup copy to messages.json via API
       try {
         fetch('/api/contact', {
           method: 'POST',
@@ -121,7 +181,7 @@ ${name} (${email})`;
         }).catch(() => {});
       } catch (e) {}
 
-      // 2. Set action URLs in status card
+      // 2. Set action URLs in status card if exists
       const openGmailBtn = document.getElementById('open-gmail-btn');
       const openMailClientBtn = document.getElementById('open-mail-client-btn');
       if (openGmailBtn) openGmailBtn.href = gmailUrl;
@@ -135,10 +195,16 @@ ${name} (${email})`;
         navigator.clipboard.writeText(emailBody);
       } catch (err) {}
 
-      // 5. Display status card
+      // 5. Display status card or success alert
       if (statusCard) {
         statusCard.classList.remove('hidden');
         statusCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        const successAlert = document.getElementById('success-alert');
+        if (successAlert) {
+          successAlert.classList.remove('hidden');
+          successAlert.scrollIntoView({ behavior: 'smooth' });
+        }
       }
 
       // Reset button
@@ -155,4 +221,3 @@ ${name} (${email})`;
     });
   }
 });
-
