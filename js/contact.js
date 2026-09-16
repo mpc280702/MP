@@ -2,15 +2,17 @@
  * CONTACT & BOOKING FORM SCRIPT (CAO NGỌC MINH)
  */
 
+let lastFormattedBody = '';
+
 function setInquiryType(btn) {
   const buttons = document.querySelectorAll('.inquiry-btn');
   buttons.forEach(b => {
     b.classList.remove('active', 'border-[#00DF89]', 'text-white', 'bg-[#00DF89]/20');
-    b.classList.add('text-[#B8D3CB]', 'bg-[#072C24]');
+    b.classList.add('text-[#B8D3CB]', 'bg-[#04201A]');
   });
 
   btn.classList.add('active', 'border-[#00DF89]', 'text-white', 'bg-[#00DF89]/20');
-  btn.classList.remove('text-[#B8D3CB]', 'bg-[#072C24]');
+  btn.classList.remove('text-[#B8D3CB]', 'bg-[#04201A]');
 
   const hiddenInput = document.getElementById('selected-inquiry');
   if (hiddenInput) {
@@ -27,6 +29,20 @@ function updateLocalClock() {
   }
 }
 
+function copyMessageText() {
+  if (!lastFormattedBody) return;
+  navigator.clipboard.writeText(lastFormattedBody).then(() => {
+    const copyText = document.getElementById('copy-text');
+    const copyIcon = document.getElementById('copy-icon');
+    if (copyText) copyText.textContent = 'Đã sao chép!';
+    if (copyIcon) copyIcon.textContent = 'check';
+    setTimeout(() => {
+      if (copyText) copyText.textContent = 'Sao Chép Nội Dung';
+      if (copyIcon) copyIcon.textContent = 'content_copy';
+    }, 2500);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   updateLocalClock();
   setInterval(updateLocalClock, 1000);
@@ -39,14 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const submitBtn = document.getElementById('submit-btn');
       const btnText = document.getElementById('btn-text');
       const btnIcon = document.getElementById('btn-icon');
-      const successAlert = document.getElementById('success-alert');
-      const activationAlert = document.getElementById('activation-alert');
-      const errorAlert = document.getElementById('error-alert');
-
-      // Hide previous alerts
-      if (successAlert) successAlert.classList.add('hidden');
-      if (activationAlert) activationAlert.classList.add('hidden');
-      if (errorAlert) errorAlert.classList.add('hidden');
+      const statusCard = document.getElementById('status-card');
 
       // Collect form field values
       const inquiry = document.getElementById('selected-inquiry')?.value || 'Phỏng Vấn Tuyển Dụng';
@@ -54,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('email')?.value.trim() || '';
       const prefDate = document.getElementById('pref-date')?.value.trim() || 'Không cung cấp';
       const prefTimeSelect = document.getElementById('pref-time');
-      const prefTime = prefTimeSelect ? prefTimeSelect.options[prefTimeSelect.selectedIndex]?.text : '';
+      const prefTime = prefTimeSelect ? prefTimeSelect.options[prefTimeSelect.selectedIndex]?.text : 'Linh hoạt';
       const message = document.getElementById('message')?.value.trim() || '';
 
       if (!name || !email || !message) {
@@ -62,83 +71,87 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Button loading state
+      // Format clean message for email
+      const emailSubject = `[Portfolio Cao Ngọc Minh] Lời nhắn từ ${name} - ${inquiry}`;
+      const emailBody = `Kính gửi Cao Ngọc Minh (Graphic Designer),
+
+Tôi gửi lời nhắn từ Website Portfolio của bạn với thông tin như sau:
+--------------------------------------------------
+• Họ và tên: ${name}
+• Địa chỉ Email: ${email}
+• Số điện thoại / Ngày trao đổi: ${prefDate}
+• Khung giờ thuận tiện: ${prefTime}
+• Mục đích liên hệ: ${inquiry}
+
+Nội dung lời nhắn:
+${message}
+--------------------------------------------------
+Trân trọng,
+${name} (${email})`;
+
+      lastFormattedBody = emailBody;
+
+      // Prepare URLs
+      const targetEmail = 'mngoc12851@gmail.com';
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+      const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+      // Update button state
       const originalText = btnText ? btnText.textContent : 'Gửi Lời Nhắn Đến Cao Ngọc Minh';
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+        submitBtn.classList.add('opacity-70');
       }
-      if (btnText) btnText.textContent = 'Đang gửi lời nhắn tới Gmail...';
-      if (btnIcon) btnIcon.textContent = 'hourglass_top';
+      if (btnText) btnText.textContent = 'Đang mở Gmail...';
+      if (btnIcon) btnIcon.textContent = 'outgoing_mail';
 
+      // 1. If running with local server, save a backup copy to messages.json
       try {
-        const payload = {
-          'Mục đích trao đổi': inquiry,
-          'Họ và tên': name,
-          'Địa chỉ Email': email,
-          'Số điện thoại / Ngày trao đổi': prefDate,
-          'Khung giờ thuận tiện': prefTime,
-          'Nội dung lời nhắn': message,
-          '_subject': `[Portfolio Cao Ngọc Minh] Tin nhắn mới từ ${name} (${inquiry})`,
-          '_template': 'table',
-          '_captcha': 'false'
-        };
-
-        const response = await fetch('https://formsubmit.co/ajax/mngoc12851@gmail.com', {
+        fetch('/api/contact', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            'Họ và tên': name,
+            'Email': email,
+            'Mục đích': inquiry,
+            'SĐT / Ngày': prefDate,
+            'Khung giờ': prefTime,
+            'Lời nhắn': message
+          })
+        }).catch(() => {});
+      } catch (e) {}
 
-        const data = await response.json();
+      // 2. Set action URLs in status card
+      const openGmailBtn = document.getElementById('open-gmail-btn');
+      const openMailClientBtn = document.getElementById('open-mail-client-btn');
+      if (openGmailBtn) openGmailBtn.href = gmailUrl;
+      if (openMailClientBtn) openMailClientBtn.href = mailtoUrl;
 
-        if (response.ok || data.success === 'true' || data.success === true) {
-          if (data.message && data.message.toLowerCase().includes('activation')) {
-            // First time activation message from FormSubmit
-            if (activationAlert) {
-              activationAlert.classList.remove('hidden');
-              activationAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } else if (successAlert) {
-              successAlert.classList.remove('hidden');
-            }
-          } else {
-            // Standard success
-            if (successAlert) {
-              successAlert.classList.remove('hidden');
-              successAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } else {
-              alert(`Cảm ơn ${name}! Lời nhắn đã được chuyển tới Gmail của Cao Ngọc Minh.`);
-            }
-          }
-          contactForm.reset();
-        } else {
-          throw new Error(data.message || 'Lỗi gửi tin nhắn');
-        }
-      } catch (err) {
-        console.error('Lỗi khi gửi email:', err);
-        if (errorAlert) {
-          errorAlert.classList.remove('hidden');
-          const fallbackBtn = document.getElementById('fallback-email-btn');
-          if (fallbackBtn) {
-            const subject = encodeURIComponent(`[Portfolio] ${inquiry} - Từ ${name}`);
-            const body = encodeURIComponent(`Xin chào Cao Ngọc Minh,\n\nTôi là: ${name}\nEmail: ${email}\nSĐT / Ngày: ${prefDate}\nKhung giờ: ${prefTime}\n\nMục đích: ${inquiry}\n\nLời nhắn:\n${message}`);
-            fallbackBtn.href = `mailto:mngoc12851@gmail.com?subject=${subject}&body=${body}`;
-          }
-          errorAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } else {
-          alert('Có lỗi khi gửi tự động. Vui lòng gửi email trực tiếp tới mngoc12851@gmail.com');
-        }
-      } finally {
+      // 3. Automatically open Gmail compose in a new tab
+      window.open(gmailUrl, '_blank');
+
+      // 4. Also copy text to clipboard for convenience
+      try {
+        navigator.clipboard.writeText(emailBody);
+      } catch (err) {}
+
+      // 5. Display status card
+      if (statusCard) {
+        statusCard.classList.remove('hidden');
+        statusCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      // Reset button
+      setTimeout(() => {
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+          submitBtn.classList.remove('opacity-70');
         }
         if (btnText) btnText.textContent = originalText;
         if (btnIcon) btnIcon.textContent = 'send';
-      }
+      }, 600);
+
+      contactForm.reset();
     });
   }
 });

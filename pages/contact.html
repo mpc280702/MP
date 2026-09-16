@@ -195,40 +195,31 @@
               </button>
             </form>
 
-            <!-- Success Alert Message (Hidden initially) -->
-            <div id="success-alert" class="hidden mt-6 p-6 rounded-2xl bg-[#04201A] border border-[#00DF89] text-white">
-              <div class="flex items-center space-x-3 mb-2">
-                <span class="material-symbols-outlined text-[#00DF89]">check_circle</span>
-                <h4 class="font-roboto font-bold text-base text-[#00DF89]">Đã Gửi Thành Công!</h4>
+            <!-- Message Status Card (Hidden initially) -->
+            <div id="status-card" class="hidden mt-6 p-6 rounded-2xl bg-[#04201A] border border-[#00DF89] text-white shadow-2xl transition-all">
+              <div class="flex items-center space-x-3 mb-2.5">
+                <span class="material-symbols-outlined text-[#00DF89] text-2xl">outgoing_mail</span>
+                <h4 class="font-roboto font-bold text-base text-[#00DF89]" id="status-title">Đã Tạo Lời Nhắn Gửi Tới Gmail!</h4>
               </div>
-              <p class="text-xs text-[#B8D3CB] leading-relaxed">Cảm ơn Quý Anh/Chị đã liên hệ. Lời nhắn đã được gửi trực tiếp đến hộp thư Gmail <strong>mngoc12851@gmail.com</strong>. Cao Ngọc Minh sẽ phản hồi trong thời gian sớm nhất!</p>
-            </div>
-
-            <!-- Activation Alert Message -->
-            <div id="activation-alert" class="hidden mt-6 p-6 rounded-2xl bg-[#04201A] border border-amber-400/50 text-white">
-              <div class="flex items-center space-x-3 mb-2">
-                <span class="material-symbols-outlined text-amber-400">mark_email_unread</span>
-                <h4 class="font-roboto font-bold text-base text-amber-400">Cần Bấm Kích Hoạt Trong Gmail (Chỉ 1 Lần Duy Nhất)!</h4>
+              <p class="text-xs sm:text-sm text-[#DDE8E4] leading-relaxed mb-4" id="status-desc">
+                Cửa sổ soạn thư Gmail vừa được mở tự động với toàn bộ thông tin đã được điền sẵn tới <strong>mngoc12851@gmail.com</strong>. Quý Anh/Chị chỉ cần bấm nút <strong>Gửi (Send)</strong> trong Gmail!
+              </p>
+              
+              <!-- Action links in card -->
+              <div class="flex flex-wrap gap-2.5 pt-2 border-t border-[#00DF89]/20">
+                <a id="open-gmail-btn" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl btn-accent-gradient font-roboto text-xs font-bold uppercase tracking-wider text-[#04201A] shadow-md hover:scale-105 transition-all">
+                  <span class="material-symbols-outlined text-sm">open_in_new</span>
+                  <span>Mở Tab Gmail Để Gửi</span>
+                </a>
+                <a id="open-mail-client-btn" href="#" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#072C24] border border-[#00DF89]/30 font-roboto text-xs font-bold uppercase tracking-wider text-white hover:border-[#00DF89] transition-all">
+                  <span class="material-symbols-outlined text-sm">mail</span>
+                  <span>Ứng Dụng Mail Mặc Định</span>
+                </a>
+                <button type="button" id="copy-content-btn" onclick="copyMessageText()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#072C24] border border-white/15 font-roboto text-xs font-bold uppercase tracking-wider text-[#B8D3CB] hover:text-white transition-all">
+                  <span class="material-symbols-outlined text-sm" id="copy-icon">content_copy</span>
+                  <span id="copy-text">Sao Chép Nội Dung</span>
+                </button>
               </div>
-              <p class="text-xs text-[#B8D3CB] leading-relaxed mb-3">Hệ thống gửi thư đã gửi email xác nhận vào <strong>mngoc12851@gmail.com</strong> để bảo vệ chống spam. Bạn chỉ cần mở Gmail và nhấp vào nút <strong>"Activate Form"</strong>, từ đó về sau mọi lời nhắn sẽ được gửi tự động 100%!</p>
-              <a href="https://mail.google.com/mail/u/0/#search/FormSubmit" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 text-[#04201A] font-bold text-xs uppercase tracking-wider hover:bg-amber-300 transition-all shadow-md">
-                <span class="material-symbols-outlined text-base">mail</span>
-                <span>Mở Gmail để kích hoạt ngay</span>
-                <span class="material-symbols-outlined text-sm ml-1">arrow_outward</span>
-              </a>
-            </div>
-
-            <!-- Error Alert Message -->
-            <div id="error-alert" class="hidden mt-6 p-6 rounded-2xl bg-[#04201A] border border-red-500/50 text-white">
-              <div class="flex items-center space-x-3 mb-2">
-                <span class="material-symbols-outlined text-red-400">error</span>
-                <h4 class="font-roboto font-bold text-base text-red-400">Không Thể Gửi Tự Động!</h4>
-              </div>
-              <p class="text-xs text-[#B8D3CB] leading-relaxed mb-3">Có lỗi xảy ra khi kết nối. Quý Anh/Chị có thể bấm nút bên dưới để gửi trực tiếp qua ứng dụng email:</p>
-              <a id="fallback-email-btn" href="mailto:mngoc12851@gmail.com" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-red-500/20 border border-red-500/40 text-xs font-bold text-white hover:bg-red-500/30 transition-all">
-                <span class="material-symbols-outlined text-sm">mail</span>
-                <span>Mở Ứng Dụng Email Gửi Trực Tiếp</span>
-              </a>
             </div>
           </div>
 

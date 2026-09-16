@@ -30,6 +30,41 @@ const server = http.createServer((req, res) => {
     reqPath = '/index.html';
   }
 
+  // API endpoint to capture contact messages
+  if (req.method === 'POST' && reqPath === '/api/contact') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const data = JSON.parse(body);
+        const messagesFile = path.join(ROOT_DIR, 'messages.json');
+        let messages = [];
+        if (fs.existsSync(messagesFile)) {
+          try { messages = JSON.parse(fs.readFileSync(messagesFile, 'utf8')); } catch (e) {}
+        }
+        data.timestamp = new Date().toISOString();
+        data.localTime = new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+        messages.unshift(data);
+        fs.writeFileSync(messagesFile, JSON.stringify(messages, null, 2), 'utf8');
+
+        console.log(`\n📩 [TIN NHẮN MỚI TỪ WEBSITE]`);
+        console.log(`- Người gửi: ${data['Họ và tên']} (${data['Email'] || data['Email liên hệ'] || data['Địa chỉ Email']})`);
+        console.log(`- Mục đích: ${data['Mục đích'] || data['Mục đích trao đổi']}`);
+        console.log(`- Lời nhắn: ${data['Lời nhắn'] || data['Nội dung lời nhắn']}\n`);
+
+        res.writeHead(200, {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Access-Control-Allow-Origin': '*'
+        });
+        res.end(JSON.stringify({ success: true, message: 'Đã lưu lời nhắn thành công!' }));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ success: false, error: err.message }));
+      }
+    });
+    return;
+  }
+
   const filePath = path.join(ROOT_DIR, reqPath);
 
   // Security check: ensure filePath is inside ROOT_DIR

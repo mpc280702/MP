@@ -16,3 +16,4 @@ desktop.ini
 *.bak
 .tempmediaStorage/
 .git_tools/
+messages.json
