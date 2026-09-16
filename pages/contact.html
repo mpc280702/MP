@@ -150,18 +150,18 @@
                     Tư Vấn Thương Hiệu
                   </button>
                 </div>
-                <input id="selected-inquiry" type="hidden" value="Phỏng Vấn Tuyển Dụng"/>
+                <input id="selected-inquiry" name="Mục đích" type="hidden" value="Phỏng Vấn Tuyển Dụng"/>
               </div>
 
               <!-- Name & Email -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label class="block font-roboto text-xs uppercase tracking-wider text-white mb-2 font-bold" for="name">Họ & Tên *</label>
-                  <input class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm placeholder:text-[#B8D3CB]/50" id="name" placeholder="Quý Anh/Chị..." required="" type="text"/>
+                  <input class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm placeholder:text-[#B8D3CB]/50" id="name" name="Họ và tên" placeholder="Quý Anh/Chị..." required="" type="text"/>
                 </div>
                 <div>
                   <label class="block font-roboto text-xs uppercase tracking-wider text-white mb-2 font-bold" for="email">Địa Chỉ Email *</label>
-                  <input class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm placeholder:text-[#B8D3CB]/50" id="email" placeholder="email@congty.com" required="" type="email"/>
+                  <input class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm placeholder:text-[#B8D3CB]/50" id="email" name="Email" placeholder="email@congty.com" required="" type="email"/>
                 </div>
               </div>
 
@@ -169,29 +169,29 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label class="block font-roboto text-xs uppercase tracking-wider text-white mb-2 font-bold" for="pref-date">Số Điện Thoại Hoặc Ngày Trao Đổi</label>
-                  <input class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm placeholder:text-[#B8D3CB]/50" id="pref-date" placeholder="0901..." type="text"/>
+                  <input class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm placeholder:text-[#B8D3CB]/50" id="pref-date" name="Số điện thoại / Ngày" placeholder="0901..." type="text"/>
                 </div>
                 <div>
                   <label class="block font-roboto text-xs uppercase tracking-wider text-white mb-2 font-bold" for="pref-time">Khung Giờ Thuận Tiện</label>
-                  <select class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm" id="pref-time">
-                    <option value="09:00">09:00 SA - 11:30 SA</option>
-                    <option value="14:00">02:00 CH - 05:00 CH</option>
-                    <option value="19:00">07:00 Tối - 09:00 Tối</option>
-                    <option value="flexible">Linh hoạt / Bất kỳ lúc nào</option>
+                  <select class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm" id="pref-time" name="Khung giờ thuận tiện">
+                    <option value="09:00 SA - 11:30 SA">09:00 SA - 11:30 SA</option>
+                    <option value="02:00 CH - 05:00 CH">02:00 CH - 05:00 CH</option>
+                    <option value="07:00 Tối - 09:00 Tối">07:00 Tối - 09:00 Tối</option>
+                    <option value="Linh hoạt / Bất kỳ lúc nào">Linh hoạt / Bất kỳ lúc nào</option>
                   </select>
                 </div>
               </div>
 
               <!-- Message / Brief -->
               <div>
-                <label class="block font-roboto text-xs uppercase tracking-wider text-white mb-2 font-bold" for="message">Mô Tả Công Việc / Lời Nhắn</label>
-                <textarea class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm placeholder:text-[#B8D3CB]/50" id="message" placeholder="Chia sẻ đôi nét về vị trí công việc, yêu cầu thiết kế hoặc mục tiêu dự án..." rows="4"></textarea>
+                <label class="block font-roboto text-xs uppercase tracking-wider text-white mb-2 font-bold" for="message">Mô Tả Công Việc / Lời Nhắn *</label>
+                <textarea class="w-full bg-[#04201A] text-white px-4 py-3.5 rounded-xl border border-[#00DF89]/20 focus:outline-none focus:border-[#00DF89] font-roboto text-sm placeholder:text-[#B8D3CB]/50" id="message" name="Lời nhắn" placeholder="Chia sẻ đôi nét về vị trí công việc, yêu cầu thiết kế hoặc mục tiêu dự án..." required="" rows="4"></textarea>
               </div>
 
               <!-- Submit Button -->
               <button type="submit" id="submit-btn" class="btn-accent-gradient w-full py-4 rounded-full font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xl shadow-[#00DF89]/25 hover:scale-[1.02] transition-all">
                 <span id="btn-text">Gửi Lời Nhắn Đến Cao Ngọc Minh</span>
-                <span class="material-symbols-outlined text-base">send</span>
+                <span id="btn-icon" class="material-symbols-outlined text-base">send</span>
               </button>
             </form>
 
@@ -199,9 +199,31 @@
             <div id="success-alert" class="hidden mt-6 p-6 rounded-2xl bg-[#04201A] border border-[#00DF89] text-white">
               <div class="flex items-center space-x-3 mb-2">
                 <span class="material-symbols-outlined text-[#00DF89]">check_circle</span>
-                <h4 class="font-roboto font-bold text-base">Đã Gửi Thành Công!</h4>
+                <h4 class="font-roboto font-bold text-base text-[#00DF89]">Đã Gửi Thành Công!</h4>
               </div>
-              <p class="text-xs text-[#B8D3CB] leading-relaxed">Cảm ơn Quý Anh/Chị đã liên hệ. Cao Ngọc Minh đã nhận được thông tin và sẽ phản hồi sớm nhất có thể.</p>
+              <p class="text-xs text-[#B8D3CB] leading-relaxed">Cảm ơn Quý Anh/Chị đã liên hệ. Lời nhắn đã được gửi trực tiếp đến hộp thư Gmail <strong>mngoc12851@gmail.com</strong>. Cao Ngọc Minh sẽ phản hồi trong thời gian sớm nhất!</p>
+            </div>
+
+            <!-- Activation Alert Message -->
+            <div id="activation-alert" class="hidden mt-6 p-6 rounded-2xl bg-[#04201A] border border-amber-400/50 text-white">
+              <div class="flex items-center space-x-3 mb-2">
+                <span class="material-symbols-outlined text-amber-400">mark_email_unread</span>
+                <h4 class="font-roboto font-bold text-base text-amber-400">Yêu Cầu Kích Hoạt Gmail Lần Đầu!</h4>
+              </div>
+              <p class="text-xs text-[#B8D3CB] leading-relaxed">FormSubmit đã gửi 1 email xác nhận tới <strong>mngoc12851@gmail.com</strong>. Bạn chỉ cần mở hộp thư Gmail và nhấp vào nút <strong>"Activate Form"</strong> một lần duy nhất để kết nối nhận thư tự động.</p>
+            </div>
+
+            <!-- Error Alert Message -->
+            <div id="error-alert" class="hidden mt-6 p-6 rounded-2xl bg-[#04201A] border border-red-500/50 text-white">
+              <div class="flex items-center space-x-3 mb-2">
+                <span class="material-symbols-outlined text-red-400">error</span>
+                <h4 class="font-roboto font-bold text-base text-red-400">Không Thể Gửi Tự Động!</h4>
+              </div>
+              <p class="text-xs text-[#B8D3CB] leading-relaxed mb-3">Có lỗi xảy ra khi kết nối. Quý Anh/Chị có thể bấm nút bên dưới để gửi trực tiếp qua ứng dụng email:</p>
+              <a id="fallback-email-btn" href="mailto:mngoc12851@gmail.com" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-red-500/20 border border-red-500/40 text-xs font-bold text-white hover:bg-red-500/30 transition-all">
+                <span class="material-symbols-outlined text-sm">mail</span>
+                <span>Mở Ứng Dụng Email Gửi Trực Tiếp</span>
+              </a>
             </div>
           </div>
 
