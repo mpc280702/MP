@@ -3,8 +3,51 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>CAO NGỌC MINH — Graphic Designer | Portfolio</title>
-  <meta name="description" content="Portfolio của Cao Ngọc Minh - Graphic Designer. Khám phá chất liệu hình ảnh, nâng tầm bản sắc thương hiệu. Chuyên thiết kế nhận diện thương hiệu, Menu, POSM, ấn phẩm bao bì và Digital Marketing."/>
+  <title>CAO NGỌC MINH — Graphic Designer & Digital Creator | Portfolio</title>
+  <meta name="description" content="Portfolio chính thức của Cao Ngọc Minh - Graphic Designer & Digital Creator tại Hà Nội. Chuyên thiết kế nhận diện thương hiệu, Menu, POSM, bao bì sản phẩm và Digital Marketing."/>
+  <meta name="keywords" content="Cao Ngọc Minh, Graphic Designer, Thiết kế đồ họa, Portfolio, Brand Identity, Nhận diện thương hiệu, Menu POSM, UI UX, Hà Nội"/>
+  <meta name="author" content="Cao Ngọc Minh"/>
+  <link rel="canonical" href="https://mpc280702.github.io/MP/index.html"/>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg"/>
+
+  <!-- Open Graph / Facebook / Zalo / LinkedIn -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://mpc280702.github.io/MP/index.html"/>
+  <meta property="og:title" content="CAO NGỌC MINH — Graphic Designer & Digital Creator | Portfolio"/>
+  <meta property="og:description" content="Khám phá chất liệu hình ảnh — Nâng tầm bản sắc thương hiệu. Xem 12 dự án tiêu biểu và hồ sơ năng lực của Cao Ngọc Minh."/>
+  <meta property="og:image" content="https://mpc280702.github.io/MP/assets/images/cao-ngoc-minh-portrait.jpg"/>
+  <meta property="og:locale" content="vi_VN"/>
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="CAO NGỌC MINH — Graphic Designer Portfolio"/>
+  <meta name="twitter:description" content="Khám phá chất liệu hình ảnh — Nâng tầm bản sắc thương hiệu. Chuyên thiết kế Brand Identity, Menu, POSM & Digital Marketing."/>
+  <meta name="twitter:image" content="https://mpc280702.github.io/MP/assets/images/cao-ngoc-minh-portrait.jpg"/>
+
+  <!-- Structured Data: Schema.org Person & ProfilePage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Cao Ngọc Minh",
+      "jobTitle": "Graphic Designer & Digital Creator",
+      "url": "https://mpc280702.github.io/MP/index.html",
+      "image": "https://mpc280702.github.io/MP/assets/images/cao-ngoc-minh-portrait.jpg",
+      "email": "mailto:mngoc12851@gmail.com",
+      "telephone": "+84327430794",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bắc Từ Liêm",
+        "addressRegion": "Hà Nội",
+        "addressCountry": "VN"
+      },
+      "alumniOf": "Trường Đại Học Mỏ - Địa Chất",
+      "knowsAbout": ["Graphic Design", "Brand Identity", "Menu & POSM Design", "Packaging Design", "UI/UX Design", "Digital Marketing Visuals"]
+    }
+  }
+  </script>
   
   <!-- Roboto Font Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,19 +84,19 @@
   </script>
   <link rel="stylesheet" href="css/main.css"/>
 </head>
-<body class="bg-[#05261F] font-roboto text-white antialiased selection:bg-[#00DF89] selection:text-[#04201A]">
+<body class="bg-[#05261F] font-roboto text-white antialiased selection:bg-[#00DF89] selection:text-[#04201A] overflow-x-hidden">
 
   <!-- Header / Thanh Điều Hướng -->
   <header class="fixed top-0 w-full z-50 glass-nav transition-all">
     <div class="h-16 sm:h-20 max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
       
       <!-- Logo -->
-      <a class="font-roboto text-xl sm:text-2xl font-black tracking-wider uppercase text-white hover:text-white/80 transition-colors flex items-center leading-none" href="index.html">
+      <a class="font-roboto text-xl sm:text-2xl font-black tracking-wider uppercase text-white hover:text-white/80 transition-colors flex items-center leading-none" href="index.html" aria-label="Cao Ngọc Minh Trang Chủ">
         MINH<span class="text-[#00DF89]">.</span>
       </a>
 
       <!-- Desktop Nav (Pill Capsule Bar) -->
-      <nav class="hidden md:flex items-center nav-pill-container">
+      <nav class="hidden md:flex items-center nav-pill-container" aria-label="Menu chính">
         <a class="nav-pill-item nav-pill-active" href="index.html">Trang Chủ</a>
         <a class="nav-pill-item" href="pages/selected-work.html">Dự Án Tiêu Biểu</a>
         <a class="nav-pill-item" href="pages/about.html">Về Tôi</a>
@@ -73,7 +116,7 @@
       </div>
 
       <!-- Mobile Menu Toggle Button (Symmetrical & perfectly centered) -->
-      <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-[#0A362D] text-white hover:text-[#00DF89] border border-[#00DF89]/30 active:scale-95 transition-all shadow-sm shrink-0" aria-label="Mở Menu">
+      <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-[#0A362D] text-white hover:text-[#00DF89] border border-[#00DF89]/30 active:scale-95 transition-all shadow-sm shrink-0" aria-label="Mở Menu Điều Hướng Mobile">
         <span class="material-symbols-outlined text-[22px] leading-none select-none">menu</span>
       </button>
     </div>
@@ -116,7 +159,7 @@
             <div class="lg:col-span-7 flex flex-col items-start">
               <div class="flex items-center space-x-2.5 mb-4 sm:mb-6">
                 <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#00DF89] animate-ping"></span>
-                <span class="font-roboto text-[11px] sm:text-xs font-bold text-white/90 tracking-widest uppercase bg-[#072C24] px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-[#00DF89]/30">SẴN SÀNG NHẬN DỰ ÁN & PHỎNG VẤN</span>
+                <span class="font-roboto text-[11px] sm:text-xs font-bold text-white/90 tracking-widest uppercase bg-[#072C24] px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-[#00DF89]/30">SẴN SÀNG NHẬN DỰ ÁN & PHỎNG VẤN (HÀ NỘI / REMOTE)</span>
               </div>
 
               <h1 class="font-roboto text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-black text-white uppercase tracking-tight leading-[1.12] mb-4 sm:mb-6">
@@ -127,12 +170,12 @@
                 Khám phá chất liệu hình ảnh — Nâng tầm bản sắc thương hiệu.
               </p>
               <p class="text-sm sm:text-lg text-[#B8D3CB] leading-relaxed max-w-2xl font-normal mb-6 sm:mb-8">
-                Nghiên cứu ý tưởng, sáng tạo ấn phẩm truyền thông, thiết kế Menu & POSM, bao bì sản phẩm và giao diện hình ảnh Digital Marketing chuyên nghiệp.
+                Nghiên cứu ý tưởng, sáng tạo bộ nhận diện thương hiệu, thiết kế Menu & POSM, bao bì sản phẩm và giao diện hình ảnh Digital Marketing chuyên nghiệp.
               </p>
 
               <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto mb-8 sm:mb-10">
                 <a class="btn-accent-gradient inline-flex items-center justify-center px-6 py-3.5 font-roboto font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl shadow-xl shadow-[#00DF89]/20 hover:scale-105 active:scale-95 transition-all text-center" href="pages/selected-work.html">
-                  <span>Xem Dự Án Tiêu Biểu</span>
+                  <span>Xem 12 Dự Án Tiêu Biểu</span>
                   <span class="material-symbols-outlined ml-2 text-base">arrow_forward</span>
                 </a>
                 <a class="btn-outline-pill inline-flex items-center justify-center px-6 py-3.5 font-roboto font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl hover:border-[#00DF89] active:scale-95 transition-all text-center" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
@@ -144,7 +187,7 @@
               <!-- Lưới Thống Kê Nhanh (Số Chạy Tự Động) -->
               <div class="grid grid-cols-2 gap-4 sm:gap-12 pt-6 sm:pt-8 border-t border-[#00DF89]/20 w-full max-w-lg">
                 <div class="flex flex-col bg-[#072C24]/60 sm:bg-transparent p-3 sm:p-0 rounded-xl sm:rounded-none border border-[#00DF89]/15 sm:border-0">
-                  <span class="counter-number font-roboto text-3xl sm:text-5xl font-black text-[#00DF89]" data-target="6" data-suffix="+ Năm" data-pad="2" data-duration="1600">06+ Năm</span>
+                  <span class="counter-number font-roboto text-3xl sm:text-5xl font-black text-[#00DF89]" data-target="3" data-suffix="+ Năm" data-pad="2" data-duration="1600">03+ Năm</span>
                   <span class="font-roboto text-[11px] sm:text-xs text-[#B8D3CB] uppercase tracking-wider mt-1 sm:mt-2 font-medium">Kinh Nghiệm Thực Chiến</span>
                 </div>
                 <div class="flex flex-col bg-[#072C24]/60 sm:bg-transparent p-3 sm:p-0 rounded-xl sm:rounded-none border border-[#00DF89]/15 sm:border-0">
@@ -157,10 +200,10 @@
             <!-- Cột Phải: Ảnh Visual Nghệ Thuật Nổi Bật -->
             <div class="lg:col-span-5 relative mt-4 lg:mt-0 w-full max-w-md mx-auto lg:max-w-none">
               <div class="relative w-full h-[360px] sm:h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-[#072C24] border border-[#00DF89]/30 group">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('assets/images/cao-ngoc-minh-portrait.jpg')"></div>
+                <img src="assets/images/cao-ngoc-minh-portrait.jpg" alt="Chân dung Cao Ngọc Minh - Graphic Designer & Digital Creator" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" fetchpriority="high" width="480" height="480"/>
                 
                 <!-- Lớp gradient phủ nhẹ ở chân ảnh -->
-                <div class="absolute inset-0 bg-gradient-to-t from-[#04201A] via-transparent to-transparent opacity-80"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#04201A] via-transparent to-transparent opacity-80 pointer-events-none"></div>
                 
                 <!-- Badge góc trên ảnh -->
                 <div class="absolute top-3.5 left-3.5 flex gap-2">
@@ -188,7 +231,7 @@
       </section>
 
       <!-- Marquee Ticker Bar (Chạy liên tục không ngừng) -->
-      <section class="marquee-container w-full py-3.5 sm:py-4 bg-[#031B16] border-y border-[#00DF89]/20 overflow-hidden flex items-center select-none">
+      <section class="marquee-container w-full py-3.5 sm:py-4 bg-[#031B16] border-y border-[#00DF89]/20 overflow-hidden flex items-center select-none" aria-label="Kỹ năng chính">
         <div class="animate-marquee flex whitespace-nowrap items-center space-x-6 sm:space-x-8 text-xs sm:text-sm font-bold tracking-widest text-[#B8D3CB] uppercase">
           <!-- Set 1 -->
           <span class="flex items-center gap-2.5 sm:gap-3"><span class="text-[#00DF89]">✦</span> BRAND IDENTITY</span>
@@ -222,10 +265,10 @@
           <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4 sm:gap-6">
             <div>
               <span class="font-roboto text-xs font-bold text-[#00DF89] uppercase tracking-widest mb-1.5 block">DANH MỤC CHỌN LỌC</span>
-              <h2 class="font-roboto text-2xl sm:text-4xl font-black text-white uppercase">Dự Án Tiêu Biểu</h2>
+              <h2 class="font-roboto text-2xl sm:text-4xl font-black text-white uppercase">Dự Án Tiêu Biểu (12 Dự Án)</h2>
             </div>
             <a class="inline-flex items-center font-roboto text-xs sm:text-sm uppercase tracking-wider text-[#00DF89] hover:text-white transition-colors group font-bold" href="pages/selected-work.html">
-              <span>Xem Tất Cả 12 Dự Án</span>
+              <span>Xem Toàn Bộ 12 Dự Án & Bộ Lọc</span>
               <span class="material-symbols-outlined ml-1.5 text-base group-hover:translate-x-1.5 transition-transform">arrow_forward</span>
             </a>
           </div>
@@ -235,7 +278,7 @@
             <!-- Dự Án 1: Nét Quê - Brand Identity -->
             <a class="group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all duration-300 border border-[#00DF89]/20 hover:border-[#00DF89]/60" href="pages/case-study-net-que.html">
               <div class="relative w-full h-64 sm:h-80 overflow-hidden bg-[#04201A]">
-                <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('assets/images/net-que-isometric-mockup.jpg')"></div>
+                <img src="assets/images/net-que-isometric-mockup.jpg" alt="Nhận diện thương hiệu ẩm thực Nét Quê" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" width="400" height="320"/>
                 <div class="absolute top-3.5 left-3.5 flex gap-2">
                   <span class="px-3 py-1 bg-[#04201A]/90 backdrop-blur-md rounded-full font-roboto text-[10px] sm:text-[11px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Branding & Cultural Identity</span>
                 </div>
@@ -255,7 +298,7 @@
             <!-- Dự Án 2: Lamee - Brand Identity -->
             <a class="group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all duration-300 border border-[#00DF89]/20 hover:border-[#00DF89]/60" href="pages/case-study-lamee.html">
               <div class="relative w-full h-64 sm:h-80 overflow-hidden bg-[#04201A]">
-                <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('assets/images/lamee-isometric-mockup.jpg')"></div>
+                <img src="assets/images/lamee-isometric-mockup.jpg" alt="Nhận diện thương hiệu phong cách sống Lamee" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" width="400" height="320"/>
                 <div class="absolute top-3.5 left-3.5 flex gap-2">
                   <span class="px-3 py-1 bg-[#04201A]/90 backdrop-blur-md rounded-full font-roboto text-[10px] sm:text-[11px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Branding & Lifestyle</span>
                 </div>
@@ -275,7 +318,7 @@
             <!-- Dự Án 3: Website Portfolio — Cao Ngọc Minh -->
             <a class="group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all duration-300 border border-[#00DF89]/20 hover:border-[#00DF89]/60" href="pages/case-study-portfolio.html">
               <div class="relative w-full h-64 sm:h-80 overflow-hidden bg-[#04201A]">
-                <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('assets/images/portfolio-3d-screens.jpg')"></div>
+                <img src="assets/images/portfolio-3d-screens.jpg" alt="Thiết kế và xây dựng Website Portfolio Cao Ngọc Minh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" width="400" height="320"/>
                 <div class="absolute top-3.5 left-3.5 flex gap-2">
                   <span class="px-3 py-1 bg-[#04201A]/90 backdrop-blur-md rounded-full font-roboto text-[10px] sm:text-[11px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">UI/UX · Web Design</span>
                 </div>
@@ -300,7 +343,7 @@
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div class="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-none">
             <div class="relative w-full h-[360px] sm:h-[480px] rounded-2xl overflow-hidden shadow-2xl bg-[#072C24] border border-[#00DF89]/30 group">
-              <img src="assets/images/portfolio-workspace-mockup.jpg" alt="Cao Ngọc Minh Portfolio Website Showcase" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+              <img src="assets/images/portfolio-workspace-mockup.jpg" alt="Không gian làm việc và quy trình thiết kế Cao Ngọc Minh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" width="480" height="480"/>
               <div class="absolute inset-0 bg-gradient-to-t from-[#04201A] via-transparent to-transparent opacity-70"></div>
               
               <div class="absolute top-3.5 left-3.5 flex gap-2">
@@ -338,7 +381,7 @@
                 <span class="text-[#00DF89]">📞</span> <span>Điện thoại: <strong>0327.430.794</strong></span>
               </div>
               <div class="flex items-center gap-2">
-                <span class="text-[#00DF89]">✉️</span> <span>Email: <strong>mngoc1285l@gmail.com</strong></span>
+                <span class="text-[#00DF89]">✉️</span> <span>Email: <strong>mngoc12851@gmail.com</strong></span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[#00DF89]">📍</span> <span>Khu vực: <strong>Bắc Từ Liêm, TP. Hà Nội</strong></span>
@@ -375,7 +418,7 @@
           </h2>
           
           <p class="text-sm sm:text-lg text-[#B8D3CB] max-w-2xl mb-6 sm:mb-8 leading-relaxed font-normal">
-            Em rất hy vọng sẽ được đồng hành cùng Quý Anh/Chị trong các dự án sáng tạo và cơ hội nghề nghiệp sắp tới!
+            Tôi rất hy vọng sẽ được đồng hành cùng Quý Doanh nghiệp / Quý Anh/Chị trong các dự án sáng tạo và cơ hội nghề nghiệp sắp tới!
           </p>
           
           <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center items-center">

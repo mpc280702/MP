@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00DF89"/>
+      <stop offset="100%" stop-color="#A3E635"/>
+    </linearGradient>
+    <radialGradient id="bgGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#0A362D"/>
+      <stop offset="100%" stop-color="#04201A"/>
+    </radialGradient>
+  </defs>
+  <!-- Background Rounded Squircle -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" stroke="#00DF89" stroke-width="2" stroke-opacity="0.35"/>
+  <!-- Letter M -->
+  <path d="M 16 46 L 16 20 L 26 35 L 38 35 L 48 20 L 48 46" fill="none" stroke="url(#mintGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Accent Dot -->
+  <circle cx="51" cy="46" r="3.5" fill="#A3E635"/>
+</svg>

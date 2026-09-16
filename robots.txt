@@ -1,0 +1,7 @@
+# Robots.txt for Cao Ngoc Minh Portfolio Website
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /.git_tools/
+
+Sitemap: https://mpc280702.github.io/MP/sitemap.xml
