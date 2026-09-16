@@ -92,7 +92,7 @@ ${name} (${email})`;
       lastFormattedBody = emailBody;
 
       // Prepare URLs
-      const targetEmail = 'mngoc12851@gmail.com';
+      const targetEmail = 'mngoc1285l@gmail.com';
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
       const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
