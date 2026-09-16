@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Dự Án Tiêu Biểu (12 Dự Án) — CAO NGỌC MINH | Portfolio</title>
-  <meta name="description" content="Khám phá bộ sưu tập 12 dự án thiết kế chọn lọc về Nhận diện thương hiệu, Menu & POSM, Bao bì, UI/UX và Digital Marketing của Cao Ngọc Minh."/>
+  <meta name="description" content="Khám phá bộ sưu tập 12 dự án thiết kế chọn lọc về Nhận diện thương hiệu, Menu & POSM, Bao bì, UI/UX và Digital Campaign của Cao Ngọc Minh."/>
   <meta name="keywords" content="Dự án thiết kế đồ họa, Portfolio Graphic Designer, Brand Identity, Thiết kế Menu, POSM, Bao bì, UI UX, Cao Ngọc Minh"/>
   <meta name="author" content="Cao Ngọc Minh"/>
   <link rel="canonical" href="https://mpc280702.github.io/MP/pages/selected-work.html"/>
@@ -131,10 +131,10 @@
               DỰ ÁN <span class="gradient-mint-lime">TIÊU BIỂU</span>
             </h1>
             <p class="text-base sm:text-lg text-[#DDE8E4] mt-3 font-normal leading-relaxed">
-              Tuyển tập các bộ nhận diện thương hiệu, Menu & POSM, ấn phẩm bao bì, giao diện UI/UX và truyền thông số được thực hiện qua hành trình sáng tạo chuyên nghiệp.
+              Tuyển tập 12 dự án về Nhận diện thương hiệu, Menu & POSM, Bao bì, UI/UX và Digital Campaign được thực hiện qua quá trình làm việc thực chiến.
             </p>
           </div>
-          <div class="flex items-center space-x-2 text-sm text-[#DDE8E4] bg-[#0B3B30] px-4 py-2.5 rounded-xl border border-[#00DF89]/30 shadow-md">
+          <div class="flex items-center space-x-2 text-sm text-[#DDE8E4] bg-[#072C24] px-4 py-2.5 rounded-xl border border-[#00DF89]/30 shadow-md">
             <span class="font-roboto font-medium text-white">Đang hiển thị <strong class="text-[#00DF89] font-black text-base" id="project-count">12</strong> dự án</span>
           </div>
         </div>
@@ -146,333 +146,381 @@
           <button class="filter-btn px-5 py-2.5 rounded-full font-roboto text-xs font-bold uppercase tracking-wider btn-accent-gradient transition-all whitespace-nowrap shadow-md" onclick="filterProjects('all', event)">
             Tất Cả (12)
           </button>
-          <button class="filter-btn px-5 py-2.5 rounded-full font-roboto text-xs font-bold uppercase tracking-wider bg-[#0B3B30] text-[#DDE8E4] hover:text-white hover:bg-[#0f4a3d] border border-white/15 transition-all whitespace-nowrap" onclick="filterProjects('brand', event)">
+          <button class="filter-btn px-5 py-2.5 rounded-full font-roboto text-xs font-bold uppercase tracking-wider bg-[#072C24] text-[#DDE8E4] hover:text-white hover:bg-[#0A362D] border border-white/15 transition-all whitespace-nowrap" onclick="filterProjects('brand', event)">
             Nhận Diện Thương Hiệu (6)
           </button>
-          <button class="filter-btn px-5 py-2.5 rounded-full font-roboto text-xs font-bold uppercase tracking-wider bg-[#0B3B30] text-[#DDE8E4] hover:text-white hover:bg-[#0f4a3d] border border-white/15 transition-all whitespace-nowrap" onclick="filterProjects('uiux', event)">
+          <button class="filter-btn px-5 py-2.5 rounded-full font-roboto text-xs font-bold uppercase tracking-wider bg-[#072C24] text-[#DDE8E4] hover:text-white hover:bg-[#0A362D] border border-white/15 transition-all whitespace-nowrap" onclick="filterProjects('uiux', event)">
             UI/UX & Web (3)
           </button>
-          <button class="filter-btn px-5 py-2.5 rounded-full font-roboto text-xs font-bold uppercase tracking-wider bg-[#0B3B30] text-[#DDE8E4] hover:text-white hover:bg-[#0f4a3d] border border-white/15 transition-all whitespace-nowrap" onclick="filterProjects('motion', event)">
+          <button class="filter-btn px-5 py-2.5 rounded-full font-roboto text-xs font-bold uppercase tracking-wider bg-[#072C24] text-[#DDE8E4] hover:text-white hover:bg-[#0A362D] border border-white/15 transition-all whitespace-nowrap" onclick="filterProjects('motion', event)">
             Đồ Họa & Poster (3)
           </button>
-          <button class="filter-btn px-5 py-2.5 rounded-full font-roboto text-xs font-bold uppercase tracking-wider bg-[#0B3B30] text-[#DDE8E4] hover:text-white hover:bg-[#0f4a3d] border border-white/15 transition-all whitespace-nowrap" onclick="filterProjects('editorial', event)">
+          <button class="filter-btn px-5 py-2.5 rounded-full font-roboto text-xs font-bold uppercase tracking-wider bg-[#072C24] text-[#DDE8E4] hover:text-white hover:bg-[#0A362D] border border-white/15 transition-all whitespace-nowrap" onclick="filterProjects('editorial', event)">
             Menu & POSM (4)
           </button>
         </div>
       </section>
 
-      <!-- Projects Grid (12 Projects) -->
+      <!-- Projects Grid (12 Projects with clear Recruiter Metadata) -->
       <section class="w-full max-w-7xl mx-auto px-6 sm:px-8 pb-24">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
 
           <!-- Dự Án 1: Ulibee Product Campaign (Featured Case Study) -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="brand motion">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="brand motion">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/ulibee-product-campaign-kv.jpg" alt="Key Visual quảng bá sản phẩm Ulibee" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">FMCG</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Digital Marketing</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">FMCG</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Digital Campaign</span>
               </div>
-              <a href="case-study-vortex.html" class="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-white text-primary-green flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 shadow-lg" aria-label="Xem case study Ulibee">
-                <span class="material-symbols-outlined text-[20px]">arrow_outward</span>
-              </a>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2024 - 2025</span>
-                  <span class="font-roboto text-xs text-[#00DF89] font-bold uppercase">Case Study Nổi Bật</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Ulibee Group • 2024 - 2025</span>
+                  <span class="text-[#00DF89] font-bold">Role: Graphic Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Ulibee — Product Campaign</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Thiết kế Key Visual quảng bá Nước Tẩy Đa Năng Sinh Học Ulibee: công nghệ Nhật Bản, enzyme sinh học an toàn và làm sạch vượt trội x3.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Ulibee — Product Campaign</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Key Visual</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">3D Compositing</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Digital Ads</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Key Visual quảng bá Nước Tẩy Đa Năng Sinh Học: công nghệ Nhật Bản, enzyme sinh học an toàn và làm sạch vượt trội x3.</p>
               </div>
-              <a href="case-study-vortex.html" class="mt-6 pt-4 flex items-center text-white font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+              <a href="case-study-vortex.html" class="mt-6 pt-4 flex items-center justify-between text-white font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
                 <span>Khám Phá Case Study Chi Tiết</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </a>
             </div>
           </div>
 
           <!-- Dự Án 2: Nét Quê - Brand Identity (Featured Case Study) -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="brand editorial">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="brand editorial">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/net-que-isometric-mockup.jpg" alt="Nhận diện thương hiệu ẩm thực Nét Quê" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Branding</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Cultural Identity</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Branding</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Cultural Identity</span>
               </div>
-              <a href="case-study-net-que.html" class="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-white text-primary-green flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 shadow-lg" aria-label="Xem case study Nét Quê">
-                <span class="material-symbols-outlined text-[20px]">arrow_outward</span>
-              </a>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2024 - 2025</span>
-                  <span class="font-roboto text-xs text-[#00DF89] font-bold uppercase">Case Study Nổi Bật</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Nét Quê • 2024 - 2025</span>
+                  <span class="text-[#00DF89] font-bold">Role: Graphic Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Nét Quê — Brand Identity</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Xây dựng bộ nhận diện thương hiệu Nét Quê mang đậm bản sắc văn hóa Việt Nam, kết hợp đỏ đô – trắng cùng hoa văn truyền thống và phong cách hiện đại.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Nét Quê — Brand Identity</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Brand Identity</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Pattern Design</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Stationery & Gift</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Nhận diện thương hiệu mang đậm bản sắc văn hóa Việt Nam: đỏ đô – trắng kết hợp hoa văn truyền thống và phong cách sang trọng.</p>
               </div>
-              <a href="case-study-net-que.html" class="mt-6 pt-4 flex items-center text-white font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+              <a href="case-study-net-que.html" class="mt-6 pt-4 flex items-center justify-between text-white font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
                 <span>Khám Phá Case Study Chi Tiết</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </a>
             </div>
           </div>
 
           <!-- Dự Án 3: Lamee - Brand Identity (Featured Case Study) -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="brand editorial">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="brand editorial">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/lamee-isometric-mockup.jpg" alt="Nhận diện thương hiệu phong cách sống Lamee" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Branding</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Lifestyle</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Branding</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Lifestyle</span>
               </div>
-              <a href="case-study-lamee.html" class="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-white text-primary-green flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 shadow-lg" aria-label="Xem case study Lamee">
-                <span class="material-symbols-outlined text-[20px]">arrow_outward</span>
-              </a>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2024 - 2025</span>
-                  <span class="font-roboto text-xs text-[#00DF89] font-bold uppercase">Case Study Nổi Bật</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Lamee Group • 2024 - 2025</span>
+                  <span class="text-[#00DF89] font-bold">Role: Graphic Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Lamee — Brand Identity</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Xây dựng bộ nhận diện thương hiệu Lamee phong cách sống xanh, hiện đại và thân thiện: xanh lá – vàng chanh – trắng cùng biểu tượng chiếc lá tự nhiên.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Lamee — Brand Identity</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Visual Identity</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Stationery</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Eco Packaging</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Nhận diện thương hiệu phong cách sống xanh, hiện đại và thân thiện: xanh lá – vàng chanh – trắng cùng biểu tượng chiếc lá mầm.</p>
               </div>
-              <a href="case-study-lamee.html" class="mt-6 pt-4 flex items-center text-white font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+              <a href="case-study-lamee.html" class="mt-6 pt-4 flex items-center justify-between text-white font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
                 <span>Khám Phá Case Study Chi Tiết</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </a>
             </div>
           </div>
 
           <!-- Dự Án 4: Website Portfolio — Cao Ngọc Minh (Featured Case Study) -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="uiux">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="uiux">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/portfolio-3d-screens.jpg" alt="Thiết kế và xây dựng Website Portfolio Cao Ngọc Minh" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">UI/UX</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Web Design</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">UI/UX</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Web Design</span>
               </div>
-              <a href="case-study-portfolio.html" class="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-white text-primary-green flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 shadow-lg" aria-label="Xem case study Portfolio">
-                <span class="material-symbols-outlined text-[20px]">arrow_outward</span>
-              </a>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2026</span>
-                  <span class="font-roboto text-xs text-[#00DF89] font-bold uppercase">Case Study Nổi Bật</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Cao Ngọc Minh • 2026</span>
+                  <span class="text-[#00DF89] font-bold">Role: UI/UX & Web</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Website Portfolio — Cao Ngọc Minh</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Thiết kế và tự xây dựng website portfolio cá nhân để giới thiệu năng lực, kinh nghiệm và các dự án thiết kế: phong cách tối giản, hiện đại, nền xanh đậm điểm nhấn xanh neon.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Website Portfolio — Cao Ngọc Minh</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">UI/UX Concept</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">HTML/CSS/JS</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Responsive</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Website portfolio cá nhân đa nền tảng Dark Emerald & Neon Mint, tự tay thiết kế và lập trình frontend chuẩn tuyển dụng.</p>
               </div>
-              <a href="case-study-portfolio.html" class="mt-6 pt-4 flex items-center text-white font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+              <a href="case-study-portfolio.html" class="mt-6 pt-4 flex items-center justify-between text-white font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
                 <span>Khám Phá Case Study Chi Tiết</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </a>
             </div>
           </div>
 
           <!-- Dự Án 5: Dê Âm Chay - Menu & POSM F&B -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="brand editorial">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="brand editorial">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/portfolio-workspace-mockup.jpg" alt="Bộ Menu và POSM nhà hàng Dê Âm Chay" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">F&B Design</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Menu & POSM</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">F&B Design</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Menu & POSM</span>
               </div>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2023 - 2024</span>
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">Ẩm Thực & F&B</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Dê Âm Chay • 2023 - 2024</span>
+                  <span class="text-[#00DF89] font-bold">Role: In-house Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Dê Âm Chay — Menu & POSM F&B</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Hệ thống menu nhiều trang, standee để bàn, banner quảng cáo sự kiện và ấn phẩm POSM trực tiếp tại nhà hàng.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Dê Âm Chay — Menu & POSM F&B</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Menu nhiều trang</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Standee POSM</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Event Banner</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Hệ thống menu nhiều trang, standee để bàn, banner quảng cáo sự kiện và ấn phẩm POSM trực tiếp tại nhà hàng.</p>
               </div>
-              <div class="mt-6 pt-4 flex items-center text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
-                <span>Xem Chi Tiết Dự Án</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+              <div class="mt-6 pt-4 flex items-center justify-between text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+                <span>Dự Án Doanh Nghiệp Thực Chiến</span>
+                <span class="material-symbols-outlined text-sm">restaurant</span>
               </div>
             </div>
           </div>
 
           <!-- Dự Án 6: Vincent Holdings Corporate Identity -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="brand editorial">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="brand editorial">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQj4tBwWsRL4cYfcUhZhqpizXDufObLbldt2MPiLxT3qx9FfK8_0lul99mEdCJVYlP4TUl-pg49us8biNcFpFitoFJKvx_I_tWT37vzNjR2t3QEJJiEl0QrIKI71nnmrx279wMemlI4FESJEu-mSo7x6EGyDBixqtHA4RenHGWlR6eMWXF4sjT8Hcsnvo2M0nJE6YSL3zunXR6-jNx5Ib9-XSElaliqNA-eZLfO1CZ6HbXvmrjlh21" alt="Bộ nhận diện thương hiệu doanh nghiệp Vincent Holdings" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Corporate</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Brand Identity</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Corporate</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Brand Identity</span>
               </div>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2021 - 2022</span>
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">Doanh Nghiệp</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Vincent Holdings • 2021 - 2022</span>
+                  <span class="text-[#00DF89] font-bold">Role: Graphic Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Vincent Holdings — Identity System</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Hệ thống văn phòng phẩm, ấn phẩm truyền thông nội bộ, profile công ty và mẫu tiếp thị chuẩn nhận diện.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Vincent Holdings — Identity System</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Letterhead</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Company Profile</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Marketing Assets</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Hệ thống văn phòng phẩm, ấn phẩm truyền thông nội bộ, profile công ty và mẫu tiếp thị chuẩn nhận diện.</p>
               </div>
-              <div class="mt-6 pt-4 flex items-center text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
-                <span>Xem Bộ Nhận Diện</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+              <div class="mt-6 pt-4 flex items-center justify-between text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+                <span>Dự Án Doanh Nghiệp Thực Chiến</span>
+                <span class="material-symbols-outlined text-sm">corporate_fare</span>
               </div>
             </div>
           </div>
 
           <!-- Dự Án 7: Vortex Kinetic Type -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="motion editorial">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="motion editorial">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCajGjM2pgdQmHSjT4yMnt-C50C2EKZ5N42MC2CVjPXDKobbI7tSzwD3TaKtHgtjQnrKYwVJjsAUGPD5Iu8pkSo4qi3v9ddggTAcoBtFuQzNpx5JsgVPFz2w3JXJnKnEvBhrSNtZvOrhoVHUKtDjNCO3ac0CbyOSaVVnLL3cr8J1u173pcf6fYlar1C9FYK-VfbOxfwwaeGWn-Ab9PB3xdFEAru97qhdepnq5VR_EopDdj_ZoiYqqVV" alt="Kiểu chữ động thể nghiệm Vortex Kinetic Type" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Motion</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Typography</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Motion</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Typography</span>
               </div>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2024</span>
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">Kiểu Chữ Biến Đổi</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Creative Lab • 2024</span>
+                  <span class="text-[#00DF89] font-bold">Role: Type Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Vortex — Kinetic Typography</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Nghệ thuật chữ chuyển động thể nghiệm với thuật toán biến đổi độ đậm nhạt linh hoạt theo tần số âm thanh.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Vortex — Kinetic Typography</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Variable Font</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Sound Reactive</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Motion Poster</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Nghệ thuật chữ chuyển động thể nghiệm với thuật toán biến đổi độ đậm nhạt linh hoạt theo tần số âm thanh.</p>
               </div>
-              <div class="mt-6 pt-4 flex items-center text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
-                <span>Xem Mẫu Phông Chữ</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+              <div class="mt-6 pt-4 flex items-center justify-between text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+                <span>Thể Nghiệm Sáng Tạo</span>
+                <span class="material-symbols-outlined text-sm">text_fields</span>
               </div>
             </div>
           </div>
 
           <!-- Dự Án 8: EcoPack Sustainable Packaging -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="brand editorial">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="brand editorial">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/lamee-isometric-mockup.jpg" alt="Thiết kế bao bì tái chế EcoPack" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Packaging</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Eco-Friendly</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Packaging</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Eco-Friendly</span>
               </div>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2024</span>
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">Thiết Kế Bao Bì</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>EcoPack Concept • 2024</span>
+                  <span class="text-[#00DF89] font-bold">Role: Graphic Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">EcoPack — Sustainable Packaging</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Thiết kế hệ thống bao bì nhãn mác vật liệu tái chế thân thiện môi trường, tối giản mực in và tạo điểm nhấn thị giác cao cấp.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">EcoPack — Sustainable Packaging</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Kraft Box</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Eco Tag</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Dieline Layout</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Thiết kế hệ thống bao bì nhãn mác vật liệu tái chế thân thiện môi trường, tối giản mực in và tạo điểm nhấn thị giác cao cấp.</p>
               </div>
-              <div class="mt-6 pt-4 flex items-center text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
-                <span>Xem Mẫu Bao Bì</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+              <div class="mt-6 pt-4 flex items-center justify-between text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+                <span>Thiết Kế Bao Bì Xanh</span>
+                <span class="material-symbols-outlined text-sm">inventory_2</span>
               </div>
             </div>
           </div>
 
           <!-- Dự Án 9: Glow Cosmetics E-Commerce KV -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="brand uiux">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="brand uiux">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/ulibee-product-campaign-kv.jpg" alt="Key Visual thương mại điện tử Glow Cosmetics" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">E-Commerce</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Key Visual</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">E-Commerce</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Key Visual</span>
               </div>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2024</span>
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">Shopee & TikTok Mall</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Glow Cosmetics • 2024</span>
+                  <span class="text-[#00DF89] font-bold">Role: Visual Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Glow Cosmetics — E-Commerce KV</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Thiết kế bộ banner gian hàng Shopee Mall, TikTok Shop và ấn phẩm hình ảnh sản phẩm tối ưu CTR cho chiến dịch Mega Sale.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Glow Cosmetics — E-Commerce KV</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Shopee Mall Banner</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">TikTok Shop</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Mega Sale Ads</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Thiết kế bộ banner gian hàng Shopee Mall, TikTok Shop và ấn phẩm hình ảnh sản phẩm tối ưu CTR cho chiến dịch Mega Sale.</p>
               </div>
-              <div class="mt-6 pt-4 flex items-center text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
-                <span>Xem Hình Ảnh E-Commerce</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+              <div class="mt-6 pt-4 flex items-center justify-between text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+                <span>Hình Ảnh Thương Mại Điện Tử</span>
+                <span class="material-symbols-outlined text-sm">shopping_bag</span>
               </div>
             </div>
           </div>
 
           <!-- Dự Án 10: Neon Event Poster Series -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="motion editorial">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="motion editorial">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/net-que-isometric-mockup.jpg" alt="Chuỗi poster sự kiện âm nhạc Neon Music Series" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Poster</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Event Series</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Poster</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Event Series</span>
               </div>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2023</span>
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">Poster & Sự Kiện</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Music Festival • 2023</span>
+                  <span class="text-[#00DF89] font-bold">Role: Poster Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Neon Nights — Music Event Posters</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Chuỗi poster sự kiện âm nhạc kết hợp màu sắc neon tương phản cao, typography hiện đại và hiệu ứng thị giác mạnh mẽ.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Neon Nights — Music Event Posters</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Event Poster</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Neon Glow</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Typography</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Chuỗi poster sự kiện âm nhạc kết hợp màu sắc neon tương phản cao, typography hiện đại và hiệu ứng thị giác mạnh mẽ.</p>
               </div>
-              <div class="mt-6 pt-4 flex items-center text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
-                <span>Xem Chuỗi Poster</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+              <div class="mt-6 pt-4 flex items-center justify-between text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+                <span>Ấn Phẩm Sự Kiện</span>
+                <span class="material-symbols-outlined text-sm">celebration</span>
               </div>
             </div>
           </div>
 
           <!-- Dự Án 11: Urban Coffee Takeaway Identity -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="brand editorial">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="brand editorial">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/lamee-isometric-mockup.jpg" alt="Bộ nhận diện cà phê mang đi Urban Coffee" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Coffee Brand</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Takeaway POSM</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Coffee Brand</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">Takeaway POSM</span>
               </div>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2024</span>
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">Cà Phê & Đồ Uống</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Urban Coffee • 2024</span>
+                  <span class="text-[#00DF89] font-bold">Role: Graphic Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Urban Coffee — Takeaway Identity</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Thiết kế logo, ly giấy, túi quai, thẻ tích điểm và bảng menu treo tường mang phong cách đô thị trẻ trung, tinh tế.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Urban Coffee — Takeaway Identity</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Paper Cup</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Wall Menu</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Loyalty Card</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Thiết kế logo, ly giấy, túi quai, thẻ tích điểm và bảng menu treo tường mang phong cách đô thị trẻ trung, tinh tế.</p>
               </div>
-              <div class="mt-6 pt-4 flex items-center text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
-                <span>Xem Chi Tiết Ấn Phẩm</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+              <div class="mt-6 pt-4 flex items-center justify-between text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+                <span>Nhận Diện Đồ Uống & POSM</span>
+                <span class="material-symbols-outlined text-sm">local_cafe</span>
               </div>
             </div>
           </div>
 
           <!-- Dự Án 12: Aura App UI/UX Experience -->
-          <div class="project-card group cursor-pointer flex flex-col bg-[#0B3B30] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-white/15 hover:border-[#00DF89]/60" data-category="uiux">
-            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#06352C]">
+          <div class="project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-white/15 hover:border-[#00DF89]/60 transition-all duration-300" data-category="uiux">
+            <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
               <img src="../assets/images/portfolio-3d-screens.jpg" alt="Giao diện trải nghiệm ứng dụng Aura App" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="320"/>
               <div class="absolute top-4 left-4 flex gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Mobile App</span>
-                <span class="px-3 py-1 rounded-full bg-[#06352C]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">UI/UX</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">Mobile App</span>
+                <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/30">UI/UX</span>
               </div>
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">2025</span>
-                  <span class="font-roboto text-xs text-[#DDE8E4] font-medium">Giao Diện Ứng Dụng</span>
+                <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+                  <span>Aura Concept • 2025</span>
+                  <span class="text-[#00DF89] font-bold">Role: UI/UX Designer</span>
                 </div>
-                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors">Aura App — UI/UX Experience</h3>
-                <p class="text-sm text-[#DDE8E4] mt-2 line-clamp-2 leading-relaxed">Thiết kế luồng trải nghiệm người dùng (UX flow) và bộ giao diện Dark Theme trực quan cho ứng dụng phong cách sống trên Figma.</p>
+                <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">Aura App — UI/UX Experience</h3>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">UX User Flow</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Dark Theme UI</span>
+                  <span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">Figma Prototype</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">Thiết kế luồng trải nghiệm người dùng (UX flow) và bộ giao diện Dark Theme trực quan cho ứng dụng phong cách sống trên Figma.</p>
               </div>
-              <div class="mt-6 pt-4 flex items-center text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
-                <span>Xem Thiết Kế Giao Diện</span>
-                <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">chevron_right</span>
+              <div class="mt-6 pt-4 flex items-center justify-between text-[#DDE8E4] font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+                <span>Giao Diện Trải Nghiệm Số</span>
+                <span class="material-symbols-outlined text-sm">phone_iphone</span>
               </div>
             </div>
           </div>
@@ -486,13 +534,11 @@
           <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> BRAND IDENTITY</span>
           <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> MENU & POSM</span>
           <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> E-COMMERCE VISUALS</span>
-          <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> DIGITAL MARKETING</span>
+          <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> DIGITAL CAMPAIGN</span>
           <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> PHOTOSHOP</span>
           <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> ILLUSTRATOR</span>
           <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> INDESIGN</span>
           <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> FIGMA</span>
-          <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> BRAND IDENTITY</span>
-          <span class="flex items-center gap-3"><span class="text-[#00DF89]">✦</span> MENU & POSM</span>
         </div>
       </section>
 
@@ -515,7 +561,7 @@
   <footer class="w-full bg-[#031B16] py-10 sm:py-12 px-4 sm:px-8 border-t border-[#00DF89]/20 font-roboto">
     <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
       <span class="font-roboto text-xl sm:text-2xl font-black text-white uppercase tracking-wider">CAO NGỌC MINH<span class="text-[#00DF89]">.</span></span>
-      <p class="text-xs sm:text-sm text-[#B8D3CB] mt-1.5 max-w-md">Graphic Designer • Khám phá chất liệu hình ảnh - Nâng tầm bản sắc thương hiệu.</p>
+      <p class="text-xs sm:text-sm text-[#B8D3CB] mt-1.5 max-w-md">Graphic Designer & Digital Creator • Khám phá chất liệu hình ảnh - Nâng tầm bản sắc thương hiệu.</p>
       
       <!-- Footer Nav Links -->
       <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-4 text-xs font-medium text-[#B8D3CB]">

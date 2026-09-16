@@ -52,7 +52,7 @@ function copyMessageText() {
     if (copyText) copyText.textContent = 'Đã sao chép!';
     if (copyIcon) copyIcon.textContent = 'check';
     setTimeout(() => {
-      if (copyText) copyText.textContent = 'Sao Chép Nội Dung';
+      if (copyText) copyText.textContent = 'Sao Chép Lại Nội Dung';
       if (copyIcon) copyIcon.textContent = 'content_copy';
     }, 2500);
   });
@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rawInquiry = document.getElementById('selected-inquiry')?.value || 'Phỏng Vấn Tuyển Dụng';
       const rawName = document.getElementById('name')?.value || '';
       const rawEmail = document.getElementById('email')?.value || '';
+      const rawCompany = document.getElementById('company')?.value || 'Cá nhân';
       const rawPhone = document.getElementById('pref-date')?.value || 'Không cung cấp';
       const prefTimeSelect = document.getElementById('pref-time');
       const rawTime = prefTimeSelect ? prefTimeSelect.options[prefTimeSelect.selectedIndex]?.text : 'Linh hoạt';
@@ -103,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const name = sanitizeInput(rawName);
       const email = sanitizeInput(rawEmail);
+      const company = sanitizeInput(rawCompany);
       const inquiry = sanitizeInput(rawInquiry);
       const prefDate = sanitizeInput(rawPhone);
       const prefTime = sanitizeInput(rawTime);
@@ -133,12 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Format clean message for email
       const emailSubject = `[Portfolio Cao Ngọc Minh] Lời nhắn từ ${name} - ${inquiry}`;
-      const emailBody = `Kính gửi Cao Ngọc Minh (Graphic Designer),
+      const emailBody = `Kính gửi Cao Ngọc Minh (Graphic Designer & Digital Creator),
 
 Tôi gửi lời nhắn từ Website Portfolio của bạn với thông tin như sau:
 --------------------------------------------------
 • Họ và tên: ${name}
 • Địa chỉ Email: ${email}
+• Công ty / Doanh nghiệp: ${company}
 • Số điện thoại / Ngày trao đổi: ${prefDate}
 • Khung giờ thuận tiện: ${prefTime}
 • Mục đích liên hệ: ${inquiry}
@@ -173,6 +176,7 @@ ${name} (${email})`;
           body: JSON.stringify({
             'Họ và tên': name,
             'Email': email,
+            'Công ty': company,
             'Mục đích': inquiry,
             'SĐT / Ngày': prefDate,
             'Khung giờ': prefTime,
