@@ -105,45 +105,79 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
       `;
     }
 
-    const payload = {
+    const targetEmail = 'mngoc12851@gmail.com';
+    const formSubmitUrl = `https://formsubmit.co/ajax/${targetEmail}`;
+
+    const formPayload = {
       'Họ và tên': name,
-      'Email': email,
-      'Mục đích': purpose,
-      'Lời nhắn': message,
-      'submittedAt': new Date().toISOString()
+      'Email người gửi': email,
+      '_replyto': email,
+      'Mục đích liên hệ': purpose,
+      'Nội dung lời nhắn': message,
+      '_subject': `[Portfolio Website] ${purpose} - Từ ${name}`,
+      '_template': 'table',
+      '_captcha': 'false'
     };
 
+    // Backup to local server storage if available
     try {
-      const response = await fetch('/api/contact', {
+      fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          'Họ và tên': name,
+          'Email': email,
+          'Mục đích': purpose,
+          'Lời nhắn': message,
+          'submittedAt': new Date().toISOString()
+        })
+      }).catch(() => {});
+    } catch (_) {}
+
+    try {
+      const response = await fetch(formSubmitUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formPayload)
       });
 
-      if (response.ok) {
+      const resData = await response.json().catch(() => ({}));
+
+      if (response.ok && (resData.success === 'true' || resData.success === true)) {
         // 5. UI STATE: SUCCESS
         showStatus(
           statusBox,
           'success',
-          'Đã Gửi Lời Nhắn Thành Công!',
-          `Cảm ơn <strong>${name}</strong> đã liên hệ. Tin nhắn của bạn đã được ghi nhận an toàn. Cao Ngọc Minh sẽ phản hồi qua email <strong>${email}</strong> trong vòng 24 giờ.`
+          'Đã Gửi Lời Nhắn Đến Hộp Thư Thành Công! 🎉',
+          `Cảm ơn <strong>${name}</strong> đã liên hệ. Lời nhắn đã được chuyển trực tiếp tới hộp thư Gmail của Cao Ngọc Minh (<strong>${targetEmail}</strong>). Minh sẽ phản hồi bạn qua email <strong>${email}</strong> trong thời gian sớm nhất.`
+        );
+        form.reset();
+      } else if (resData.message && resData.message.includes('needs Activation')) {
+        showStatus(
+          statusBox,
+          'success',
+          'Yêu Cầu Kích Hoạt Form (Lần Đầu Tiên)',
+          `Hệ thống vừa gửi 1 email xác nhận kích hoạt tới <strong>${targetEmail}</strong>. Bạn hãy mở hòm thư Gmail và bấm nút <strong>"Activate Form"</strong> (chỉ cần làm 1 lần duy nhất) để hoàn tất kết nối nhận email trực tiếp từ website!`
         );
         form.reset();
       } else {
-        throw new Error('Server returned ' + response.status);
+        throw new Error(resData.message || 'Server returned ' + response.status);
       }
     } catch (err) {
-      console.warn('API submission notice:', err.message);
+      console.warn('Email gateway notice:', err.message);
       // 6. UI STATE: ERROR with graceful fallback
       const mailtoSubject = encodeURIComponent(`[Portfolio] ${purpose} - ${name}`);
       const mailtoBody = encodeURIComponent(`Chào Cao Ngọc Minh,\n\nTôi là ${name} (${email}).\nMục đích: ${purpose}\n\nLời nhắn:\n${message}`);
-      const mailtoLink = `mailto:mngoc12851@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+      const mailtoLink = `mailto:${targetEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
 
       showStatus(
         statusBox,
         'error',
-        'Máy Chủ Đang Ngoại Tuyến (Offline)',
-        `Tin nhắn chưa gửi qua API được. Bạn có thể bấm nút bên dưới để gửi email trực tiếp tới <strong>mngoc12851@gmail.com</strong>:
+        'Không Thể Gửi Email Tự Động',
+        `Tin nhắn chưa gửi qua cổng email tự động được. Bạn có thể bấm nút bên dưới để mở ứng dụng Email gửi trực tiếp tới <strong>${targetEmail}</strong>:
         <div class="mt-3">
           <a href="${mailtoLink}" class="btn-primary inline-flex items-center gap-1.5 px-4 py-2 text-xs">
             <span>Mở Email Gửi Trực Tiếp</span>
