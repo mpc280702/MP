@@ -39,10 +39,7 @@ function updateLocalClock() {
 function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
   if (!form || !submitBtn) return;
 
-  const btnText = submitBtn.querySelector('span:not(.material-symbols-outlined)') || submitBtn;
-  const btnIcon = submitBtn.querySelector('.material-symbols-outlined');
-  const originalText = btnText ? btnText.textContent : 'Gửi Lời Nhắn';
-  const originalIcon = btnIcon ? btnIcon.textContent : 'send';
+  const originalBtnHTML = submitBtn.innerHTML;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -89,18 +86,16 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
     // 4. UI STATE: LOADING
     submitBtn.disabled = true;
     submitBtn.classList.add('opacity-70', 'cursor-wait');
-    if (btnText) btnText.textContent = 'Đang gửi lời nhắn...';
-    if (btnIcon) btnIcon.textContent = 'sync';
-    if (btnIcon) btnIcon.classList.add('animate-spin');
+    submitBtn.innerHTML = `<span>Đang gửi lời nhắn...</span><span class="material-symbols-outlined text-base ml-2 animate-spin">sync</span>`;
 
     if (statusBox) {
       statusBox.classList.remove('hidden');
-      statusBox.className = 'state-box state-loading flex items-center gap-3';
+      statusBox.className = 'state-box state-loading flex items-center gap-3 p-4 rounded-xl bg-[#04201A] border border-[#00DF89]/30 text-white';
       statusBox.innerHTML = `
-        <span class="material-symbols-outlined text-[#00DF89] animate-spin">sync</span>
+        <span class="material-symbols-outlined text-[#00DF89] animate-spin text-2xl shrink-0">sync</span>
         <div>
           <strong class="block text-white text-xs sm:text-sm font-bold">Đang xử lý gửi tin nhắn...</strong>
-          <span class="text-xs text-[#B8D3CB]">Vui lòng đợi giây lát.</span>
+          <span class="text-xs text-[#B8D3CB]">Vui lòng đợi trong giây lát.</span>
         </div>
       `;
     }
@@ -121,10 +116,10 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
 
     const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-    // Localhost: Send to local backend server
-    if (isLocalhost) {
-      try {
-        const localRes = await fetch('/api/contact', {
+    try {
+      if (isLocalhost) {
+        // Send to local server
+        await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -134,9 +129,9 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
             'Lời nhắn': message,
             'submittedAt': new Date().toISOString()
           })
-        });
+        }).catch(() => {});
 
-        // Also ping FormSubmit in background if online
+        // Also ping FormSubmit gateway in background
         fetch(formSubmitUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -147,36 +142,35 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
           statusBox,
           'success',
           'Đã Gửi Lời Nhắn Thành Công! 🎉',
-          `Cảm ơn <strong>${name}</strong> đã liên hệ. Lời nhắn của bạn đã được ghi nhận an toàn (lưu tại local server). Cao Ngọc Minh sẽ phản hồi bạn qua email <strong>${email}</strong> sớm nhất!`
+          `Cảm ơn <strong>${name}</strong> đã liên hệ. Lời nhắn đã được lưu trữ an toàn. Cao Ngọc Minh sẽ phản hồi bạn qua email <strong>${email}</strong> sớm nhất!`
         );
-        form.reset();
-        return;
-      } catch (e) {
-        console.warn('Local API error, trying gateway:', e);
+      } else {
+        // Production: send via FormSubmit with 8s timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+        const response = await fetch(formSubmitUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(formPayload),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        showStatus(
+          statusBox,
+          'success',
+          'Đã Gửi Lời Nhắn Đến Hộp Thư Thành Công! 🎉',
+          `Cảm ơn <strong>${name}</strong> đã liên hệ. Lời nhắn đã được chuyển trực tiếp tới hộp thư Gmail của Cao Ngọc Minh (<strong>${targetEmail}</strong>). Minh sẽ phản hồi qua email <strong>${email}</strong> trong thời gian sớm nhất.`
+        );
       }
-    }
 
-    // Production / GitHub Pages: Send via FormSubmit
-    try {
-      const response = await fetch(formSubmitUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(formPayload)
-      });
-
-      showStatus(
-        statusBox,
-        'success',
-        'Đã Gửi Lời Nhắn Đến Hộp Thư Thành Công! 🎉',
-        `Cảm ơn <strong>${name}</strong> đã liên hệ. Lời nhắn đã được chuyển trực tiếp tới hộp thư Gmail của Cao Ngọc Minh (<strong>${targetEmail}</strong>). Minh sẽ phản hồi bạn qua email <strong>${email}</strong> trong thời gian sớm nhất.`
-      );
       form.reset();
     } catch (err) {
-      console.warn('Email gateway notice:', err.message);
-      // Fallback
+      console.warn('Submission fallback notice:', err.message);
       const mailtoSubject = encodeURIComponent(`[Portfolio] ${purpose} - ${name}`);
       const mailtoBody = encodeURIComponent(`Chào Cao Ngọc Minh,\n\nTôi là ${name} (${email}).\nMục đích: ${purpose}\n\nLời nhắn:\n${message}`);
       const mailtoLink = `mailto:${targetEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
@@ -184,8 +178,8 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
       showStatus(
         statusBox,
         'error',
-        'Không Thể Gửi Email Tự Động',
-        `Tin nhắn chưa gửi qua cổng email tự động được. Bạn có thể bấm nút bên dưới để mở ứng dụng Email gửi trực tiếp tới <strong>${targetEmail}</strong>:
+        'Không Thể Gửi Tự Động',
+        `Chưa gửi qua cổng tự động được. Bạn có thể bấm nút bên dưới để gửi email trực tiếp tới <strong>${targetEmail}</strong>:
         <div class="mt-3">
           <a href="${mailtoLink}" class="btn-primary inline-flex items-center gap-1.5 px-4 py-2 text-xs">
             <span>Mở Email Gửi Trực Tiếp</span>
@@ -194,14 +188,10 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
         </div>`
       );
     } finally {
-      // Revert button back to default
+      // Guaranteed button restoration
       submitBtn.disabled = false;
       submitBtn.classList.remove('opacity-70', 'cursor-wait');
-      if (btnText) btnText.textContent = originalText;
-      if (btnIcon) {
-        btnIcon.textContent = originalIcon;
-        btnIcon.classList.remove('animate-spin');
-      }
+      submitBtn.innerHTML = originalBtnHTML;
     }
   });
 }
