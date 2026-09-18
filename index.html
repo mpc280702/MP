@@ -842,7 +842,12 @@
               <h3 class="font-roboto text-xl font-bold text-white mb-2">Gửi Tin Nhắn Nhanh</h3>
               <p class="text-xs text-[#B8D3CB] mb-6 font-normal">Điền thông tin vào form để tin nhắn được chuyển thẳng tới hộp thư và lưu bản sao an toàn.</p>
 
-              <form id="home-contact-form" class="space-y-4">
+              <form id="home-contact-form" action="https://formsubmit.co/mngoc12851@gmail.com" method="POST" class="space-y-4">
+                <!-- FormSubmit Configuration Hidden Fields -->
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_subject" value="[Portfolio] Tin nhắn liên hệ mới từ Trang Chủ" />
+
                 <!-- Field 1: Name -->
                 <div>
                   <label class="form-label" for="home-name">Họ & Tên *</label>
