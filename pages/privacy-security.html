@@ -3,15 +3,19 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Chính Sách Bảo Mật & Bản Quyền — CAO NGỌC MINH</title>
-  <meta name="description" content="Chính sách bảo mật thông tin, cam kết NDA và quyền sở hữu trí tuệ của Graphic Designer Cao Ngọc Minh."/>
-  
-  <!-- Roboto Font Google Fonts -->
+  <title>Bản Quyền Tác Phẩm & Bảo Mật (IP & NDA) — CAO NGỌC MINH</title>
+  <meta name="description" content="Chính sách bản quyền hình ảnh (IP), cam kết bảo mật dự án (NDA) và quy định lưu trữ thông tin liên hệ của Graphic Designer Cao Ngọc Minh."/>
+  <meta name="keywords" content="Bản quyền thiết kế, Thỏa thuận NDA, Quyền sở hữu trí tuệ, Chính sách bảo mật, Cao Ngọc Minh"/>
+  <meta name="author" content="Cao Ngọc Minh"/>
+  <link rel="canonical" href="https://mpc280702.github.io/MP/pages/privacy-security.html"/>
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg"/>
+
+  <!-- Roboto Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-  
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -20,13 +24,16 @@
       theme: {
         extend: {
           colors: {
-            "primary-green": "#05261F",
-            "pine-surface": "#072C24",
-            "pine-dark": "#04201A",
-            "accent-mint": "#00DF89",
+            "primary": "#FFFFFF",
+            "accent": "#00DF89",
             "accent-lime": "#A3E635",
-            "neon-green": "#00DF89",
-            "deep-forest": "#031B16"
+            "surface": "#0A362D",
+            "surface-dim": "#04201A",
+            "surface-card": "rgba(10, 54, 45, 0.75)",
+            "on-surface": "#FFFFFF",
+            "on-surface-variant": "#B8D3CB",
+            "outline": "rgba(0, 223, 137, 0.25)",
+            "background": "#05261F"
           },
           fontFamily: {
             "sans": ["Roboto", "sans-serif"],
@@ -38,33 +45,34 @@
   </script>
   <link rel="stylesheet" href="../css/main.css"/>
 </head>
-<body class="bg-[#05261F] font-roboto text-white antialiased selection:bg-[#00DF89] selection:text-[#04201A]">
+<body class="bg-[#05261F] font-roboto text-white antialiased selection:bg-[#00DF89] selection:text-[#04201A] overflow-x-hidden">
 
-  <!-- Header / Thanh Điều Hướng -->
+  <!-- ==========================================================================
+       HEADER / NAVIGATION
+       ========================================================================== -->
   <header class="fixed top-0 w-full z-50 glass-nav transition-all">
     <div class="h-16 sm:h-20 max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
       
       <!-- Logo -->
-      <a class="font-roboto text-xl sm:text-2xl font-black tracking-wider uppercase text-white hover:text-white/80 transition-colors flex items-center leading-none" href="../index.html">
+      <a class="font-roboto text-xl sm:text-2xl font-black tracking-wider uppercase text-white hover:text-white/80 transition-colors flex items-center leading-none" href="../index.html" aria-label="Cao Ngọc Minh Trang Chủ">
         MINH<span class="text-[#00DF89]">.</span>
       </a>
 
-      <!-- Desktop Nav (Pill Capsule Bar) -->
-      <nav class="hidden md:flex items-center nav-pill-container">
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center nav-pill-container" aria-label="Menu chính">
         <a class="nav-pill-item" href="../index.html">Trang Chủ</a>
-        <a class="nav-pill-item" href="selected-work.html">Dự Án Tiêu Biểu</a>
-        <a class="nav-pill-item" href="about.html">Giới Thiệu</a>
-        <a class="nav-pill-item" href="case-study-vortex.html">Case Study</a>
+        <a class="nav-pill-item" href="selected-work.html">Dự Án</a>
+        <a class="nav-pill-item" href="about.html">Về Tôi</a>
         <a class="nav-pill-item" href="contact.html">Liên Hệ</a>
       </nav>
 
-      <!-- Action Buttons -->
+      <!-- Right Action CTA -->
       <div class="hidden sm:flex items-center space-x-3">
-        <a class="btn-outline-pill px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider inline-flex items-center gap-1.5" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
-          <span class="material-symbols-outlined text-sm">download</span>
+        <a class="btn-secondary" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined text-sm mr-1.5">download</span>
           <span>Tải CV</span>
         </a>
-        <a class="btn-accent-gradient px-5 py-2 rounded-full text-xs uppercase tracking-wider inline-flex items-center gap-1" href="contact.html">
+        <a class="btn-primary" href="contact.html">
           <span>Liên hệ ngay</span>
         </a>
       </div>
@@ -79,15 +87,14 @@
     <div id="mobile-menu" class="hidden md:hidden bg-[#04201A]/95 backdrop-blur-xl border-b border-[#00DF89]/20 px-5 py-5 space-y-3.5 shadow-2xl">
       <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="../index.html">Trang chủ</a>
       <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="selected-work.html">Dự án</a>
-      <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="about.html">Giới thiệu</a>
-      <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="case-study-vortex.html">Case Study</a>
+      <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="about.html">Về tôi</a>
       <a class="block font-roboto uppercase text-sm tracking-wider text-[#B8D3CB] hover:text-white font-medium py-1 pl-3 transition-colors" href="contact.html">Liên hệ</a>
       <div class="pt-3 border-t border-[#00DF89]/15 flex flex-col gap-2.5">
-        <a class="btn-outline-pill w-full justify-center py-3 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
-          <span class="material-symbols-outlined text-sm">download</span>
-          <span>Tải CV / Hồ Sơ (Drive)</span>
+        <a class="btn-secondary w-full justify-center" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined text-sm mr-1.5">download</span>
+          <span>Tải CV (Drive)</span>
         </a>
-        <a class="btn-accent-gradient w-full justify-center py-3 rounded-xl text-xs uppercase tracking-wider inline-flex items-center shadow-lg shadow-[#00DF89]/20" href="contact.html">
+        <a class="btn-primary w-full justify-center" href="contact.html">
           <span>Liên hệ ngay</span>
           <span class="material-symbols-outlined text-sm ml-1">arrow_outward</span>
         </a>
@@ -95,253 +102,183 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="w-full pt-28 pb-20 min-h-screen font-roboto">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      
-      <!-- Hero Title Section -->
-      <div class="text-center mb-12 sm:mb-16">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00DF89]/10 border border-[#00DF89]/30 text-[#00DF89] text-xs font-bold uppercase tracking-widest mb-4">
+  <!-- ==========================================================================
+       MAIN CONTENT
+       ========================================================================== -->
+  <main class="w-full pt-20 sm:pt-24 min-h-screen font-roboto">
+    <div class="flex flex-col w-full text-white">
+
+      <!-- Breadcrumb Bar -->
+      <div class="case-container pt-4 sm:pt-6 pb-4 flex items-center justify-between">
+        <a href="../index.html" class="inline-flex items-center text-[#B8D3CB] hover:text-[#00DF89] font-roboto text-xs uppercase tracking-wider transition-colors font-bold group">
+          <span class="material-symbols-outlined text-sm mr-1 group-hover:-translate-x-1 transition-transform">arrow_back</span>
+          <span>Trang Chủ</span>
+        </a>
+        <span class="text-xs text-[#B8D3CB] font-bold uppercase tracking-wider">Chính Sách &amp; Bản Quyền</span>
+      </div>
+
+      <!-- Hero Header -->
+      <section class="case-container py-8 sm:py-12 text-center max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#072C24] border border-[#00DF89]/30 text-[#00DF89] text-xs font-bold uppercase tracking-widest mb-4">
           <span class="material-symbols-outlined text-base">verified_user</span>
-          <span>Bảo Vệ Dữ Liệu & Bản Quyền Sáng Tạo</span>
+          <span>BẢN QUYỀN SÁNG TẠO &amp; CAM KẾT BẢO MẬT</span>
         </div>
-        <h1 class="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight mb-4">
-          Chính Sách <span class="gradient-mint-lime">Bảo Mật</span> & Điều Khoản
+        <h1 class="heading-1 mb-4">
+          BẢN QUYỀN TÁC PHẨM &amp; <span class="gradient-mint-lime">CHÍNH SÁCH BẢO MẬT</span>
         </h1>
-        <p class="text-[#B8D3CB] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-          Cam kết bảo vệ dữ liệu cá nhân của khách hàng, thỏa thuận bảo mật dự án (NDA) và quy định pháp lý về quyền sở hữu trí tuệ các tác phẩm thiết kế của <strong>Cao Ngọc Minh</strong>.
+        <p class="body-text text-sm sm:text-base leading-relaxed">
+          Tuyên bố rõ ràng, minh bạch về quyền sở hữu trí tuệ đối với các tác phẩm thiết kế đồ họa, quy định sử dụng tài liệu portfolio và cam kết bảo mật thông tin đối tác (NDA) của <strong>Cao Ngọc Minh</strong>.
         </p>
-        <div class="flex items-center justify-center gap-4 text-xs text-[#B8D3CB]/60 mt-4">
-          <span class="inline-flex items-center gap-1">
-            <span class="material-symbols-outlined text-sm text-[#00DF89]">calendar_month</span>
-            Hiệu lực: Tháng 03/2026
-          </span>
-          <span>•</span>
-          <span class="inline-flex items-center gap-1">
-            <span class="material-symbols-outlined text-sm text-[#00DF89]">security</span>
-            Chuẩn Nghị định 13/2023/NĐ-CP & OWASP
-          </span>
+      </section>
+
+      <!-- 4 Quick Highlight Cards -->
+      <section class="case-container pb-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="case-card text-center flex flex-col items-center">
+            <span class="material-symbols-outlined text-[#00DF89] text-3xl mb-2">copyright</span>
+            <h3 class="font-bold text-white text-sm mb-1">Bản Quyền Tác Giả (IP)</h3>
+            <p class="text-xs text-[#B8D3CB]">Bảo vệ quyền tác giả đối với toàn bộ concept, hình ảnh và layout.</p>
+          </div>
+          <div class="case-card text-center flex flex-col items-center">
+            <span class="material-symbols-outlined text-[#00DF89] text-3xl mb-2">folder_shared</span>
+            <p class="font-bold text-white text-sm mb-1">Quy Định Sử Dụng</p>
+            <p class="text-xs text-[#B8D3CB]">Chỉ phục vụ mục đích đánh giá tuyển dụng và hợp tác thiết kế.</p>
+          </div>
+          <div class="case-card text-center flex flex-col items-center">
+            <span class="material-symbols-outlined text-[#00DF89] text-3xl mb-2">lock</span>
+            <p class="font-bold text-white text-sm mb-1">Cam Kết NDA 100%</p>
+            <p class="text-xs text-[#B8D3CB]">Bảo mật tuyệt đối ý tưởng kinh doanh và dự án chưa công bố.</p>
+          </div>
+          <div class="case-card text-center flex flex-col items-center">
+            <span class="material-symbols-outlined text-[#00DF89] text-3xl mb-2">mark_email_read</span>
+            <p class="font-bold text-white text-sm mb-1">Bảo Mật Form Liên Hệ</p>
+            <p class="text-xs text-[#B8D3CB]">Không chia sẻ hay thương mại hóa email và thông tin khách hàng.</p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Quick Highlights Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-        <div class="p-5 rounded-2xl bg-[#0A362D]/60 border border-[#00DF89]/20 flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-xl bg-[#00DF89]/15 text-[#00DF89] flex items-center justify-center mb-3">
-            <span class="material-symbols-outlined text-2xl">lock</span>
+      <!-- Detailed 4-section Policy Breakdown -->
+      <section class="case-container pb-16 space-y-8 max-w-4xl mx-auto">
+        
+        <!-- 01. Bản quyền hình ảnh & tác phẩm (IP) -->
+        <div class="case-card space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="case-step-badge">01</span>
+            <h2 class="heading-3 text-lg sm:text-xl text-white">Bản Quyền Hình Ảnh &amp; Tác Phẩm Thiết Kế (Intellectual Property)</h2>
           </div>
-          <h3 class="text-sm font-bold text-white mb-1">Cam Kết NDA 100%</h3>
-          <p class="text-xs text-[#B8D3CB]">Tuyệt đối không tiết lộ tài liệu, ý tưởng hoặc kế hoạch kinh doanh trước ngày ra mắt.</p>
+          <div class="body-text text-sm space-y-3 leading-relaxed">
+            <p>
+              Toàn bộ các tác phẩm đồ họa bao gồm nhưng không giới hạn: <em>Logo, Brand Guidelines, Key Visual, Mockup 3D, Bao bì, Menu &amp; POSM</em> được trưng bày trên website này là tài sản trí tuệ thuộc quyền sở hữu của <strong>Cao Ngọc Minh</strong> hoặc thuộc về khách hàng/đối tác theo các điều khoản hợp đồng bàn giao quyền sử dụng thương mại.
+            </p>
+            <div class="bg-[#04201A] p-4 rounded-xl border border-[#00DF89]/15">
+              <span class="text-[#00DF89] font-bold text-xs uppercase block mb-1">Quy định nghiêm cấm:</span>
+              <ul class="text-xs text-[#B8D3CB] space-y-1.5 list-disc list-inside">
+                <li>Nghiêm cấm sao chép, tải về để mạo danh tác giả trong hồ sơ xin việc hoặc chào thầu dự án khác.</li>
+                <li>Không sử dụng bất kỳ hình ảnh nào vào mục đích thương mại khi chưa có sự đồng ý bằng văn bản của tác giả.</li>
+                <li>Trường hợp trích dẫn tác phẩm vì mục đích học thuật, nghiên cứu hoặc viết bài truyền thông, vui lòng ghi rõ nguồn: <strong>Design by Cao Ngọc Minh (Portfolio)</strong>.</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-[#0A362D]/60 border border-[#00DF89]/20 flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-xl bg-[#00DF89]/15 text-[#00DF89] flex items-center justify-center mb-3">
-            <span class="material-symbols-outlined text-2xl">copyright</span>
+        <!-- 02. Quy định sử dụng tài liệu & Portfolio -->
+        <div class="case-card space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="case-step-badge">02</span>
+            <h2 class="heading-3 text-lg sm:text-xl text-white">Quy Định Sử Dụng Tài Liệu &amp; Hồ Sơ Tuyển Dụng</h2>
           </div>
-          <h3 class="text-sm font-bold text-white mb-1">Bản Quyền Minh Bạch</h3>
-          <p class="text-xs text-[#B8D3CB]">Bàn giao toàn bộ quyền thương mại khi hoàn tất hợp đồng thiết kế theo thỏa thuận.</p>
+          <div class="body-text text-sm space-y-3 leading-relaxed">
+            <p>
+              Website portfolio cá nhân này được tạo ra nhằm mục đích giới thiệu năng lực thực chiến, phong cách thiết kế và quá trình tư duy sáng tạo của tôi tới Quý Nhà Tuyển Dụng, Khách hàng và Đối tác tiềm năng.
+            </p>
+            <ul class="text-xs text-[#B8D3CB] space-y-1.5 list-disc list-inside">
+              <li><strong>Hồ sơ CV:</strong> Nhà tuyển dụng được toàn quyền tải, lưu trữ và luân chuyển file CV (Google Drive) trong nội bộ bộ phận nhân sự phục vụ mục đích phỏng vấn.</li>
+              <li><strong>Hình ảnh minh họa:</strong> Một số hình ảnh minh họa bao bì, mockup sử dụng phôi ảnh miễn phí bản quyền thương mại (Freepik, Unsplash) phục vụ mục đích hiển thị trực quan phi thương mại.</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-[#0A362D]/60 border border-[#00DF89]/20 flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-xl bg-[#00DF89]/15 text-[#00DF89] flex items-center justify-center mb-3">
-            <span class="material-symbols-outlined text-2xl">enhanced_encryption</span>
+        <!-- 03. Cam kết bảo mật thông tin đối tác & NDA -->
+        <div class="case-card space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="case-step-badge">03</span>
+            <h2 class="heading-3 text-lg sm:text-xl text-white">Cam Kết Thỏa Thuận Bảo Mật Dự Án (NDA)</h2>
           </div>
-          <h3 class="text-sm font-bold text-white mb-1">Mã Hóa & Chống Rò Rỉ</h3>
-          <p class="text-xs text-[#B8D3CB]">Mọi dữ liệu gửi qua Form liên hệ đều được làm sạch (Sanitize) và bảo vệ đa lớp.</p>
+          <div class="body-text text-sm space-y-3 leading-relaxed">
+            <p>
+              Đối với các dự án thiết kế đang trong giai đoạn phát triển hoặc sắp ra mắt, tôi luôn tôn trọng và tuân thủ nghiêm ngặt thỏa thuận bảo mật thông tin:
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+              <div class="bg-[#04201A] p-4 rounded-xl border border-[#00DF89]/15">
+                <span class="text-white font-bold text-xs block mb-1">Sẵn Sàng Ký Kết NDA</span>
+                <p class="text-xs text-[#B8D3CB]">Chủ động ký văn bản thỏa thuận bảo mật trước khi tiếp nhận tài liệu brief hoặc chiến lược kinh doanh của Quý Doanh nghiệp.</p>
+              </div>
+              <div class="bg-[#04201A] p-4 rounded-xl border border-[#00DF89]/15">
+                <span class="text-[#00DF89] font-bold text-xs block mb-1">Không Công Khai Bản Nháp</span>
+                <p class="text-xs text-[#B8D3CB]">Chỉ trưng bày các tác phẩm đã chính thức được nhãn hàng phát hành trên thị trường hoặc đã được sự chấp thuận bằng văn bản.</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- Policy Sections -->
-      <div class="space-y-8 text-sm sm:text-base leading-relaxed text-[#B8D3CB]">
+        <!-- 04. Chính sách lưu trữ thông tin liên hệ -->
+        <div class="case-card space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="case-step-badge">04</span>
+            <h2 class="heading-3 text-lg sm:text-xl text-white">Chính Sách Lưu Trữ &amp; Xử Lý Dữ Liệu Liên Hệ</h2>
+          </div>
+          <div class="body-text text-sm space-y-3 leading-relaxed">
+            <p>
+              Khi Quý Khách gửi lời nhắn qua Form Liên hệ hoặc qua Email/Zalo, thông tin của bạn được xử lý có trách nhiệm và minh bạch:
+            </p>
+            <ul class="text-xs text-[#B8D3CB] space-y-2 list-disc list-inside">
+              <li><strong>Phạm vi dữ liệu:</strong> Họ và tên, địa chỉ email, mục đích hợp tác và nội dung tin nhắn trao đổi.</li>
+              <li><strong>Mục đích duy nhất:</strong> Sử dụng để phản hồi, giải đáp thắc mắc, gửi báo giá hoặc trao đổi lịch phỏng vấn.</li>
+              <li><strong>Bảo mật:</strong> Tuyệt đối không chia sẻ, mua bán hoặc chuyển nhượng thông tin liên hệ cho bất kỳ bên thứ ba hay mạng lưới quảng cáo spam nào.</li>
+              <li><strong>Yêu cầu xóa dữ liệu:</strong> Bạn có thể yêu cầu xóa toàn bộ lịch sử tin nhắn đã gửi bất kỳ lúc nào bằng cách gửi email tới: <em>mngoc12851@gmail.com</em>.</li>
+            </ul>
+          </div>
+        </div>
 
-        <!-- Section 1 -->
-        <section class="p-6 sm:p-8 rounded-2xl bg-[#0A362D]/40 border border-[#00DF89]/20 glass-card">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-8 rounded-lg bg-[#00DF89]/20 text-[#00DF89] flex items-center justify-center font-bold text-sm">
-              01
-            </div>
-            <h2 class="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
-              Mục Đích & Phạm Vi Thu Thập Dữ Liệu
-            </h2>
+        <!-- Bottom Contact Card -->
+        <div class="bg-[#072C24] p-8 rounded-2xl border border-[#00DF89]/30 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+          <div>
+            <span class="caption-text block mb-1">CẦN TRAO ĐỔI THÊM VỀ ĐIỀU KHOẢN?</span>
+            <h3 class="heading-2 text-xl sm:text-2xl">Liên Hệ Trực Tiếp Với Tôi</h3>
+            <p class="body-text text-xs sm:text-sm mt-1">Sẵn sàng phản hồi mọi thắc mắc liên quan đến bản quyền và thỏa thuận bảo mật.</p>
           </div>
-          <p class="mb-3">
-            Khi bạn tương tác với website portfolio này (thông qua form liên hệ, đặt lịch trao đổi hoặc email), chúng tôi chỉ thu thập các thông tin tối thiểu cần thiết để trao đổi công việc, bao gồm:
-          </p>
-          <ul class="list-disc list-inside space-y-1.5 ml-2 text-xs sm:text-sm text-white/90">
-            <li><strong>Họ và tên</strong>: Để xưng hô và cá nhân hóa quá trình liên lạc.</li>
-            <li><strong>Địa chỉ Email & Số điện thoại</strong>: Để phản hồi báo giá, gửi đề xuất dự án hoặc tài liệu thiết kế.</li>
-            <li><strong>Mô tả dự án & Ngân sách dự kiến</strong>: Nhằm đánh giá mức độ phù hợp và chuẩn bị giải pháp tối ưu.</li>
-          </ul>
-          <p class="mt-3 text-xs sm:text-sm text-[#00DF89]">
-            ⚠️ Website <strong>không</strong> thu thập thông tin thẻ tín dụng, mật khẩu hay bất kỳ dữ liệu nhạy cảm cá nhân nào của bạn.
-          </p>
-        </section>
+          <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
+            <a href="contact.html" class="btn-primary">
+              <span>Gửi Tin Nhắn</span>
+              <span class="material-symbols-outlined text-sm ml-1.5">arrow_forward</span>
+            </a>
+            <a href="mailto:mngoc12851@gmail.com" class="btn-secondary">
+              <span class="material-symbols-outlined text-sm mr-1.5">mail</span>
+              <span>Gửi Email</span>
+            </a>
+          </div>
+        </div>
 
-        <!-- Section 2 -->
-        <section class="p-6 sm:p-8 rounded-2xl bg-[#0A362D]/40 border border-[#00DF89]/20 glass-card">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-8 rounded-lg bg-[#00DF89]/20 text-[#00DF89] flex items-center justify-center font-bold text-sm">
-              02
-            </div>
-            <h2 class="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
-              Thỏa Thuận Bảo Mật Dự Án (NDA) & Thông Tin Doanh Nghiệp
-            </h2>
-          </div>
-          <p class="mb-3">
-            Đối với các dự án thiết kế thương hiệu (Branding), bao bì sản phẩm hoặc chiến dịch tiếp thị chưa công bố:
-          </p>
-          <div class="space-y-3">
-            <div class="p-4 rounded-xl bg-[#04201A]/70 border border-[#00DF89]/15">
-              <h4 class="font-bold text-white text-sm flex items-center gap-2 mb-1">
-                <span class="material-symbols-outlined text-[#00DF89] text-base">verified</span>
-                Ký kết Thỏa thuận Không Tiết lộ (NDA)
-              </h4>
-              <p class="text-xs text-[#B8D3CB]">
-                Sẵn sàng ký hợp đồng NDA song phương với khách hàng doanh nghiệp trước khi bắt đầu thảo luận chi tiết về chiến lược sản phẩm.
-              </p>
-            </div>
-            <div class="p-4 rounded-xl bg-[#04201A]/70 border border-[#00DF89]/15">
-              <h4 class="font-bold text-white text-sm flex items-center gap-2 mb-1">
-                <span class="material-symbols-outlined text-[#00DF89] text-base">folder_delete</span>
-                Lưu trữ & Bảo mật File Thiết kế Gốc
-              </h4>
-              <p class="text-xs text-[#B8D3CB]">
-                Toàn bộ source file (.AI, .PSD, .FIG, tài liệu nội bộ) được lưu trữ trên cloud có xác thực hai lớp (2FA). Sau khi hoàn thành dự án và bàn giao, file lưu trữ sẽ được giữ kín hoặc xóa theo yêu cầu của đối tác.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 3 -->
-        <section class="p-6 sm:p-8 rounded-2xl bg-[#0A362D]/40 border border-[#00DF89]/20 glass-card">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-8 rounded-lg bg-[#00DF89]/20 text-[#00DF89] flex items-center justify-center font-bold text-sm">
-              03
-            </div>
-            <h2 class="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
-              Bản Quyền Tác Phẩm & Quyền Sở Hữu Trí Tuệ (IP)
-            </h2>
-          </div>
-          <p class="mb-3">
-            Quy định rõ ràng về quyền tác giả và quyền thương mại hóa tác phẩm:
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="p-4 rounded-xl bg-[#04201A]/70 border border-white/10">
-              <h4 class="font-bold text-[#A3E635] text-sm mb-1.5">Dành cho Khách hàng</h4>
-              <p class="text-xs text-[#B8D3CB]">
-                Sau khi thanh toán 100% chi phí hợp đồng, khách hàng nhận trọn quyền sử dụng thương mại, đăng ký bảo hộ nhãn hiệu đối với mẫu thiết kế được chọn cuối cùng.
-              </p>
-            </div>
-            <div class="p-4 rounded-xl bg-[#04201A]/70 border border-white/10">
-              <h4 class="font-bold text-[#00DF89] text-sm mb-1.5">Quyền của Designer</h4>
-              <p class="text-xs text-[#B8D3CB]">
-                Cao Ngọc Minh giữ quyền nhân thân (quyền ghi danh tác giả) và quyền hiển thị tác phẩm trong portfolio cá nhân phục vụ mục đích trưng bày năng lực chuyên môn (trừ khi có điều khoản cấm trong NDA).
-              </p>
-            </div>
-          </div>
-          <div class="mt-4 p-3 rounded-lg bg-red-950/30 border border-red-500/30 text-xs text-red-200 flex items-start gap-2">
-            <span class="material-symbols-outlined text-red-400 text-base shrink-0 mt-0.5">gavel</span>
-            <span>Nghiêm cấm mọi hành vi sao chép, clone mã nguồn website, re-up hình ảnh dự án trên website này cho mục đích thương mại mà không có văn bản chấp thuận.</span>
-          </div>
-        </section>
-
-        <!-- Section 4 -->
-        <section class="p-6 sm:p-8 rounded-2xl bg-[#0A362D]/40 border border-[#00DF89]/20 glass-card">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-8 rounded-lg bg-[#00DF89]/20 text-[#00DF89] flex items-center justify-center font-bold text-sm">
-              04
-            </div>
-            <h2 class="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
-              An Toàn Kỹ Thuật & Phòng Thủ Hệ Thống Web
-            </h2>
-          </div>
-          <p class="mb-3">
-            Website được xây dựng với hệ thống bảo vệ nhiều lớp đáp ứng chuẩn an toàn web hiện đại:
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <div class="flex items-center gap-2.5 p-3 rounded-lg bg-[#04201A]/50 border border-[#00DF89]/10">
-              <span class="material-symbols-outlined text-[#00DF89] text-lg">shield</span>
-              <span><strong>HTTP Security Headers</strong>: CSP, X-Frame-Options, nosniff chống Clickjacking & MIME spoofing.</span>
-            </div>
-            <div class="flex items-center gap-2.5 p-3 rounded-lg bg-[#04201A]/50 border border-[#00DF89]/10">
-              <span class="material-symbols-outlined text-[#00DF89] text-lg">bug_report</span>
-              <span><strong>Chống XSS & SQLi</strong>: Dữ liệu người dùng được escape và làm sạch hoàn toàn trước khi xử lý.</span>
-            </div>
-            <div class="flex items-center gap-2.5 p-3 rounded-lg bg-[#04201A]/50 border border-[#00DF89]/10">
-              <span class="material-symbols-outlined text-[#00DF89] text-lg">pest_control</span>
-              <span><strong>Honeypot Bot Trap</strong>: Bẫy tự động chặn spam bot gửi form quảng cáo rác.</span>
-            </div>
-            <div class="flex items-center gap-2.5 p-3 rounded-lg bg-[#04201A]/50 border border-[#00DF89]/10">
-              <span class="material-symbols-outlined text-[#00DF89] text-lg">speed</span>
-              <span><strong>Rate Limiting</strong>: Chống spam request, flood traffic và tấn công DoS nhẹ.</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 5 -->
-        <section class="p-6 sm:p-8 rounded-2xl bg-[#0A362D]/40 border border-[#00DF89]/20 glass-card">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-8 rounded-lg bg-[#00DF89]/20 text-[#00DF89] flex items-center justify-center font-bold text-sm">
-              05
-            </div>
-            <h2 class="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
-              Quyền Hạn Của Khách Hàng Đối Với Dữ Liệu
-            </h2>
-          </div>
-          <p class="mb-3">
-            Bạn có toàn quyền kiểm soát thông tin cá nhân đã gửi cho chúng tôi:
-          </p>
-          <ul class="list-disc list-inside space-y-1.5 ml-2 text-xs sm:text-sm text-white/90">
-            <li><strong>Quyền yêu cầu trích xuất</strong>: Kiểm tra lại toàn bộ thông tin bạn từng gửi qua hệ thống.</li>
-            <li><strong>Quyền yêu cầu chỉnh sửa / cập nhật</strong>: Thay đổi thông tin liên lạc khi có sự điều chỉnh.</li>
-            <li><strong>Quyền yêu cầu xóa vĩnh viễn (Right to be forgotten)</strong>: Yêu cầu xóa bỏ hoàn toàn email, số điện thoại hoặc lịch sử tin nhắn khỏi hòm thư làm việc.</li>
-          </ul>
-        </section>
-
-        <!-- Section 6: Contact for Security Issues -->
-        <section class="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0A362D] to-[#04201A] border border-[#00DF89]/40 shadow-xl">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-            <div>
-              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#00DF89] uppercase tracking-wider mb-2">
-                <span class="material-symbols-outlined text-sm">contact_support</span>
-                Kênh Tiếp Nhận Bảo Mật
-              </span>
-              <h3 class="text-xl font-bold text-white">Bạn có thắc mắc hoặc báo cáo bảo mật?</h3>
-              <p class="text-xs sm:text-sm text-[#B8D3CB] mt-1 max-w-lg">
-                Nếu bạn phát hiện lỗ hổng bảo mật, tranh chấp bản quyền hoặc muốn yêu cầu xóa dữ liệu, vui lòng gửi phản hồi trực tiếp. Phản hồi cam kết trong vòng 24h.
-              </p>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-3 shrink-0">
-              <a href="contact.html" class="btn-accent-gradient px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider inline-flex items-center justify-center gap-2">
-                <span>Gửi Yêu Cầu</span>
-                <span class="material-symbols-outlined text-sm">arrow_forward</span>
-              </a>
-              <a href="mailto:caongocminh.design@gmail.com" class="btn-outline-pill px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider inline-flex items-center justify-center gap-2">
-                <span class="material-symbols-outlined text-sm">mail</span>
-                <span>Email Trực Tiếp</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-      </div>
+      </section>
 
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- Site-wide Footer -->
   <footer class="w-full bg-[#031B16] py-10 sm:py-12 px-4 sm:px-8 border-t border-[#00DF89]/20 font-roboto">
     <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
-      <span class="font-roboto text-xl sm:text-2xl font-black text-white uppercase tracking-wider">CAO NGỌC MINH<span class="text-[#00DF89]">.</span></span>
-      <p class="text-xs sm:text-sm text-[#B8D3CB] mt-1.5 max-w-md">Graphic Designer • Khám phá chất liệu hình ảnh - Nâng tầm bản sắc thương hiệu.</p>
+      <a href="../index.html" class="font-roboto text-xl sm:text-2xl font-black text-white uppercase tracking-wider">
+        CAO NGỌC MINH<span class="text-[#00DF89]">.</span>
+      </a>
+      <p class="text-xs sm:text-sm text-[#B8D3CB] mt-1.5 max-w-md">Graphic Designer • Chuyên sâu Brand Identity, Key Visual & Hệ Thống Ấn Phẩm Quảng Cáo.</p>
       
       <!-- Footer Nav Links -->
       <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-4 text-xs font-medium text-[#B8D3CB]">
         <a href="../index.html" class="hover:text-[#00DF89] transition-colors">Trang Chủ</a>
         <a href="selected-work.html" class="hover:text-[#00DF89] transition-colors">Dự Án</a>
-        <a href="about.html" class="hover:text-[#00DF89] transition-colors">Giới Thiệu</a>
+        <a href="about.html" class="hover:text-[#00DF89] transition-colors">Về Tôi</a>
         <a href="contact.html" class="hover:text-[#00DF89] transition-colors">Liên Hệ</a>
-        <a href="privacy-security.html" class="text-[#00DF89] font-bold">Chính Sách Bảo Mật & Bản Quyền</a>
+        <a href="privacy-security.html" class="text-[#00DF89] font-bold">Bản Quyền &amp; Bảo Mật</a>
       </div>
 
       <p class="text-[11px] sm:text-xs text-[#B8D3CB]/70 mt-4">© <span id="current-year">2026</span> Cao Ngọc Minh. Mọi quyền được bảo lưu.</p>

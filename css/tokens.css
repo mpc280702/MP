@@ -1,0 +1,72 @@
+/**
+ * CAO NGOC MINH PORTFOLIO — DESIGN SYSTEM TOKENS
+ * Brand Colors: Dark Emerald (#05261F) & Neon Mint (#00DF89)
+ */
+
+:root {
+  /* Brand Background Colors */
+  --bg-base: #05261F;
+  --bg-surface: #0A362D;
+  --bg-card: #072C24;
+  --bg-dark: #04201A;
+  --bg-footer: #031B16;
+  --bg-glass: rgba(7, 44, 36, 0.75);
+  --bg-glass-dark: rgba(4, 32, 26, 0.85);
+
+  /* Brand Accent Colors */
+  --accent: #00DF89;
+  --accent-lime: #A3E635;
+  --accent-glow: rgba(0, 223, 137, 0.25);
+  --accent-glow-strong: rgba(0, 223, 137, 0.50);
+  --gradient-accent: linear-gradient(135deg, #00DF89 0%, #A3E635 100%);
+  --gradient-card: linear-gradient(180deg, rgba(10, 54, 45, 0.6) 0%, rgba(4, 32, 26, 0.9) 100%);
+  --gradient-text: linear-gradient(135deg, #FFFFFF 0%, #DDE8E4 50%, #00DF89 100%);
+  --gradient-mint-lime: linear-gradient(135deg, #00DF89 0%, #A3E635 100%);
+
+  /* Typography Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #B8D3CB;
+  --text-light: #DDE8E4;
+  --text-muted: #8BA69F;
+  --text-accent: #00DF89;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(0, 223, 137, 0.15);
+  --border-default: rgba(0, 223, 137, 0.30);
+  --border-hover: rgba(0, 223, 137, 0.70);
+  --border-white-subtle: rgba(255, 255, 255, 0.12);
+
+  /* Border Radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-accent: 0 4px 20px rgba(0, 223, 137, 0.30);
+  --shadow-accent-hover: 0 8px 30px rgba(0, 223, 137, 0.50);
+
+  /* Typography Scale */
+  --font-sans: 'Roboto', system-ui, -apple-system, sans-serif;
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  --text-6xl: 3.75rem;    /* 60px */
+
+  /* Animation & Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
