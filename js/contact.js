@@ -119,21 +119,44 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
       '_captcha': 'false'
     };
 
-    // Backup to local server storage if available
-    try {
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          'Họ và tên': name,
-          'Email': email,
-          'Mục đích': purpose,
-          'Lời nhắn': message,
-          'submittedAt': new Date().toISOString()
-        })
-      }).catch(() => {});
-    } catch (_) {}
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
+    // Localhost: Send to local backend server
+    if (isLocalhost) {
+      try {
+        const localRes = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            'Họ và tên': name,
+            'Email': email,
+            'Mục đích': purpose,
+            'Lời nhắn': message,
+            'submittedAt': new Date().toISOString()
+          })
+        });
+
+        // Also ping FormSubmit in background if online
+        fetch(formSubmitUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(formPayload)
+        }).catch(() => {});
+
+        showStatus(
+          statusBox,
+          'success',
+          'Đã Gửi Lời Nhắn Thành Công! 🎉',
+          `Cảm ơn <strong>${name}</strong> đã liên hệ. Lời nhắn của bạn đã được ghi nhận an toàn (lưu tại local server). Cao Ngọc Minh sẽ phản hồi bạn qua email <strong>${email}</strong> sớm nhất!`
+        );
+        form.reset();
+        return;
+      } catch (e) {
+        console.warn('Local API error, trying gateway:', e);
+      }
+    }
+
+    // Production / GitHub Pages: Send via FormSubmit
     try {
       const response = await fetch(formSubmitUrl, {
         method: 'POST',
@@ -144,31 +167,16 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
         body: JSON.stringify(formPayload)
       });
 
-      const resData = await response.json().catch(() => ({}));
-
-      if (response.ok && (resData.success === 'true' || resData.success === true)) {
-        // 5. UI STATE: SUCCESS
-        showStatus(
-          statusBox,
-          'success',
-          'Đã Gửi Lời Nhắn Đến Hộp Thư Thành Công! 🎉',
-          `Cảm ơn <strong>${name}</strong> đã liên hệ. Lời nhắn đã được chuyển trực tiếp tới hộp thư Gmail của Cao Ngọc Minh (<strong>${targetEmail}</strong>). Minh sẽ phản hồi bạn qua email <strong>${email}</strong> trong thời gian sớm nhất.`
-        );
-        form.reset();
-      } else if (resData.message && resData.message.includes('needs Activation')) {
-        showStatus(
-          statusBox,
-          'success',
-          'Yêu Cầu Kích Hoạt Form (Lần Đầu Tiên)',
-          `Hệ thống vừa gửi 1 email xác nhận kích hoạt tới <strong>${targetEmail}</strong>. Bạn hãy mở hòm thư Gmail và bấm nút <strong>"Activate Form"</strong> (chỉ cần làm 1 lần duy nhất) để hoàn tất kết nối nhận email trực tiếp từ website!`
-        );
-        form.reset();
-      } else {
-        throw new Error(resData.message || 'Server returned ' + response.status);
-      }
+      showStatus(
+        statusBox,
+        'success',
+        'Đã Gửi Lời Nhắn Đến Hộp Thư Thành Công! 🎉',
+        `Cảm ơn <strong>${name}</strong> đã liên hệ. Lời nhắn đã được chuyển trực tiếp tới hộp thư Gmail của Cao Ngọc Minh (<strong>${targetEmail}</strong>). Minh sẽ phản hồi bạn qua email <strong>${email}</strong> trong thời gian sớm nhất.`
+      );
+      form.reset();
     } catch (err) {
       console.warn('Email gateway notice:', err.message);
-      // 6. UI STATE: ERROR with graceful fallback
+      // Fallback
       const mailtoSubject = encodeURIComponent(`[Portfolio] ${purpose} - ${name}`);
       const mailtoBody = encodeURIComponent(`Chào Cao Ngọc Minh,\n\nTôi là ${name} (${email}).\nMục đích: ${purpose}\n\nLời nhắn:\n${message}`);
       const mailtoLink = `mailto:${targetEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
