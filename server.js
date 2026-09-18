@@ -51,13 +51,16 @@ const MIME_TYPES = {
   '.txt': 'text/plain; charset=utf-8'
 };
 
-// OWASP Recommended Security Headers
+// OWASP Recommended Security Headers & Cache-Control for fresh dev updates
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'SAMEORIGIN',
   'X-XSS-Protection': '1; mode=block',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  'Cache-Control': 'no-cache, no-store, must-revalidate',
+  'Pragma': 'no-cache',
+  'Expires': '0',
   'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https:;"
 };
 
@@ -161,6 +164,12 @@ const server = http.createServer((req, res) => {
           serveFile(indexPath, res);
           return;
         }
+      }
+      // Check if file.html exists
+      const htmlPath = filePath + '.html';
+      if (fs.existsSync(htmlPath)) {
+        serveFile(htmlPath, res);
+        return;
       }
       res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY_HEADERS });
       res.end(`404 Not Found: Không tìm thấy tệp yêu cầu`);

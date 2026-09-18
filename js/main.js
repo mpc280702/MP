@@ -110,6 +110,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  // Bulletproof click navigation for project cards
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.project-card');
+    if (!card) return;
+
+    // If card triggers a modal preview, let its onclick run
+    const onclickAttr = card.getAttribute('onclick') || '';
+    if (onclickAttr.includes('openProjectModal')) {
+      return;
+    }
+
+    const href = card.getAttribute('href') || card.getAttribute('data-href');
+    if (href) {
+      e.preventDefault();
+      window.location.href = href;
+    }
+  });
 });
+
 
 
