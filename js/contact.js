@@ -100,7 +100,7 @@ function attachContactFormHandler(form, submitBtn, statusBox, honeypotId) {
       `;
     }
 
-    const targetEmail = 'mngoc12851@gmail.com';
+    const targetEmail = 'mngoc1285l@gmail.com';
     const formSubmitUrl = `https://formsubmit.co/ajax/${targetEmail}`;
 
     const formPayload = {
