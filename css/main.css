@@ -82,7 +82,7 @@ i.material-symbols-outlined {
 }
 
 /* ==========================================================================
-   ANIMATIONS & EFFECTS
+   ANIMATIONS & EFFECTS SYSTEM
    ========================================================================== */
 @keyframes pulseGlow {
   0%, 100% {
@@ -97,6 +97,21 @@ i.material-symbols-outlined {
 
 .animate-pulse-glow {
   animation: pulseGlow 6s ease-in-out infinite;
+}
+
+/* Text Shimmer Effect */
+@keyframes textShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-mint-lime {
+  background: linear-gradient(135deg, #00DF89 0%, #A3E635 50%, #00DF89 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 6s linear infinite;
 }
 
 /* Infinite Marquee Scroll Animation */
@@ -120,7 +135,324 @@ i.material-symbols-outlined {
   animation-play-state: paused;
 }
 
-/* Reduced motion preference */
+/* ==========================================================================
+   1. SCROLL PROGRESS BAR (TOP VIEWPORT)
+   ========================================================================== */
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #00DF89 0%, #A3E635 50%, #00DF89 100%);
+  background-size: 200% 100%;
+  animation: progressShimmer 2.5s linear infinite;
+  z-index: 99999;
+  box-shadow: 0 0 12px rgba(0, 223, 137, 0.8), 0 0 24px rgba(163, 230, 53, 0.4);
+  pointer-events: none;
+  transition: width 0.08s ease-out;
+}
+
+@keyframes progressShimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ==========================================================================
+   2. CUSTOM GLOWING CURSOR (DESKTOP)
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background-color: #00DF89;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100000;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px #00DF89;
+    transition: opacity 0.2s ease, transform 0.08s ease-out;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid rgba(0, 223, 137, 0.45);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
+                height 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.2s ease, 
+                background-color 0.2s ease,
+                opacity 0.2s ease;
+    opacity: 0;
+    will-change: transform, width, height, opacity;
+  }
+
+  .custom-cursor-dot.is-active,
+  .custom-cursor-ring.is-active {
+    opacity: 1;
+  }
+
+  .custom-cursor-ring.cursor-hover {
+    width: 52px;
+    height: 52px;
+    border-color: #A3E635;
+    background-color: rgba(0, 223, 137, 0.08);
+  }
+
+  .custom-cursor-dot.cursor-hover {
+    transform: translate(-50%, -50%) scale(1.4);
+    background-color: #A3E635;
+  }
+
+  .custom-cursor-ring.cursor-click {
+    width: 28px;
+    height: 28px;
+    background-color: rgba(0, 223, 137, 0.25);
+    border-color: #00DF89;
+  }
+}
+
+/* ==========================================================================
+   3. SPOTLIGHT HOVER EFFECT FOR CARDS
+   ========================================================================== */
+.spotlight-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    480px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(0, 223, 137, 0.15),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   4. 3D TILT EFFECT ON CARDS
+   ========================================================================== */
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+/* ==========================================================================
+   5. BUTTON SHIMMER & RIPPLE
+   ========================================================================== */
+.btn-primary, 
+.btn-accent-gradient {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after, 
+.btn-accent-gradient::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  opacity: 0;
+  transition: transform 0.8s ease-in-out, opacity 0.3s;
+  pointer-events: none;
+}
+
+.btn-primary:hover::after, 
+.btn-accent-gradient:hover::after {
+  opacity: 1;
+  transform: rotate(25deg) translate(400%, 0);
+}
+
+.ripple-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.32);
+  transform: scale(0);
+  animation: rippleSpread 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes rippleSpread {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   6. SCROLL REVEAL ANIMATIONS
+   ========================================================================== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(-35px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(35px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger container */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.19s; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.26s; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.33s; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.40s; }
+.reveal-stagger.is-visible > *:nth-child(7) { transition-delay: 0.47s; }
+.reveal-stagger.is-visible > *:nth-child(8) { transition-delay: 0.54s; }
+
+/* ==========================================================================
+   7. BACK TO TOP BUTTON WITH SVG CIRCULAR PROGRESS
+   ========================================================================== */
+#back-to-top {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(4, 32, 26, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 223, 137, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00DF89;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+#back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+#back-to-top:hover {
+  border-color: #00DF89;
+  box-shadow: 0 0 22px rgba(0, 223, 137, 0.45);
+  transform: translateY(-3px) scale(1.05);
+  color: #FFFFFF;
+}
+
+#back-to-top .progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+#back-to-top .progress-ring-circle {
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+/* ==========================================================================
+   8. HERO PARTICLES CANVAS
+   ========================================================================== */
+#hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   9. REDUCED MOTION PREFERENCE
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -130,6 +462,18 @@ i.material-symbols-outlined {
   }
   .animate-marquee {
     animation: none !important;
+    transform: none !important;
+  }
+  .reveal-on-scroll,
+  .reveal-scale,
+  .reveal-slide-left,
+  .reveal-slide-right,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .tilt-card {
     transform: none !important;
   }
 }

@@ -87,6 +87,8 @@
   </script>
 </head>
 <body class="bg-[#05261F] font-roboto text-white antialiased selection:bg-[#00DF89] selection:text-[#04201A] overflow-x-hidden">
+  <!-- Glowing Scroll Progress Bar -->
+  <div id="scroll-progress-bar"></div>
 
   <!-- ==========================================================================
        01. HEADER & NAVIGATION
@@ -111,7 +113,7 @@
       <div class="hidden sm:flex items-center space-x-3">
         <a class="btn-secondary px-4 py-2 text-xs uppercase tracking-wider inline-flex items-center gap-1.5" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
           <span class="material-symbols-outlined text-sm">download</span>
-          <span>Tải CV</span>
+          <span>Hồ Sơ Của Tôi</span>
         </a>
         <a class="btn-primary px-5 py-2.5 text-xs tracking-wider uppercase inline-flex items-center gap-1" href="pages/contact.html">
           <span>Liên Hệ</span>
@@ -134,7 +136,7 @@
       <div class="pt-3 border-t border-[#00DF89]/15 flex flex-col gap-2.5">
         <a class="btn-secondary w-full justify-center py-3 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
           <span class="material-symbols-outlined text-sm">download</span>
-          <span>Tải CV / Hồ Sơ (Drive)</span>
+          <span>Hồ Sơ Của Tôi (Drive)</span>
         </a>
         <a class="btn-primary inline-flex w-full justify-center items-center py-3 font-bold text-xs tracking-wider uppercase rounded-xl" href="pages/contact.html">
           <span>Liên Hệ Ngay</span>
@@ -152,6 +154,9 @@
            02. HERO SECTION
            ========================================================================== -->
       <section class="relative w-full min-h-[82vh] flex flex-col justify-center px-4 sm:px-8 overflow-hidden bg-[#05261F] pt-6 pb-12 sm:pb-16">
+        
+        <!-- Interactive Star-Dust Particles Canvas -->
+        <canvas id="hero-particles"></canvas>
         
         <!-- Ambient Glow Decorations -->
         <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[320px] sm:h-[600px] bg-[#00DF89]/12 rounded-full blur-[90px] sm:blur-[130px] pointer-events-none animate-pulse-glow"></div>
@@ -197,7 +202,7 @@
                 </a>
                 <a class="btn-secondary" href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener">
                   <span class="material-symbols-outlined mr-2 text-base">download</span>
-                  <span>Tải CV (Google Drive)</span>
+                  <span>Hồ Sơ Của Tôi (Google Drive)</span>
                 </a>
               </div>
 
@@ -221,7 +226,7 @@
 
             <!-- Right Column: Visual Portrait -->
             <div class="lg:col-span-5 relative mt-4 lg:mt-0 w-full max-w-md mx-auto lg:max-w-none">
-              <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl bg-[#072C24] border border-[#00DF89]/30 group">
+              <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl bg-[#072C24] border border-[#00DF89]/30 group tilt-card spotlight-card">
                 <img src="assets/images/cao-ngoc-minh-portrait.jpg" alt="Chân dung Cao Ngọc Minh - Graphic Designer & Brand Creator" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" fetchpriority="high" width="480" height="480"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#04201A] via-transparent to-transparent opacity-80 pointer-events-none"></div>
                 
@@ -271,7 +276,7 @@
       <!-- ==========================================================================
            03. SELECTED WORK SECTION (6 Strongest Projects)
            ========================================================================== -->
-      <section id="selected-work" class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#04201A]">
+      <section id="selected-work" class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#04201A] reveal-on-scroll">
         <div class="max-w-7xl mx-auto">
           
           <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-4 sm:gap-6">
@@ -286,7 +291,7 @@
           </div>
 
           <!-- Grid of 6 Featured Projects with clear Recruiter metadata -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 reveal-stagger">
             
             <!-- Project 1: Ulibee Product Campaign -->
             <a href="pages/case-study-vortex.html" data-href="pages/case-study-vortex.html" onclick="window.location.href='pages/case-study-vortex.html'" class="project-card group">
@@ -493,7 +498,7 @@
       <!-- ==========================================================================
            04. CAPABILITIES SECTION (Dịch Vụ & Kỹ Năng Cốt Lõi)
            ========================================================================== -->
-      <section class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#05261F] border-t border-[#00DF89]/20" aria-label="Năng lực và dịch vụ">
+      <section class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#05261F] border-t border-[#00DF89]/20 reveal-on-scroll" aria-label="Năng lực và dịch vụ">
         <div class="max-w-7xl mx-auto">
           <div class="mb-12 text-center max-w-3xl mx-auto">
             <span class="caption-text block mb-2">CHUYÊN MÔN NGHỀ NGHIỆP</span>
@@ -501,7 +506,7 @@
             <p class="body-text mt-2 font-normal">Quy trình thiết kế chuẩn mực đáp ứng nhu cầu thực chiến của doanh nghiệp và thương hiệu hiện đại.</p>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal-stagger">
             
             <!-- Cap 1: Brand Identity -->
             <div class="capability-card">
@@ -582,10 +587,10 @@
       <!-- ==========================================================================
            05. CASE STUDY SPOTLIGHT (Deep-Dive Highlight)
            ========================================================================== -->
-      <section class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#04201A] border-t border-[#00DF89]/20" aria-label="Case study nổi bật">
+      <section class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#04201A] border-t border-[#00DF89]/20 reveal-on-scroll" aria-label="Case study nổi bật">
         <div class="max-w-7xl mx-auto">
           
-          <div class="bg-[#072C24] rounded-3xl p-6 sm:p-12 border border-[#00DF89]/30 shadow-2xl relative overflow-hidden">
+          <div class="bg-[#072C24] rounded-3xl p-6 sm:p-12 border border-[#00DF89]/30 shadow-2xl relative overflow-hidden spotlight-card">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
               <!-- Spotlight Left Column: Narrative & Results -->
@@ -645,12 +650,12 @@
       <!-- ==========================================================================
            06. ABOUT SECTION (Về Cao Ngọc Minh - Gọn Gàng, Chuyên Nghiệp)
            ========================================================================== -->
-      <section class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#05261F] border-t border-[#00DF89]/20" aria-label="Giới thiệu bản thân">
+      <section class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#05261F] border-t border-[#00DF89]/20 reveal-on-scroll" aria-label="Giới thiệu bản thân">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           <!-- Workspace Image -->
           <div class="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-none">
-            <div class="relative w-full h-[360px] sm:h-[440px] rounded-3xl overflow-hidden shadow-2xl bg-[#072C24] border border-[#00DF89]/30 group">
+            <div class="relative w-full h-[360px] sm:h-[440px] rounded-3xl overflow-hidden shadow-2xl bg-[#072C24] border border-[#00DF89]/30 group tilt-card spotlight-card">
               <img src="assets/images/portfolio-workspace-mockup.jpg" alt="Không gian làm việc và quy trình thiết kế Cao Ngọc Minh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" width="480" height="480"/>
               <div class="absolute inset-0 bg-gradient-to-t from-[#04201A] via-transparent to-transparent opacity-75"></div>
               
@@ -699,7 +704,7 @@
       <!-- ==========================================================================
            07. PROCESS SECTION (Quy Trình Thiết Kế 5 Bước)
            ========================================================================== -->
-      <section class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#04201A] border-t border-[#00DF89]/20" aria-label="Quy trình làm việc">
+      <section class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#04201A] border-t border-[#00DF89]/20 reveal-on-scroll" aria-label="Quy trình làm việc">
         <div class="max-w-7xl mx-auto">
           
           <div class="mb-12 text-center max-w-3xl mx-auto">
@@ -708,7 +713,7 @@
             <p class="body-text mt-2 font-normal">Từ nghiên cứu bài toán ban đầu đến bàn giao hệ thống file thiết kế hoàn chỉnh sẵn sàng in ấn và sản xuất.</p>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 reveal-stagger">
             
             <!-- Step 1: Discover -->
             <div class="bg-[#072C24] p-6 rounded-2xl border border-[#00DF89]/25 hover:border-[#00DF89] transition-all flex flex-col justify-between">
@@ -777,7 +782,7 @@
       <!-- ==========================================================================
            08. CONTACT SECTION (Gọn Gàng, Lưu Trữ Backend Thật, 4 Trạng Thái UI)
            ========================================================================== -->
-      <section id="contact" class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#05261F] border-t border-[#00DF89]/20" aria-label="Liên hệ trực tiếp">
+      <section id="contact" class="w-full py-16 sm:py-24 px-4 sm:px-8 bg-[#05261F] border-t border-[#00DF89]/20 reveal-on-scroll" aria-label="Liên hệ trực tiếp">
         <div class="max-w-7xl mx-auto">
           
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
@@ -827,11 +832,11 @@
               <!-- Quick CV download CTA card -->
               <div class="p-5 rounded-2xl bg-[#04201A] border border-[#00DF89]/30 flex items-center justify-between">
                 <div>
-                  <span class="font-roboto text-xs font-bold text-white block">Hồ Sơ CV Bản Chuẩn (Drive)</span>
+                  <span class="font-roboto text-xs font-bold text-white block">Hồ Sơ Của Tôi (Drive)</span>
                   <span class="text-xs text-[#B8D3CB]">Cập nhật tháng 03/2026</span>
                 </div>
                 <a href="https://drive.google.com/file/d/1IoAuuZ41ltPX-_qH5ja9ZAlyX8o99pjO/view?usp=sharing" target="_blank" rel="noopener" class="btn-secondary px-3.5 py-2 text-xs">
-                  <span>Mở CV</span>
+                  <span>Mở Hồ Sơ</span>
                   <span class="material-symbols-outlined text-sm ml-1">open_in_new</span>
                 </a>
               </div>
