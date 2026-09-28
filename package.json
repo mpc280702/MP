@@ -1,8 +1,11 @@
 {
   "name": "mp-portfolio",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Cao Ngoc Minh - Graphic Designer & Digital Creator Portfolio",
   "type": "commonjs",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "check": "node scripts/validate-site.js"
   }
 }

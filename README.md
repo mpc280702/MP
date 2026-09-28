@@ -7,12 +7,15 @@ Website portfolio cá nhân cao cấp dành cho **Cao Ngọc Minh (Graphic Desig
 ## 📁 Cấu trúc Thư mục Dự án
 
 ```text
-stitch_x_y_d_ng_website_portfolio/
+MP/
 │
 ├── index.html                       # Trang chủ (Home) - Hero, Selected Work Preview, About & CTA
+├── 404.html                         # Trang báo lỗi 404 tùy biến chuyên nghiệp
+├── robots.txt                       # Tệp chỉ mục công cụ tìm kiếm
+├── sitemap.xml                      # Sơ đồ trang web hỗ trợ SEO
 │
-├── pages/                           # Thư mục các trang chức năng
-│   ├── selected-work.html           # Bộ sưu tập 12 dự án với bộ lọc phân loại tương tác (Filter)
+├── pages/                           # Thư mục các trang chức năng & Case Studies
+│   ├── selected-work.html           # Bộ sưu tập dự án với bộ lọc phân loại tương tác (Filter)
 │   ├── case-study-vortex.html       # Case study chi tiết dự án Vortex Kinetic Identity
 │   ├── case-study-net-que.html      # Case study dự án Nét Quê F&B Branding
 │   ├── case-study-lamee.html        # Case study dự án La Mée Paris
@@ -22,6 +25,8 @@ stitch_x_y_d_ng_website_portfolio/
 │   └── privacy-security.html        # Chính sách bảo mật dữ liệu, thỏa thuận NDA & bản quyền tác phẩm
 │
 ├── css/                             # Định kiểu giao diện toàn cục
+│   ├── tokens.css                   # Hệ thống Design Tokens (Màu sắc, Typography, Spacing)
+│   ├── components.css               # Định dạng các component (Buttons, Cards, Badges)
 │   └── main.css                     # Custom scrollbar, animations, glassmorphism & utilities
 │
 ├── js/                              # Mã nguồn JavaScript xử lý tương tác
@@ -30,12 +35,18 @@ stitch_x_y_d_ng_website_portfolio/
 │   └── contact.js                   # Xử lý form, bẫy Honeypot, XSS sanitization & submission cooldown
 │
 ├── assets/                          # Tài nguyên hình ảnh & tài liệu
-│   ├── images/                      # Ảnh chụp màn hình & mockup giao diện
+│   ├── images/                      # Ảnh chụp màn hình, ảnh dự án & mockup giao diện
 │   └── docs/                        # Tài liệu hướng dẫn thiết kế & chiến lược
-│       ├── DESIGN.md                # Design System (Màu sắc, Typography, Spacing)
-│       └── portfolio_strategy.txt   # Phân tích mục tiêu & quy trình xây dựng portfolio
+│       ├── DESIGN.md                # Design System Reference
+│       └── portfolio_strategy_hieu_designer.txt # Tài liệu chiến lược phát triển
 │
-├── server.js                        # Máy chủ Node.js tích hợp OWASP Security Headers & Rate Limiter
+├── scripts/                         # Kịch bản tự động hóa và tiện ích
+│   ├── start-server.bat             # Script chạy server và tự mở trình duyệt
+│   └── push-to-github.bat           # Script tự động xác thực và đẩy code lên GitHub
+│
+├── server.js                        # Máy chủ Node.js tích hợp OWASP Security Headers, Rate Limiter & Custom 404
+├── package.json                     # Quản lý metadata dự án và npm scripts (start, dev)
+├── start.bat                        # Phím tắt khởi động nhanh 1-click
 └── README.md                        # Tài liệu hướng dẫn dự án
 ```
 
@@ -43,13 +54,17 @@ stitch_x_y_d_ng_website_portfolio/
 
 ## 🚀 Cách Chạy & Xem Website
 
-1. **Chạy Secure Server (khuyến nghị)**:
+1. **Khởi động bằng 1 cú nhấp (Khuyến nghị trên Windows)**:
+   - Nhấp đúp vào tệp `start.bat` ở thư mục gốc.
+
+2. **Khởi động bằng Node.js / npm**:
    ```bash
-   node server.js
+   npm start
+   # hoặc: node server.js
    ```
    Sau đó truy cập: `http://localhost:3000`
 
-2. **Mở trực tiếp trong trình duyệt**:
+3. **Mở trực tiếp trong trình duyệt**:
    - Nhấp đúp vào tệp `index.html` trong thư mục gốc.
 
 ---

@@ -1,6 +1,6 @@
 @echo off
 title Day Code Len GitHub - Cao Ngoc Minh Portfolio
-cd /d "%~dp0"
+cd /d "%~dp0\.."
 
 :: Them duong dan Git vao PATH
 set "PATH=%LOCALAPPDATA%\Programs\Git\cmd;%PATH%"

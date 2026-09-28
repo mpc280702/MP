@@ -5,27 +5,34 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const ROOT_DIR = path.resolve(__dirname);
 
-// Security: In-memory Rate Limiter
-const RATE_LIMIT_WINDOW_MS = 10000; // 10 seconds
-const MAX_REQUESTS_PER_WINDOW = 120; // 120 reqs / 10s per IP
+const RATE_LIMIT_WINDOW_MS = 10000;
+const MAX_REQUESTS_PER_WINDOW = 120;
+const MAX_BODY_BYTES = 64 * 1024;
+
 const requestCounts = new Map();
 
-// Periodic cleanup of rate limiter memory
 setInterval(() => {
   const now = Date.now();
+
   for (const [ip, data] of requestCounts.entries()) {
     if (now - data.startTime > RATE_LIMIT_WINDOW_MS) {
       requestCounts.delete(ip);
     }
   }
-}, RATE_LIMIT_WINDOW_MS);
+}, RATE_LIMIT_WINDOW_MS).unref();
 
 function isRateLimited(ip) {
   const now = Date.now();
   const clientData = requestCounts.get(ip);
 
-  if (!clientData || now - clientData.startTime > RATE_LIMIT_WINDOW_MS) {
-    requestCounts.set(ip, { count: 1, startTime: now });
+  if (
+    !clientData ||
+    now - clientData.startTime > RATE_LIMIT_WINDOW_MS
+  ) {
+    requestCounts.set(ip, {
+      count: 1,
+      startTime: now
+    });
     return false;
   }
 
@@ -51,36 +58,119 @@ const MIME_TYPES = {
   '.txt': 'text/plain; charset=utf-8'
 };
 
-// OWASP Recommended Security Headers & Cache-Control for fresh dev updates
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'SAMEORIGIN',
-  'X-XSS-Protection': '1; mode=block',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
-  'Cache-Control': 'no-cache, no-store, must-revalidate',
+  'Permissions-Policy':
+    'camera=(), microphone=(), geolocation=()',
+  'Cache-Control':
+    'no-cache, no-store, must-revalidate',
   'Pragma': 'no-cache',
   'Expires': '0',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https:;"
+  'Content-Security-Policy':
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; " +
+    "font-src 'self' https://fonts.gstatic.com data:; " +
+    "img-src 'self' data: https:; " +
+    "connect-src 'self' https:;"
 };
 
-const server = http.createServer((req, res) => {
-  const clientIp = req.socket.remoteAddress || '127.0.0.1';
+function sendJSON(res, statusCode, payload) {
+  res.writeHead(statusCode, {
+    'Content-Type':
+      'application/json; charset=utf-8',
+    ...SECURITY_HEADERS
+  });
 
-  // Apply Rate Limiting
+  res.end(JSON.stringify(payload));
+}
+
+function collectRequestBody(req, res, callback) {
+  let body = '';
+  let size = 0;
+
+  req.setEncoding('utf8');
+
+  req.on('data', (chunk) => {
+    size += Buffer.byteLength(chunk, 'utf8');
+
+    if (size > MAX_BODY_BYTES) {
+      sendJSON(res, 413, {
+        success: false,
+        error: 'Request body too large.'
+      });
+      req.destroy();
+      return;
+    }
+
+    body += chunk;
+  });
+
+  req.on('end', () => callback(body));
+}
+
+function sanitizeContactPayload(data) {
+  const toSafeString = (value, maxLength) =>
+    String(value ?? '')
+      .trim()
+      .slice(0, maxLength);
+
+  return {
+    'Họ và tên': toSafeString(
+      data['Họ và tên'],
+      120
+    ),
+    'Email': toSafeString(
+      data.Email,
+      180
+    ),
+    'Mục đích': toSafeString(
+      data['Mục đích'],
+      180
+    ),
+    'Lời nhắn': toSafeString(
+      data['Lời nhắn'],
+      5000
+    ),
+    submittedAt:
+      toSafeString(
+        data.submittedAt,
+        80
+      )
+  };
+}
+
+const server = http.createServer((req, res) => {
+  const clientIp =
+    req.socket.remoteAddress || '127.0.0.1';
+
   if (isRateLimited(clientIp)) {
-    res.writeHead(429, { 
-      'Content-Type': 'text/plain; charset=utf-8',
+    res.writeHead(429, {
+      'Content-Type':
+        'text/plain; charset=utf-8',
       'Retry-After': '10',
-      ...SECURITY_HEADERS 
+      ...SECURITY_HEADERS
     });
-    res.end('429 Too Many Requests: Vui lòng thử lại sau vài giây.');
+
+    res.end(
+      '429 Too Many Requests: Vui lòng thử lại sau vài giây.'
+    );
     return;
   }
 
-  // Method check
-  if (!['GET', 'HEAD', 'OPTIONS', 'POST'].includes(req.method)) {
-    res.writeHead(405, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY_HEADERS });
+  if (
+    !['GET', 'HEAD', 'OPTIONS', 'POST']
+      .includes(req.method)
+  ) {
+    res.writeHead(405, {
+      'Content-Type':
+        'text/plain; charset=utf-8',
+      Allow: 'GET, HEAD, OPTIONS, POST',
+      ...SECURITY_HEADERS
+    });
+
     res.end('405 Method Not Allowed');
     return;
   }
@@ -88,19 +178,30 @@ const server = http.createServer((req, res) => {
   if (req.method === 'OPTIONS') {
     res.writeHead(204, {
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, HEAD, POST, OPTIONS',
+      'Access-Control-Allow-Methods':
+        'GET, HEAD, POST, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'Content-Type',
       ...SECURITY_HEADERS
     });
+
     res.end();
     return;
   }
 
-  // Normalize and sanitize request path
   let reqPath;
+
   try {
-    reqPath = decodeURI(req.url.split('?')[0]);
-  } catch (err) {
-    res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY_HEADERS });
+    reqPath = decodeURI(
+      req.url.split('?')[0]
+    );
+  } catch (_) {
+    res.writeHead(400, {
+      'Content-Type':
+        'text/plain; charset=utf-8',
+      ...SECURITY_HEADERS
+    });
+
     res.end('400 Bad Request');
     return;
   }
@@ -109,104 +210,220 @@ const server = http.createServer((req, res) => {
     reqPath = '/index.html';
   }
 
-  // API endpoint to capture contact messages
-  if (req.method === 'POST' && reqPath === '/api/contact') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', () => {
-      try {
-        const data = JSON.parse(body);
-        const messagesFile = path.join(ROOT_DIR, 'messages.json');
-        let messages = [];
-        if (fs.existsSync(messagesFile)) {
-          try { messages = JSON.parse(fs.readFileSync(messagesFile, 'utf8')); } catch (e) {}
-        }
-        data.timestamp = new Date().toISOString();
-        data.localTime = new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
-        messages.unshift(data);
-        fs.writeFileSync(messagesFile, JSON.stringify(messages, null, 2), 'utf8');
-
-        console.log(`\n📩 [TIN NHẮN MỚI TỪ WEBSITE]`);
-        console.log(`- Người gửi: ${data['Họ và tên']} (${data['Email'] || data['Email liên hệ'] || data['Địa chỉ Email']})`);
-        console.log(`- Mục đích: ${data['Mục đích'] || data['Mục đích trao đổi']}`);
-        console.log(`- Lời nhắn: ${data['Lời nhắn'] || data['Nội dung lời nhắn']}\n`);
-
-        res.writeHead(200, {
-          'Content-Type': 'application/json; charset=utf-8',
-          'Access-Control-Allow-Origin': '*',
-          ...SECURITY_HEADERS
-        });
-        res.end(JSON.stringify({ success: true, message: 'Đã lưu lời nhắn thành công!' }));
-      } catch (err) {
-        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8', ...SECURITY_HEADERS });
-        res.end(JSON.stringify({ success: false, error: err.message }));
-      }
-    });
-    return;
-  }
-
-  // Absolute path resolution & strict Directory Traversal check
-  const safePath = path.normalize(reqPath).replace(/^(\.\.[\/\\])+/, '');
-  const filePath = path.resolve(ROOT_DIR, '.' + safePath);
-  const relative = path.relative(ROOT_DIR, filePath);
-
-  if (relative.startsWith('..') || path.isAbsolute(relative)) {
-    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY_HEADERS });
-    res.end('403 Forbidden: Truy cập bị từ chối');
-    return;
-  }
-
-  fs.stat(filePath, (err, stats) => {
-    if (err || !stats.isFile()) {
-      if (stats && stats.isDirectory()) {
-        const indexPath = path.join(filePath, 'index.html');
-        if (fs.existsSync(indexPath)) {
-          serveFile(indexPath, res);
-          return;
-        }
-      }
-      // Check if file.html exists
-      const htmlPath = filePath + '.html';
-      if (fs.existsSync(htmlPath)) {
-        serveFile(htmlPath, res);
-        return;
-      }
-      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY_HEADERS });
-      res.end(`404 Not Found: Không tìm thấy tệp yêu cầu`);
+  if (
+    req.method === 'POST' &&
+    reqPath === '/api/contact'
+  ) {
+    if (
+      req.headers['content-type']?.includes(
+        'application/json'
+      ) !== true
+    ) {
+      sendJSON(res, 415, {
+        success: false,
+        error: 'Content-Type must be application/json.'
+      });
       return;
     }
 
-    serveFile(filePath, res);
-  });
+    collectRequestBody(
+      req,
+      res,
+      (body) => {
+        try {
+          const parsed = JSON.parse(body);
+
+          if (
+            !parsed ||
+            typeof parsed !== 'object' ||
+            Array.isArray(parsed)
+          ) {
+            throw new Error(
+              'Invalid request payload.'
+            );
+          }
+
+          const data =
+            sanitizeContactPayload(parsed);
+
+          const messagesFile =
+            path.join(
+              ROOT_DIR,
+              'messages.json'
+            );
+
+          let messages = [];
+
+          if (fs.existsSync(messagesFile)) {
+            try {
+              const existing = JSON.parse(
+                fs.readFileSync(
+                  messagesFile,
+                  'utf8'
+                )
+              );
+
+              if (Array.isArray(existing)) {
+                messages = existing;
+              }
+            } catch (_) {
+              messages = [];
+            }
+          }
+
+          data.timestamp =
+            new Date().toISOString();
+
+          data.localTime =
+            new Date().toLocaleString(
+              'vi-VN',
+              {
+                timeZone:
+                  'Asia/Ho_Chi_Minh'
+              }
+            );
+
+          messages.unshift(data);
+
+          fs.writeFileSync(
+            messagesFile,
+            JSON.stringify(
+              messages,
+              null,
+              2
+            ),
+            'utf8'
+          );
+
+          sendJSON(res, 200, {
+            success: true,
+            message:
+              'Đã lưu lời nhắn thành công!'
+          });
+        } catch (error) {
+          sendJSON(res, 400, {
+            success: false,
+            error: 'Invalid JSON payload.'
+          });
+        }
+      }
+    );
+
+    return;
+  }
+
+  const safePath =
+    path.normalize(reqPath)
+      .replace(
+        /^(\.\.[/\\])+/, ''
+      );
+
+  const filePath =
+    path.resolve(
+      ROOT_DIR,
+      '.' + safePath
+    );
+
+  const relative =
+    path.relative(
+      ROOT_DIR,
+      filePath
+    );
+
+  if (
+    relative.startsWith('..') ||
+    path.isAbsolute(relative)
+  ) {
+    res.writeHead(403, {
+      'Content-Type':
+        'text/plain; charset=utf-8',
+      ...SECURITY_HEADERS
+    });
+
+    res.end(
+      '403 Forbidden: Truy cập bị từ chối'
+    );
+    return;
+  }
+
+  fs.stat(
+    filePath,
+    (err, stats) => {
+      if (err || !stats?.isFile()) {
+        res.writeHead(404, {
+          'Content-Type':
+            'text/plain; charset=utf-8',
+          ...SECURITY_HEADERS
+        });
+
+        res.end(
+          '404 Not Found: Không tìm thấy tệp yêu cầu'
+        );
+        return;
+      }
+
+      serveFile(
+        filePath,
+        res
+      );
+    }
+  );
 });
 
-function serveFile(filePath, res) {
-  const ext = path.extname(filePath).toLowerCase();
-  const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+function serveFile(
+  filePath,
+  res
+) {
+  const ext =
+    path.extname(
+      filePath
+    ).toLowerCase();
+
+  const contentType =
+    MIME_TYPES[ext] ||
+    'application/octet-stream';
 
   res.writeHead(200, {
-    'Content-Type': contentType,
+    'Content-Type':
+      contentType,
     ...SECURITY_HEADERS
   });
 
-  const stream = fs.createReadStream(filePath);
+  if (res.req?.method === 'HEAD') {
+    res.end();
+    return;
+  }
+
+  const stream =
+    fs.createReadStream(
+      filePath
+    );
+
   stream.pipe(res);
-  stream.on('error', () => {
-    if (!res.headersSent) {
-      res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY_HEADERS });
-      res.end('500 Internal Server Error');
+
+  stream.on(
+    'error',
+    () => {
+      if (!res.headersSent) {
+        res.writeHead(500, {
+          'Content-Type':
+            'text/plain; charset=utf-8',
+          ...SECURITY_HEADERS
+        });
+      }
+
+      res.end(
+        '500 Internal Server Error'
+      );
     }
-  });
+  );
 }
 
-server.listen(PORT, () => {
-  console.log(`===================================================`);
-  console.log(`🚀 Portfolio Secure Server is running!`);
-  console.log(`👉 URL: http://localhost:${PORT}`);
-  console.log(`👉 Privacy & Security: http://localhost:${PORT}/pages/privacy-security.html`);
-  console.log(`👉 Selected Work: http://localhost:${PORT}/pages/selected-work.html`);
-  console.log(`👉 About Me: http://localhost:${PORT}/pages/about.html`);
-  console.log(`👉 Contact: http://localhost:${PORT}/pages/contact.html`);
-  console.log(`🛡️  Security Headers & Rate Limiting: ACTIVE`);
-  console.log(`===================================================`);
-});
+server.listen(
+  PORT,
+  () => {
+    console.log(
+      `Portfolio Secure Server: http://localhost:${PORT}`
+    );
+  }
+);
