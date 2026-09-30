@@ -77,7 +77,7 @@ export const SafeImage: React.FC<SafeImageProps> = ({
         <>
           {/* Loading Skeleton */}
           {isLoading && (
-            <div className="absolute inset-0 bg-[#072C24] animate-pulse flex items-center justify-center">
+            <div className="absolute inset-0 bg-[#072C24] animate-pulse motion-reduce:animate-none flex items-center justify-center">
               <span className="text-xs text-[#B8D3CB] font-mono">Đang tải...</span>
             </div>
           )}
@@ -89,7 +89,7 @@ export const SafeImage: React.FC<SafeImageProps> = ({
             decoding="async"
             onLoad={handleLoad}
             onError={handleError}
-            className={`${className} transition-opacity duration-300 ${
+            className={`${className} transition-opacity duration-300 motion-reduce:transition-none ${
               isLoading ? 'opacity-0' : 'opacity-100'
             }`}
             {...rest}

@@ -22,7 +22,7 @@ export const HomePage: React.FC = () => {
         <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
           {/* Status Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00DF89]/10 border border-[#00DF89]/30 text-[#00DF89] text-xs font-bold uppercase tracking-wider mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#00DF89] animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-[#00DF89] animate-pulse motion-reduce:animate-none"></span>
             <span>{DESIGNER_INFO.availability}</span>
           </div>
 
@@ -44,7 +44,7 @@ export const HomePage: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-12">
             <a
               href="#selected-work"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-[#00DF89] text-[#04201A] hover:bg-[#A3E635] hover:scale-105 transition-all shadow-lg text-center"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-[#00DF89] text-[#04201A] hover:bg-[#A3E635] hover:scale-105 motion-reduce:transform-none transition-all shadow-lg text-center"
             >
               Xem Dự Án
             </a>
@@ -112,13 +112,13 @@ export const HomePage: React.FC = () => {
           {featuredProjects.map((project) => (
             <article
               key={project.id}
-              className="group bg-[#072C24] rounded-2xl overflow-hidden border border-white/10 hover:border-[#00DF89]/50 transition-all duration-300 shadow-lg hover:shadow-[#00DF89]/10 hover:-translate-y-1 flex flex-col"
+              className="group bg-[#072C24] rounded-2xl overflow-hidden border border-white/10 hover:border-[#00DF89]/50 transition-all duration-300 shadow-lg hover:shadow-[#00DF89]/10 hover:-translate-y-1 motion-reduce:transform-none flex flex-col"
             >
               <SafeImage
                 src={project.coverImage}
                 alt={`Hình ảnh dự án ${project.title}`}
                 aspectRatio="aspect-[16/10]"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 motion-reduce:transform-none transition-transform duration-500"
               />
 
               <div className="p-6 flex flex-col flex-grow">

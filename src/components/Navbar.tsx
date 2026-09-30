@@ -39,7 +39,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute = 'home' }) => {
           onClick={handleLinkClick}
         >
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#00DF89] animate-pulse"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#00DF89] animate-pulse motion-reduce:animate-none"></span>
             <span className="font-extrabold tracking-wider text-base text-white group-hover:text-[#00DF89] transition-colors">
               {DESIGNER_INFO.name.toUpperCase()}
             </span>
@@ -109,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute = 'home' }) => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#04201A] border-b border-white/10 px-4 pt-3 pb-6 space-y-2 shadow-2xl animate-fade-in">
+        <div className="lg:hidden bg-[#04201A] border-b border-white/10 px-4 pt-3 pb-6 space-y-2 shadow-2xl animate-fade-in motion-reduce:animate-none">
           {NAV_ITEMS.map((item) => {
             const isActive = currentRoute === item.key;
             return (
