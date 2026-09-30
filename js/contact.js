@@ -260,33 +260,18 @@ async function attachContactFormHandler(
       '_captcha': 'false'
     };
 
-    const isLocalhost =
-      window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1';
-
     try {
-      if (isLocalhost) {
-        // Keep local Node server support, but do not treat a failed local
-        // archive as a successful delivery.
-        try {
-          await postJSON(
-            '/api/contact',
-            {
-              'Họ và tên': rawData.name,
-              'Email': rawData.email,
-              'Mục đích': rawData.purpose,
-              'Lời nhắn': rawData.message,
-              submittedAt: new Date().toISOString()
-            },
-            SUBMIT_TIMEOUT_MS
-          );
-        } catch (localError) {
-          console.warn('Local archive failed:', localError);
-        }
-      }
-
-      // Production and localhost both use FormSubmit as the delivery path.
-      await postJSON(FORM_SUBMIT_URL, formPayload, SUBMIT_TIMEOUT_MS);
+      // Gửi dữ liệu tới PHP backend
+      await postJSON(
+        '/api/contact.php',
+        {
+          'Họ và tên': rawData.name,
+          'Email': rawData.email,
+          'Mục đích': rawData.purpose,
+          'Lời nhắn': rawData.message
+        },
+        SUBMIT_TIMEOUT_MS
+      );
 
       showStatus(
         statusBox,
