@@ -108,8 +108,37 @@ for (const htmlFile of htmlFiles) {
   }
 }
 
+// Validate JSON-LD structured data in all HTML files
+const jsonLdErrors = [];
+for (const htmlFile of htmlFiles) {
+  const content = fs.readFileSync(htmlFile, 'utf8');
+  const jsonLdMatches = content.match(/<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi);
+
+  if (jsonLdMatches) {
+    for (const block of jsonLdMatches) {
+      const innerJson = block.replace(/<script\s+type=["']application\/ld\+json["']>/i, '').replace(/<\/script>/i, '').trim();
+      try {
+        JSON.parse(innerJson);
+      } catch (err) {
+        jsonLdErrors.push({
+          file: path.relative(ROOT, htmlFile),
+          error: err.message
+        });
+      }
+    }
+  }
+}
+
+if (jsonLdErrors.length) {
+  console.error(`Found ${jsonLdErrors.length} invalid JSON-LD block(s):`);
+  for (const item of jsonLdErrors) {
+    console.error(`- ${item.file}: ${item.error}`);
+  }
+  process.exit(1);
+}
+
 console.log(
-  `Checked ${htmlFiles.length} HTML file(s).`
+  `Checked ${htmlFiles.length} HTML file(s) and verified JSON-LD structured data.`
 );
 
 if (missing.length) {
