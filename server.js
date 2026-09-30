@@ -206,6 +206,31 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  const ROUTE_MAP = {
+    '/': '/index.html',
+    '/about': '/pages/about.html',
+    '/services': '/pages/services.html',
+    '/skills': '/pages/about.html',
+    '/works': '/pages/selected-work.html',
+    '/selected-work': '/pages/selected-work.html',
+    '/contact': '/pages/contact.html',
+    '/case-study/lamee': '/pages/case-study-lamee.html',
+    '/case-study/net-que': '/pages/case-study-net-que.html',
+    '/case-study/portfolio': '/pages/case-study-portfolio.html',
+    '/case-study/vortex': '/pages/case-study-vortex.html'
+  };
+
+  const normalizedLower = reqPath.toLowerCase().replace(/\/$/, '') || '/';
+  if (ROUTE_MAP[normalizedLower]) {
+    reqPath = ROUTE_MAP[normalizedLower];
+  } else if (!path.extname(reqPath)) {
+    if (fs.existsSync(path.join(ROOT_DIR, reqPath + '.html'))) {
+      reqPath = reqPath + '.html';
+    } else if (fs.existsSync(path.join(ROOT_DIR, 'pages', reqPath.replace(/^\//, '') + '.html'))) {
+      reqPath = '/pages/' + reqPath.replace(/^\//, '') + '.html';
+    }
+  }
+
   if (reqPath === '/' || reqPath === '') {
     reqPath = '/index.html';
   }
