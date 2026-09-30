@@ -1,6 +1,7 @@
 export interface DesignerInfo {
   name: string;
   role: string;
+  headline: string;
   tagline: string;
   bio: string;
   specializations: string[];
@@ -31,16 +32,18 @@ export interface PortfolioProject {
   coverImage: string;
   url?: string;
   tags: string[];
+  featured: boolean;
 }
 
 export const DESIGNER_INFO: DesignerInfo = {
   name: 'Cao Ngọc Minh',
   role: 'Graphic Designer & Brand Creator',
-  tagline: 'Biến ý tưởng thành ngôn ngữ thị giác chiến lược',
-  bio: 'Chuyên gia thiết kế đồ họa với tư duy thị giác ứng dụng cao, tập trung vào xây dựng nhận diện thương hiệu nhất quán, key visual quảng cáo số cuốn hút và ấn phẩm in ấn/POSM thực chiến.',
+  headline: 'Biến ý tưởng thành hệ thống thị giác rõ ràng và nhất quán.',
+  tagline: 'Biến ý tưởng thành hệ thống thị giác rõ ràng và nhất quán.',
+  bio: 'Sáng tạo bản sắc thương hiệu, định vị hình ảnh và thiết kế ấn phẩm truyền thông số thực chiến. Kết hợp tư duy thẩm mỹ hiện đại và tính ứng dụng cao.',
   specializations: [
     'Brand Identity (Nhận diện thương hiệu)',
-    'Key Visual & Digital Advertising',
+    'Key Visual & Digital Ads',
     'Menu & POSM F&B / Retail',
     'Packaging & Editorial Design'
   ],
@@ -61,7 +64,7 @@ export const DESIGNER_INFO: DesignerInfo = {
   }
 };
 
-export const FEATURED_PROJECTS: PortfolioProject[] = [
+export const PROJECTS: PortfolioProject[] = [
   {
     id: 'vortex',
     title: 'Vortex Energy Drink',
@@ -71,7 +74,8 @@ export const FEATURED_PROJECTS: PortfolioProject[] = [
     description: 'Hệ thống nhận diện thương hiệu và Key Visual bùng nổ năng lượng cho dòng nước tăng lực thế hệ mới.',
     coverImage: 'assets/images/case-study-1-cover.png',
     url: 'pages/case-study-vortex.html',
-    tags: ['Brand Identity', '3D Key Visual', 'Packaging']
+    tags: ['Brand Identity', '3D Key Visual', 'Packaging'],
+    featured: true
   },
   {
     id: 'net-que',
@@ -82,7 +86,8 @@ export const FEATURED_PROJECTS: PortfolioProject[] = [
     description: 'Tái định vị thương hiệu chuỗi ẩm thực truyền thống, thiết kế thực đơn cao cấp và bộ nhận diện tại điểm bán.',
     coverImage: 'assets/images/case-study-2-cover.png',
     url: 'pages/case-study-net-que.html',
-    tags: ['Brand Identity', 'Menu Design', 'POSM']
+    tags: ['Brand Identity', 'Menu Design', 'POSM'],
+    featured: true
   },
   {
     id: 'lamee',
@@ -93,7 +98,8 @@ export const FEATURED_PROJECTS: PortfolioProject[] = [
     description: 'Ngôn ngữ thị giác thanh lịch, chuẩn mực cao cấp cho chuỗi viện thẩm mỹ & spa chăm sóc da chuyên sâu.',
     coverImage: 'assets/images/case-study-3-cover.png',
     url: 'pages/case-study-lamee.html',
-    tags: ['Visual Identity', 'Social Templates', 'Print System']
+    tags: ['Visual Identity', 'Social Templates', 'Print System'],
+    featured: true
   },
   {
     id: 'portfolio',
@@ -104,6 +110,25 @@ export const FEATURED_PROJECTS: PortfolioProject[] = [
     description: 'Thiết kế website portfolio cá nhân phong cách Modern Dark Minimalist kết hợp công nghệ tối ưu hiệu năng.',
     coverImage: 'assets/images/case-study-4-cover.png',
     url: 'pages/case-study-portfolio.html',
-    tags: ['UI/UX Design', 'Design System', 'Accessibility']
+    tags: ['UI/UX Design', 'Design System', 'Accessibility'],
+    featured: true
+  },
+  {
+    id: 'de-am-chay',
+    title: 'Dê Âm Chay',
+    client: 'Ẩm Thực Chay',
+    category: 'Brand & Menu',
+    categorySlug: 'brand',
+    description: 'Bộ nhận diện thương hiệu thanh tịnh và thiết kế menu thực dưỡng.',
+    coverImage: 'assets/images/case-study-2-cover.png',
+    tags: ['Brand Identity', 'Menu Design'],
+    featured: false
   }
 ];
+
+export const getFeaturedProjects = (limit = 4): PortfolioProject[] => {
+  return PROJECTS.filter((project) => project.featured).slice(0, limit);
+};
+
+export const FEATURED_PROJECTS = getFeaturedProjects(4);
+
