@@ -4,38 +4,15 @@ import {
   getFeaturedProjects,
   PortfolioProject
 } from '../data/portfolioData';
+import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 
 export const HomePage: React.FC = () => {
   const featuredProjects: PortfolioProject[] = getFeaturedProjects(4);
 
   return (
     <div className="min-h-screen bg-[#04201A] text-white font-sans antialiased selection:bg-[#00DF89] selection:text-[#04201A]">
-      {/* ==========================================================================
-          01. NAVIGATION
-          ========================================================================== */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#04201A]/85 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2.5 font-bold tracking-wider text-base text-white hover:text-[#00DF89] transition-colors">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#00DF89]"></span>
-            <span>CAO NGỌC MINH</span>
-          </a>
-
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#B8D3CB]">
-            <a href="#selected-work" className="hover:text-[#00DF89] transition-colors">Dự Án</a>
-            <a href="pages/about.html" className="hover:text-[#00DF89] transition-colors">Giới Thiệu</a>
-            <a href="#contact" className="hover:text-[#00DF89] transition-colors">Liên Hệ</a>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="#contact"
-              className="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#00DF89] text-[#04201A] hover:bg-[#A3E635] transition-all shadow-md"
-            >
-              Liên Hệ
-            </a>
-          </div>
-        </div>
-      </header>
+      <Navbar currentRoute="home" />
 
       {/* ==========================================================================
           02. HERO SECTION
@@ -189,51 +166,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* ==========================================================================
-          04. CONTACT / FOOTER
-          ========================================================================== */}
-      <footer id="contact" className="bg-[#031813] border-t border-white/10 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <h4 className="text-lg font-bold text-white">{DESIGNER_INFO.name}</h4>
-            <p className="text-xs text-[#B8D3CB] mt-1">{DESIGNER_INFO.role} • {DESIGNER_INFO.address}</p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-4 text-xs font-medium">
-            <a
-              href={`mailto:${DESIGNER_INFO.email}`}
-              className="text-[#00DF89] hover:underline"
-            >
-              {DESIGNER_INFO.email}
-            </a>
-            <span className="text-white/20">•</span>
-            <a
-              href={`tel:${DESIGNER_INFO.phone}`}
-              className="text-white hover:text-[#00DF89]"
-            >
-              {DESIGNER_INFO.phoneDisplay}
-            </a>
-            <span className="text-white/20">•</span>
-            <a
-              href={DESIGNER_INFO.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-[#00DF89]"
-            >
-              Facebook
-            </a>
-            <span className="text-white/20">•</span>
-            <a
-              href={DESIGNER_INFO.cv}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-[#00DF89]"
-            >
-              Hồ Sơ (CV)
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

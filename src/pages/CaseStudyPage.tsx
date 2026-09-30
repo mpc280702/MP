@@ -5,6 +5,7 @@ import {
   PortfolioProject,
   CaseStudyDetails
 } from '../data/portfolioData';
+import { Footer } from '../components/Footer';
 
 interface CaseStudyPageProps {
   initialProjectId?: string;
@@ -332,10 +333,7 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ initialProjectId }
         </article>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#031813] border-t border-white/10 py-8 px-4 text-center text-xs text-[#B8D3CB]">
-        <p>© {new Date().getFullYear()} {DESIGNER_INFO.name}. All rights reserved. • {DESIGNER_INFO.address}</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
