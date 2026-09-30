@@ -150,7 +150,7 @@ export const HomePage: React.FC = () => {
                   <span className="text-xs font-bold uppercase tracking-wider text-[#00DF89] bg-[#00DF89]/10 px-2.5 py-1 rounded-md">
                     {project.category}
                   </span>
-                  <span className="text-xs text-[#B8D3CB]">• {project.client}</span>
+                  <span className="text-xs text-[#B8D3CB]">• {project.projectType || project.client}</span>
                 </div>
 
                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#00DF89] transition-colors">

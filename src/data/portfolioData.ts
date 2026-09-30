@@ -22,14 +22,18 @@ export interface DesignerInfo {
   };
 }
 
+export type ProjectType = 'Concept Project' | 'Personal Project';
+
 export interface PortfolioProject {
   id: string;
   title: string;
-  client: string;
+  projectType: ProjectType;
+  client?: string;
   category: string;
   categorySlug: string;
   description: string;
   coverImage: string;
+  visualNote: string;
   url?: string;
   tags: string[];
   featured: boolean;
@@ -181,62 +185,87 @@ export const SERVICES: ServiceItem[] = [
 
 export const PROJECTS: PortfolioProject[] = [
   {
-    id: 'vortex',
-    title: 'Vortex Energy Drink',
-    client: 'Vortex Beverage Co.',
-    category: 'Brand Identity & Motion',
+    id: 'kanso-roastery',
+    title: 'Kanso Roastery',
+    projectType: 'Concept Project',
+    client: 'Concept Project',
+    category: 'Brand Identity & Packaging',
     categorySlug: 'brand',
-    description: 'Hệ thống nhận diện thương hiệu và Key Visual bùng nổ năng lượng cho dòng nước tăng lực thế hệ mới.',
-    coverImage: 'assets/images/case-study-1-cover.png',
-    url: 'pages/case-study-vortex.html',
-    tags: ['Brand Identity', '3D Key Visual', 'Packaging'],
+    description: 'Concept nhận diện thương hiệu và bao bì cà phê túi lọc tối giản theo triết lý Kanso (Nhật Bản).',
+    coverImage: 'assets/images/lamee-stationery-flatlay.jpg',
+    visualNote: 'Visual tham khảo & Mockup minh họa',
+    url: 'pages/selected-work.html#kanso-roastery',
+    tags: ['Brand Identity', 'Packaging', 'Typography'],
     featured: true
   },
   {
-    id: 'net-que',
-    title: 'Nét Quê Restaurant',
-    client: 'Nét Quê F&B Group',
-    category: 'Brand Identity & Editorial',
+    id: 'aura-botanicals',
+    title: 'Aura Botanicals',
+    projectType: 'Concept Project',
+    client: 'Concept Project',
+    category: 'Packaging & Brand Identity',
+    categorySlug: 'packaging',
+    description: 'Concept nhận diện thương hiệu và thiết kế nhãn mác dòng mỹ phẩm chăm sóc da thảo mộc hữu cơ.',
+    coverImage: 'assets/images/lamee-isometric-mockup.jpg',
+    visualNote: 'Visual tham khảo & Mockup minh họa',
+    url: 'pages/selected-work.html#aura-botanicals',
+    tags: ['Packaging', 'Cosmetics', 'Eco Friendly'],
+    featured: true
+  },
+  {
+    id: 'monolith-editorial',
+    title: 'MONOLITH Editorial',
+    projectType: 'Personal Project',
+    client: 'Personal Project',
+    category: 'Editorial & Publication',
     categorySlug: 'editorial',
-    description: 'Tái định vị thương hiệu chuỗi ẩm thực truyền thống, thiết kế thực đơn cao cấp và bộ nhận diện tại điểm bán.',
-    coverImage: 'assets/images/case-study-2-cover.png',
-    url: 'pages/case-study-net-que.html',
-    tags: ['Brand Identity', 'Menu Design', 'POSM'],
+    description: 'Dự án cá nhân nghiên cứu thiết kế dàn trang ấn phẩm kiến trúc Brutalism với hệ lưới Modular.',
+    coverImage: 'assets/images/portfolio-workspace-mockup.jpg',
+    visualNote: 'Dự án cá nhân / Khám phá thị giác độc lập',
+    url: 'pages/selected-work.html#monolith-editorial',
+    tags: ['Editorial', 'Layout Grid', 'Publication'],
     featured: true
   },
   {
-    id: 'lamee',
-    title: 'Lamee Beauty Spa',
-    client: 'Lamee Wellness & Spa',
+    id: 'urban-type',
+    title: 'Urban Type',
+    projectType: 'Personal Project',
+    client: 'Personal Project',
+    category: 'Typography & Poster',
+    categorySlug: 'digital',
+    description: 'Dự án cá nhân khám phá typography đường phố đương đại và nghệ thuật sắp đặt con chữ đồ họa.',
+    coverImage: 'assets/images/portfolio-3d-screens.jpg',
+    visualNote: 'Dự án cá nhân / Khám phá nghệ thuật chữ',
+    url: 'pages/selected-work.html#urban-type',
+    tags: ['Typography', 'Poster Art', 'Experimental'],
+    featured: true
+  },
+  {
+    id: 'soulier-no-7',
+    title: 'Soulier No. 7',
+    projectType: 'Concept Project',
+    client: 'Concept Project',
     category: 'Brand Identity & Editorial',
     categorySlug: 'brand',
-    description: 'Ngôn ngữ thị giác thanh lịch, chuẩn mực cao cấp cho chuỗi viện thẩm mỹ & spa chăm sóc da chuyên sâu.',
-    coverImage: 'assets/images/case-study-3-cover.png',
-    url: 'pages/case-study-lamee.html',
-    tags: ['Visual Identity', 'Social Templates', 'Print System'],
-    featured: true
+    description: 'Concept nhận diện thương hiệu và lookbook giới thiệu bộ sưu tập giày da thủ công phong cách cổ điển.',
+    coverImage: 'assets/images/net-que-isometric-mockup.jpg',
+    visualNote: 'Visual tham khảo & Mockup minh họa',
+    url: 'pages/selected-work.html#soulier-no-7',
+    tags: ['Brand Identity', 'Editorial', 'Handcrafted'],
+    featured: false
   },
   {
-    id: 'portfolio',
-    title: 'Creative Portfolio 2026',
-    client: 'Cao Ngọc Minh',
-    category: 'UI/UX & Interactive Design',
-    categorySlug: 'uiux',
-    description: 'Thiết kế website portfolio cá nhân phong cách Modern Dark Minimalist kết hợp công nghệ tối ưu hiệu năng.',
-    coverImage: 'assets/images/case-study-4-cover.png',
-    url: 'pages/case-study-portfolio.html',
-    tags: ['UI/UX Design', 'Design System', 'Accessibility'],
-    featured: true
-  },
-  {
-    id: 'de-am-chay',
-    title: 'Dê Âm Chay',
-    client: 'Ẩm Thực Chay',
-    category: 'Brand & Menu',
-    categorySlug: 'brand',
-    description: 'Bộ nhận diện thương hiệu thanh tịnh và thiết kế menu thực dưỡng.',
-    coverImage: 'assets/images/case-study-2-cover.png',
-    tags: ['Brand Identity', 'Menu Design'],
+    id: 'noir-atelier',
+    title: 'Noir Atelier',
+    projectType: 'Concept Project',
+    client: 'Concept Project',
+    category: 'Key Visual & Digital',
+    categorySlug: 'digital',
+    description: 'Concept định hình Key Visual kỹ thuật số và bộ ấn phẩm mạng xã hội cho studio thời trang đơn sắc.',
+    coverImage: 'assets/images/ulibee-campaign-kv.jpg',
+    visualNote: 'Visual tham khảo & Mockup minh họa',
+    url: 'pages/selected-work.html#noir-atelier',
+    tags: ['Key Visual', 'Digital Media', 'Minimal Fashion'],
     featured: false
   }
 ];
