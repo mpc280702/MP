@@ -24,6 +24,18 @@ export interface DesignerInfo {
 
 export type ProjectType = 'Concept Project' | 'Personal Project';
 
+export interface CaseStudyDetails {
+  scopeOfWork?: string[];
+  colorPalette?: { hex: string; name: string }[];
+  typography?: { primary: string; secondary?: string; usage: string };
+  contextAndProblem?: string;
+  objectives?: string[];
+  researchAndDirection?: string;
+  designSolution?: string;
+  designOutputs?: string[];
+  gallery?: { image: string; caption: string; isReferenceVisual: boolean }[];
+}
+
 export interface PortfolioProject {
   id: string;
   title: string;
@@ -37,6 +49,7 @@ export interface PortfolioProject {
   url?: string;
   tags: string[];
   featured: boolean;
+  caseStudy?: CaseStudyDetails;
 }
 
 export const DESIGNER_INFO: DesignerInfo = {
@@ -196,7 +209,52 @@ export const PROJECTS: PortfolioProject[] = [
     visualNote: 'Visual tham khảo & Mockup minh họa',
     url: 'pages/selected-work.html#kanso-roastery',
     tags: ['Brand Identity', 'Packaging', 'Typography'],
-    featured: true
+    featured: true,
+    caseStudy: {
+      scopeOfWork: [
+        'Thiết kế Logo & Brandmark tối giản',
+        'Hệ thống bao bì túi cà phê 250g & 500g',
+        'Bộ tem nhãn phân biệt 4 dòng hạt rang',
+        'Tài liệu Brand Guidelines chuẩn ứng dụng'
+      ],
+      colorPalette: [
+        { hex: '#2C2A29', name: 'Charcoal Brown' },
+        { hex: '#D6C7B2', name: 'Kraft Beige' },
+        { hex: '#EBE6DE', name: 'Wabi-Sabi Cream' },
+        { hex: '#00DF89', name: 'Accent Mint' }
+      ],
+      typography: {
+        primary: 'Noto Sans JP & Inter',
+        secondary: 'Cormorant Garamond',
+        usage: 'Phông không chân tinh gọn kết hợp nét thanh nhã của serif cho tiêu đề.'
+      },
+      contextAndProblem: 'Thị trường cà phê đặc sản thường lạm dụng nhiều chi tiết minh họa rườm rà, làm lu mờ thông tin cốt lõi về nguồn gốc hạt và độ cao vùng trồng. Đề bài đặt ra là tối giản hóa bao bì theo triết lý Kanso để tập trung trải nghiệm vào hương vị hạt.',
+      objectives: [
+        'Loại bỏ các yếu tố đồ họa dư thừa, ưu tiên khoảng trắng thông thoáng.',
+        'Thiết kế cấu trúc tem nhãn trực quan, dễ quét thông tin kỹ thuật hạt rang.',
+        'Đảm bảo bao bì tương thích tốt với chất liệu giấy tái chế thân thiện môi trường.'
+      ],
+      researchAndDirection: 'Khảo sát văn hóa tối giản Nhật Bản kết hợp cùng trường phái thiết kế bao bì Bắc Âu đương đại. Định hướng thị giác chọn khoảng lặng không gian và độ cân bằng typography làm nhân vật chính.',
+      designSolution: 'Phát triển hệ thống lưới căn gióng chặt chẽ, tạo cấu trúc tem nhãn 3 khối thông tin rõ ràng. Logo tối giản dạng chữ kết hợp ký hiệu hạt cà phê cách điệu tạo điểm nhấn nhận biết nhẹ nhàng.',
+      designOutputs: [
+        'Bộ file Vector Logo Master chuẩn định dạng (AI, SVG, PDF, PNG)',
+        'Bản vẽ trải khuôn bao bì Dieline 2 quy cách in ấn',
+        'Bộ file thiết kế tem nhãn xuất xưởng in chuẩn hệ màu CMYK',
+        'Tài liệu Brand Guidelines hướng dẫn quy cách 24 trang'
+      ],
+      gallery: [
+        {
+          image: 'assets/images/lamee-stationery-flatlay.jpg',
+          caption: 'Visual tham khảo: Mockup nhận diện thương hiệu và bao bì tối giản',
+          isReferenceVisual: true
+        },
+        {
+          image: 'assets/images/net-que-stationery-flatlay.jpg',
+          caption: 'Visual tham khảo: Bố cục tem nhãn và tài liệu văn phòng',
+          isReferenceVisual: true
+        }
+      ]
+    }
   },
   {
     id: 'aura-botanicals',
@@ -210,7 +268,44 @@ export const PROJECTS: PortfolioProject[] = [
     visualNote: 'Visual tham khảo & Mockup minh họa',
     url: 'pages/selected-work.html#aura-botanicals',
     tags: ['Packaging', 'Cosmetics', 'Eco Friendly'],
-    featured: true
+    featured: true,
+    caseStudy: {
+      scopeOfWork: [
+        'Định vị bảng màu & ngôn ngữ đồ họa hữu cơ',
+        'Thiết kế nhãn chai serum, hũ kem & hộp giấy',
+        'Bộ biểu tượng minh họa thành phần thảo mộc'
+      ],
+      colorPalette: [
+        { hex: '#1C3A27', name: 'Botanical Green' },
+        { hex: '#E8DFD0', name: 'Warm Cream' },
+        { hex: '#A88D70', name: 'Earth Clay' }
+      ],
+      typography: {
+        primary: 'Outfit / Roboto',
+        usage: 'Font không chân hình học đảm bảo độ sắc nét của thông số dung tích ở kích thước in nhỏ.'
+      },
+      contextAndProblem: 'Các dòng mỹ phẩm thiên nhiên thường gặp khó khăn trong việc cân bằng giữa cảm giác mộc mạc và chuẩn mực khoa học đáng tin cậy. Nhãn chai kích thước nhỏ đòi hỏi phân cấp thông tin cực kỳ chặt chẽ.',
+      objectives: [
+        'Tạo dựng diện mạo tinh tế, sang trọng nhưng vẫn giữ nguyên tính chất thảo mộc lành tính.',
+        'Quy hoạch diện tích hiển thị rõ ràng bảng thành phần và chứng nhận an toàn.',
+        'Kiểm soát kỹ thuật in nhãn trên chất liệu chai thủy tinh mờ.'
+      ],
+      researchAndDirection: 'Nghiên cứu các dòng Clean Beauty chuẩn quốc tế. Sử dụng màu xanh thực vật đậm làm gốc, bổ trợ bằng màu kem ấm để gợi cảm giác dịu nhẹ cho làn da.',
+      designSolution: 'Phân chia nhãn chai thành 2 mặt đối xứng: mặt trước làm nổi bật tên hoạt chất và dung tích, mặt sau tối ưu lưới chữ hiển thị thành phần đầy đủ.',
+      designOutputs: [
+        'Bản thiết kế nhãn 3 quy cách chai (30ml, 50ml, 100ml)',
+        'Bản vẽ kỹ thuật khuôn hộp giấy (Dieline Print-Ready)',
+        'File bóc tách kẽm ép kim và phủ màng bóng',
+        'Bộ hình ảnh Mockup 3D trình diễn concept'
+      ],
+      gallery: [
+        {
+          image: 'assets/images/lamee-isometric-mockup.jpg',
+          caption: 'Visual tham khảo: Mockup phối cảnh bao bì mỹ phẩm trên nền vật liệu tự nhiên',
+          isReferenceVisual: true
+        }
+      ]
+    }
   },
   {
     id: 'monolith-editorial',
@@ -224,7 +319,44 @@ export const PROJECTS: PortfolioProject[] = [
     visualNote: 'Dự án cá nhân / Khám phá thị giác độc lập',
     url: 'pages/selected-work.html#monolith-editorial',
     tags: ['Editorial', 'Layout Grid', 'Publication'],
-    featured: true
+    featured: true,
+    caseStudy: {
+      scopeOfWork: [
+        'Thiết kế cấu trúc hệ lưới Modular 12 cột',
+        'Dàn trang ấn phẩm kiến trúc 48 trang',
+        'Thiết kế bìa sách dập chìm & Dust Jacket'
+      ],
+      colorPalette: [
+        { hex: '#111111', name: 'Brutal Black' },
+        { hex: '#E5E5E5', name: 'Raw Concrete' },
+        { hex: '#FF3B30', name: 'Signal Red' }
+      ],
+      typography: {
+        primary: 'Space Mono / Helvetica',
+        usage: 'Sự kết hợp giữa phông chữ đơn cách kỹ thuật và phông chữ Thụy Sĩ kinh điển.'
+      },
+      contextAndProblem: 'Dự án khám phá tính liên kết giữa bề mặt vật liệu bê tông thô ráp và độ tương phản của trang giấy in. Thử thách là làm sao để cấu trúc dàn trang tĩnh thể hiện được sự đồ sộ của kiến trúc.',
+      objectives: [
+        'Khai thác tối đa tiềm năng phân cấp của hệ lưới Modular.',
+        'Tạo ra khoảng thở thị giác sâu giữa các trang ảnh chụp công trình.',
+        'Chuẩn hóa thông số gáy sách cho hình thức khâu chỉ hở lưng.'
+      ],
+      researchAndDirection: 'Nghiên cứu nguyên lý xuất bản Bauhaus và phong cách đồ họa Thụy Sĩ (International Typographic Style). Ưu tiên các khối chữ lớn tương phản với ảnh đen trắng góc rộng.',
+      designSolution: 'Ứng dụng các khối tiêu đề đậm nét (ultra-bold) đặt lệch trục có chủ đích, tạo nhịp điệu chuyển trang dứt khoát như những nhát cắt hình khối kiến trúc.',
+      designOutputs: [
+        'File dàn trang nguyên bản Adobe InDesign (INDD, IDML)',
+        'File PDF High-Res xuất xưởng in chuẩn Bleed 3mm',
+        'Phiên bản Interactive PDF tối ưu hiển thị màn hình',
+        'File thiết kế khuôn bế bìa áo (Dust Jacket)'
+      ],
+      gallery: [
+        {
+          image: 'assets/images/portfolio-workspace-mockup.jpg',
+          caption: 'Visual tham khảo: Không gian trưng bày ấn phẩm và quy cách dàn trang',
+          isReferenceVisual: true
+        }
+      ]
+    }
   },
   {
     id: 'urban-type',
@@ -238,7 +370,43 @@ export const PROJECTS: PortfolioProject[] = [
     visualNote: 'Dự án cá nhân / Khám phá nghệ thuật chữ',
     url: 'pages/selected-work.html#urban-type',
     tags: ['Typography', 'Poster Art', 'Experimental'],
-    featured: true
+    featured: true,
+    caseStudy: {
+      scopeOfWork: [
+        'Nghiên cứu biến thể hình học của con chữ',
+        'Bộ 12 Poster nghệ thuật typography',
+        'Chuỗi visual chuyển động số phục vụ trình chiếu'
+      ],
+      colorPalette: [
+        { hex: '#00DF89', name: 'Acid Mint' },
+        { hex: '#072C24', name: 'Dark Emerald' },
+        { hex: '#A3E635', name: 'Cyber Lime' }
+      ],
+      typography: {
+        primary: 'Custom Experimental Type',
+        usage: 'Con chữ được tái cấu trúc hình học, biến con chữ thành tác phẩm thị giác độc lập.'
+      },
+      contextAndProblem: 'Trong kỷ nguyên số, con chữ thường chỉ được nhìn nhận như công cụ truyền tải thông điệp thụ động. Dự án này thử nghiệm đưa typography trở thành trung tâm biểu đạt cảm xúc thị giác.',
+      objectives: [
+        'Thử nghiệm sự phá vỡ cấu trúc giải phẫu chữ viết thông thường.',
+        'Kết hợp ánh sáng neon dạ quang với chiều sâu không gian đồ họa.',
+        'Tạo lập bộ poster nghệ thuật có khả năng ứng dụng triển lãm.'
+      ],
+      researchAndDirection: 'Thu thập tư liệu từ biển báo giao thông, graffiti và văn hóa nghệ thuật đương đại. Định hướng sử dụng màu dạ quang có độ bão hòa cao trên nền tối.',
+      designSolution: 'Tạo lập các góc nghiêng động lực học và hiệu ứng quang học phân tầng, mang lại cảm giác con chữ đang biến chuyển không ngừng theo nhịp sống đô thị.',
+      designOutputs: [
+        'Bộ 12 file in poster khổ A1 độ phân giải 300DPI',
+        'Bộ asset đồ họa số định dạng WebP/PNG tối ưu',
+        'Sổ tay ghi chép phương pháp giải phẫu chữ số'
+      ],
+      gallery: [
+        {
+          image: 'assets/images/portfolio-3d-screens.jpg',
+          caption: 'Visual tham khảo: Trình diễn các tác phẩm typography trên màn hình hiển thị 3D',
+          isReferenceVisual: true
+        }
+      ]
+    }
   },
   {
     id: 'soulier-no-7',
@@ -252,7 +420,44 @@ export const PROJECTS: PortfolioProject[] = [
     visualNote: 'Visual tham khảo & Mockup minh họa',
     url: 'pages/selected-work.html#soulier-no-7',
     tags: ['Brand Identity', 'Editorial', 'Handcrafted'],
-    featured: false
+    featured: false,
+    caseStudy: {
+      scopeOfWork: [
+        'Thiết kế biểu tượng Monogram & Logo chữ',
+        'Quy chuẩn bao bì hộp giày cứng & thẻ bảo hành da',
+        'Thiết kế Lookbook giới thiệu bộ sưu tập 28 trang'
+      ],
+      colorPalette: [
+        { hex: '#3B2317', name: 'Leather Brown' },
+        { hex: '#C5A059', name: 'Muted Gold' },
+        { hex: '#F9F6F0', name: 'Warm Parchment' }
+      ],
+      typography: {
+        primary: 'Cinzel & Playfair Display',
+        usage: 'Font chữ có chân cổ điển thể hiện phẩm chất thủ công tỉ mỉ và đẳng cấp sang trọng.'
+      },
+      contextAndProblem: 'Sản phẩm giày da cao cấp cần một ngôn ngữ thị giác truyền tải được độ bền bỉ và tay nghề thủ công, tránh sự hào nhoáng giả tạo nhưng vẫn tạo được sự tin cậy tuyệt đối.',
+      objectives: [
+        'Khắc họa tinh thần nghệ nhân qua từng chi tiết nhận diện.',
+        'Tối ưu quy cách đóng gói hộp giày mang lại trải nghiệm mở hộp trang trọng.',
+        'Đồng bộ tone màu từ catalogue in ấn đến thẻ bảo hành da.'
+      ],
+      researchAndDirection: 'Tìm hiểu lịch sử xưởng đóng giày truyền thống châu Âu. Định hướng màu nâu da thuộc kết hợp hiệu ứng dập nhiệt chìm và ép nhũ vàng mờ.',
+      designSolution: 'Biểu tượng Monogram lồng chữ tinh xảo được ứng dụng trên nhãn đồng và dập nhiệt trực tiếp lên da. Bao bì sử dụng giấy mỹ thuật ép gân tôn vinh nét đẹp thủ công.',
+      designOutputs: [
+        'Bộ file Vector Monogram & Logo Wordmark hoàn chỉnh',
+        'Bản vẽ khuôn hộp giày âm dương và túi vải bọc bảo vệ',
+        'File in ấn Lookbook khổ vuông chuẩn màu',
+        'Thông số quy chuẩn kỹ thuật ép kim và dập nổi trên da'
+      ],
+      gallery: [
+        {
+          image: 'assets/images/net-que-isometric-mockup.jpg',
+          caption: 'Visual tham khảo: Mockup nhận diện thương hiệu sang trọng và ấn phẩm',
+          isReferenceVisual: true
+        }
+      ]
+    }
   },
   {
     id: 'noir-atelier',
@@ -266,7 +471,44 @@ export const PROJECTS: PortfolioProject[] = [
     visualNote: 'Visual tham khảo & Mockup minh họa',
     url: 'pages/selected-work.html#noir-atelier',
     tags: ['Key Visual', 'Digital Media', 'Minimal Fashion'],
-    featured: false
+    featured: false,
+    caseStudy: {
+      scopeOfWork: [
+        'Sáng tạo Key Visual chủ đạo cho chiến dịch ra mắt',
+        'Hệ thống Template bài đăng mạng xã hội đa tỷ lệ',
+        'Quy chuẩn ánh sáng và bố cục hình ảnh số'
+      ],
+      colorPalette: [
+        { hex: '#0B0B0C', name: 'Obsidian Noir' },
+        { hex: '#FFFFFF', name: 'Pure White' },
+        { hex: '#71717A', name: 'Monochrome Slate' }
+      ],
+      typography: {
+        primary: 'Bodoni Moda / Neue Haas Grotesk',
+        usage: 'Tương phản mạnh mẽ giữa nét thanh mảnh thời trang và phông không chân trung tính.'
+      },
+      contextAndProblem: 'Thương hiệu thời trang tối giản cần một hệ thống hình ảnh số nổi bật ngay lập tức trên feed mạng xã hội, tránh sự đơn điệu của phong cách đen trắng thông thường.',
+      objectives: [
+        'Tạo ấn tượng thị giác sâu nhờ kỹ thuật tương phản sáng tối.',
+        'Xây dựng hệ khung Template linh hoạt cho nhiều định dạng truyền thông số.',
+        'Bảo đảm tính đồng bộ từ quảng cáo banner đến trang đích sản phẩm.'
+      ],
+      researchAndDirection: 'Nghiên cứu ánh sáng điện ảnh Noir kết hợp bố cục biên tập thời trang cao cấp. Trọng tâm hướng vào kết cấu sợi vải và hình bóng người mẫu.',
+      designSolution: 'Sử dụng ánh sáng cắt gắt chiaroscuro tạo chiều sâu kịch tính, kết hợp kiểu chữ tiêu đề kích thước lớn làm điểm neo thị giác mạnh mẽ.',
+      designOutputs: [
+        'Bộ file Key Visual Master độ phân giải 4K',
+        '15 mẫu Template bài đăng mạng xã hội (tỷ lệ 1:1, 4:5, 9:16)',
+        'Gói file nguồn PSD/AI phân chia layer có quy chuẩn',
+        'Tài liệu hướng dẫn căn chỉnh bố cục số'
+      ],
+      gallery: [
+        {
+          image: 'assets/images/ulibee-campaign-kv.jpg',
+          caption: 'Visual tham khảo: Mockup hình ảnh Key Visual trên các ấn phẩm số',
+          isReferenceVisual: true
+        }
+      ]
+    }
   }
 ];
 
