@@ -6,6 +6,7 @@ import {
   CaseStudyDetails
 } from '../data/portfolioData';
 import { Footer } from '../components/Footer';
+import { SafeImage } from '../components/SafeImage';
 
 interface CaseStudyPageProps {
   initialProjectId?: string;
@@ -125,12 +126,13 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ initialProjectId }
           </section>
 
           {/* Cover Hero Image */}
-          <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-[#072C24] border border-white/10 shadow-2xl">
-            <img
+          <div className="w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <SafeImage
               src={project.coverImage}
               alt={`Hình ảnh trang bìa dự án ${project.title}`}
+              aspectRatio="aspect-[16/9]"
+              priority={true}
               className="w-full h-full object-cover"
-              loading="eager"
             />
           </div>
 
@@ -292,14 +294,13 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ initialProjectId }
                     key={idx}
                     className="bg-[#072C24] rounded-2xl overflow-hidden border border-white/10 flex flex-col"
                   >
-                    <div className="relative aspect-[16/10] overflow-hidden bg-[#04201A]">
-                      <img
-                        src={item.image}
-                        alt={item.caption}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
+                    <SafeImage
+                      src={item.image}
+                      alt={item.caption}
+                      aspectRatio="aspect-[16/10]"
+                      visualLabel="VISUAL THAM KHẢO"
+                      className="w-full h-full object-cover"
+                    />
                     <figcaption className="p-4 bg-[#04201A] border-t border-white/10 flex items-center justify-between text-xs text-[#B8D3CB]">
                       <span>{item.caption}</span>
                       {item.isReferenceVisual && (

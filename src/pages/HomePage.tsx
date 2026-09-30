@@ -6,6 +6,7 @@ import {
 } from '../data/portfolioData';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
+import { SafeImage } from '../components/SafeImage';
 
 export const HomePage: React.FC = () => {
   const featuredProjects: PortfolioProject[] = getFeaturedProjects(4);
@@ -113,14 +114,12 @@ export const HomePage: React.FC = () => {
               key={project.id}
               className="group bg-[#072C24] rounded-2xl overflow-hidden border border-white/10 hover:border-[#00DF89]/50 transition-all duration-300 shadow-lg hover:shadow-[#00DF89]/10 hover:-translate-y-1 flex flex-col"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-[#04201A]">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </div>
+              <SafeImage
+                src={project.coverImage}
+                alt={`Hình ảnh dự án ${project.title}`}
+                aspectRatio="aspect-[16/10]"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
 
               <div className="p-6 flex flex-col flex-grow">
                 <div className="flex items-center gap-2 mb-3">

@@ -421,3 +421,21 @@ i.material-symbols-outlined {
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   10. ACCESSIBLE KEYBOARD FOCUS & TOUCH SAFEGUARDS
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--accent, #00DF89) !important;
+  outline-offset: 3px !important;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}

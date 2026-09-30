@@ -7,6 +7,7 @@ import {
 } from '../data/portfolioData';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
+import { SafeImage } from '../components/SafeImage';
 
 export const WorksPage: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
@@ -102,20 +103,15 @@ export const WorksPage: React.FC = () => {
               className="group bg-[#072C24] rounded-2xl overflow-hidden border border-white/10 hover:border-[#00DF89]/50 transition-all duration-300 shadow-xl hover:shadow-[#00DF89]/10 hover:-translate-y-1 flex flex-col cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-[#00DF89]"
             >
               {/* Image & Type Badge Overlay */}
-              <div className="relative aspect-[16/10] overflow-hidden bg-[#04201A]">
-                <img
+              <div className="relative overflow-hidden">
+                <SafeImage
                   src={project.coverImage}
-                  alt={project.title}
+                  alt={`Ảnh minh họa dự án ${project.title}`}
+                  aspectRatio="aspect-[16/10]"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  onError={(e) => {
-                    // Fallback to avoid broken images
-                    const target = e.currentTarget;
-                    target.src = '../assets/images/portfolio-workspace-mockup.jpg';
-                  }}
                 />
                 {/* Clear Project Type Badge */}
-                <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-2 pointer-events-none">
+                <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-2 pointer-events-none z-10">
                   <span
                     className={`px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-md backdrop-blur-md border ${
                       project.projectType === 'Concept Project'
