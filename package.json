@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
+    "build": "node scripts/validate-site.js",
     "check": "node scripts/validate-site.js"
   }
 }

@@ -159,69 +159,11 @@ i.material-symbols-outlined {
 }
 
 /* ==========================================================================
-   2. CUSTOM GLOWING CURSOR (DESKTOP)
+   2. CUSTOM GLOWING CURSOR (DISABLED)
    ========================================================================== */
-@media (hover: hover) and (pointer: fine) {
-  .custom-cursor-dot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background-color: #00DF89;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 100000;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px #00DF89;
-    transition: opacity 0.2s ease, transform 0.08s ease-out;
-    opacity: 0;
-    will-change: transform, opacity;
-  }
-
-  .custom-cursor-ring {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 34px;
-    height: 34px;
-    border: 1.5px solid rgba(0, 223, 137, 0.45);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
-                height 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.2s ease, 
-                background-color 0.2s ease,
-                opacity 0.2s ease;
-    opacity: 0;
-    will-change: transform, width, height, opacity;
-  }
-
-  .custom-cursor-dot.is-active,
-  .custom-cursor-ring.is-active {
-    opacity: 1;
-  }
-
-  .custom-cursor-ring.cursor-hover {
-    width: 52px;
-    height: 52px;
-    border-color: #A3E635;
-    background-color: rgba(0, 223, 137, 0.08);
-  }
-
-  .custom-cursor-dot.cursor-hover {
-    transform: translate(-50%, -50%) scale(1.4);
-    background-color: #A3E635;
-  }
-
-  .custom-cursor-ring.cursor-click {
-    width: 28px;
-    height: 28px;
-    background-color: rgba(0, 223, 137, 0.25);
-    border-color: #00DF89;
-  }
+.custom-cursor-dot,
+.custom-cursor-ring {
+  display: none !important;
 }
 
 /* ==========================================================================
