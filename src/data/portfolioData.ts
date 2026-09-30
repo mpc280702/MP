@@ -105,6 +105,80 @@ export const DESIGN_PROCESS: ProcessStep[] = [
   }
 ];
 
+export interface ServiceItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  scope: string;
+  deliverables: string[];
+  scopeDetermination: string;
+  timeline: string;
+  icon: string;
+}
+
+export const SERVICES: ServiceItem[] = [
+  {
+    id: 'brand-identity',
+    title: 'Brand Identity',
+    subtitle: 'Nhận diện thương hiệu toàn diện',
+    timeline: 'Tùy phạm vi dự án',
+    icon: 'palette',
+    scope: 'Nghiên cứu và xây dựng bản sắc thương hiệu từ gốc: cấu trúc logo, hệ thống màu sắc, kiểu chữ (typography) và bộ quy chuẩn nhận diện số & văn phòng.',
+    deliverables: [
+      'Bộ file Logo Master chuẩn vector (AI, EPS, SVG, PNG trong suốt)',
+      'Tài liệu Brand Guidelines hướng dẫn sử dụng chi tiết (PDF)',
+      'Ấn phẩm văn phòng cơ bản: Namecard, Tiêu đề thư, Phong bì',
+      'Hệ thống Avatar & Cover chuẩn kích thước mạng xã hội'
+    ],
+    scopeDetermination: 'Được xác định dựa trên số lượng ấn phẩm ứng dụng, số hướng concept cần thử nghiệm và quy mô hệ thống thương hiệu.'
+  },
+  {
+    id: 'packaging-design',
+    title: 'Packaging Design',
+    subtitle: 'Bao bì & Nhãn mác sản phẩm',
+    timeline: 'Tùy số lượng SKU & kết cấu',
+    icon: 'inventory_2',
+    scope: 'Thiết kế kết cấu và đồ họa bao bì, nhãn dán sản phẩm, tối ưu thị giác trên kệ hàng và kiểm soát chặt chẽ thông số kỹ thuật in ấn.',
+    deliverables: [
+      'Bản vẽ trải (Dieline) chuẩn kỹ thuật xuất xưởng in (AI, PDF Print-Ready)',
+      'Hình ảnh Render Mockup 3D trực quan sản phẩm thực tế',
+      'Bố cục nhãn phụ, mã vạch và thông tin dinh dưỡng / thành phần',
+      'File phân lớp hiệu ứng in đặc biệt (Ép kim, Dập nổi, Phủ UV)'
+    ],
+    scopeDetermination: 'Được xác định dựa trên số lượng mã sản phẩm (SKU), độ phức tạp của kết cấu khuôn hộp và quy cách gia công thành phẩm.'
+  },
+  {
+    id: 'editorial-profile',
+    title: 'Editorial & Profile',
+    subtitle: 'Hồ sơ năng lực, Catalogue & Menu',
+    timeline: 'Tùy độ dài nội dung',
+    icon: 'menu_book',
+    scope: 'Thiết kế ấn phẩm nhiều trang: Company Profile, Báo cáo thường niên, Catalogue sản phẩm và Menu F&B với hệ thống lưới phân cấp thông tin khoa học.',
+    deliverables: [
+      'File PDF in ấn phân giải cao, thiết lập sẵn khoảng tràn lề (Bleed)',
+      'File Digital PDF tối ưu dung lượng kèm liên kết tương tác cho email/web',
+      'Bộ khung Template dàn trang đồng bộ (Adobe InDesign / Illustrator)',
+      'Bộ asset hình ảnh đồ họa và biểu đồ trích xuất độc lập'
+    ],
+    scopeDetermination: 'Được xác định dựa trên tổng số trang nội dung, độ phức tạp của biểu đồ / infographic và mức độ biên tập hình ảnh tư liệu.'
+  },
+  {
+    id: 'key-visual-digital',
+    title: 'Key Visual & Digital',
+    subtitle: 'Hình ảnh chiến dịch & Truyền thông số',
+    timeline: 'Tùy phạm vi thiết kế',
+    icon: 'ads_click',
+    scope: 'Sáng tạo hình ảnh chủ đạo (Key Visual) cho chiến dịch truyền thông, phát triển hệ thống banner quảng cáo số và ấn phẩm truyền thông đa kênh.',
+    deliverables: [
+      'Key Visual Master chất lượng cao phục vụ in ấn và hiển thị số',
+      'Hệ thống Banner phái sinh (Resize) theo kích thước chuẩn các nền tảng',
+      'Bộ mẫu Template bài đăng mạng xã hội (Facebook, Instagram, LinkedIn)',
+      'Gói file nguồn được tổ chức layer chuẩn mực'
+    ],
+    scopeDetermination: 'Được xác định dựa trên số lượng concept Key Visual cần phát triển và danh sách các kích thước chuyển thể phái sinh.'
+  }
+];
+
 export const PROJECTS: PortfolioProject[] = [
   {
     id: 'vortex',
