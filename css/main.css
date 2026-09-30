@@ -51,6 +51,7 @@ i.material-symbols-outlined {
   word-wrap: normal;
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
   user-select: none;
 }
@@ -110,6 +111,7 @@ i.material-symbols-outlined {
   background: linear-gradient(135deg, #00DF89 0%, #A3E635 50%, #00DF89 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textShimmer 6s linear infinite;
 }
