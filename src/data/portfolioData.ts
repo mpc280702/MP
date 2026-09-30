@@ -42,10 +42,11 @@ export const DESIGNER_INFO: DesignerInfo = {
   tagline: 'Biến ý tưởng thành hệ thống thị giác rõ ràng và nhất quán.',
   bio: 'Sáng tạo bản sắc thương hiệu, định vị hình ảnh và thiết kế ấn phẩm truyền thông số thực chiến. Kết hợp tư duy thẩm mỹ hiện đại và tính ứng dụng cao.',
   specializations: [
-    'Brand Identity (Nhận diện thương hiệu)',
-    'Key Visual & Digital Ads',
-    'Menu & POSM F&B / Retail',
-    'Packaging & Editorial Design'
+    'Brand Identity',
+    'Packaging',
+    'Key Visual & Digital',
+    'Editorial',
+    'UI & Design Systems'
   ],
   email: 'mngoc1285l@gmail.com',
   phone: '0327430794',
@@ -63,6 +64,46 @@ export const DESIGNER_INFO: DesignerInfo = {
     satisfactionRate: '98%'
   }
 };
+
+export interface ProcessStep {
+  step: number;
+  title: string;
+  subtitle: string;
+  description: string;
+}
+
+export const DESIGN_PROCESS: ProcessStep[] = [
+  {
+    step: 1,
+    title: 'Khám phá',
+    subtitle: 'Nghiên cứu & Phân tích',
+    description: 'Tìm hiểu bối cảnh thương hiệu, đối tượng người dùng mục tiêu và mục tiêu cốt lõi của dự án.'
+  },
+  {
+    step: 2,
+    title: 'Định hướng',
+    subtitle: 'Concept & Moodboard',
+    description: 'Xây dựng concept thiết kế, moodboard thị giác và xác định phong cách thẩm mỹ đồng nhất.'
+  },
+  {
+    step: 3,
+    title: 'Thiết kế',
+    subtitle: 'Thực thi & Phát triển Visual',
+    description: 'Triển khai bố cục, hệ màu, kiểu chữ (typography) và hệ thống hình ảnh chi tiết theo đúng định hướng.'
+  },
+  {
+    step: 4,
+    title: 'Tinh chỉnh',
+    subtitle: 'Đánh giá & Tối ưu hóa',
+    description: 'Rà soát chi tiết, tiếp nhận phản hồi, kiểm tra tính ứng dụng thực tế và hoàn thiện từng điểm chạm thị giác.'
+  },
+  {
+    step: 5,
+    title: 'Bàn giao',
+    subtitle: 'Đóng gói & Chuẩn hóa',
+    description: 'Đóng gói file thiết kế chuẩn in ấn/digital đầy đủ, kèm hướng dẫn ứng dụng hệ thống rõ ràng.'
+  }
+];
 
 export const PROJECTS: PortfolioProject[] = [
   {
