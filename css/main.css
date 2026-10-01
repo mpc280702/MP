@@ -448,8 +448,3 @@ i.material-symbols-outlined {
   }
 }
 
-/* Responsive utilities safeguard */
-.hidden {
-  display: none !important;
-}
-

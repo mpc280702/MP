@@ -172,7 +172,6 @@
 }
 
 .nav-pill-container {
-  display: none;
   align-items: center;
   gap: 0.25rem;
   background: rgba(4, 32, 26, 0.85);
@@ -184,9 +183,9 @@
   box-shadow: var(--shadow-sm);
 }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
   .nav-pill-container {
-    display: inline-flex !important;
+    display: none !important;
   }
 }
 
