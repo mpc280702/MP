@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Quản Lý Cơ Sở Dữ Liệu Lời Nhắn — CAO NGỌC MINH | Portfolio Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
+  <!-- Roboto Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Production Precompiled Tailwind CSS -->
+  <link rel="stylesheet" href="../css/tailwind.min.css">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <style>
+    .status-badge-unread {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .status-badge-read {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    .status-badge-replied {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .table-row-hover:hover {
+      background: rgba(0, 223, 137, 0.04);
+    }
+  </style>
+</head>
+<body class="bg-[#05261F] font-roboto text-white antialiased selection:bg-[#00DF89] selection:text-[#04201A] overflow-x-hidden min-h-screen">
+
+  <!-- Header -->
+  <header class="fixed top-0 w-full z-50 glass-nav transition-all">
+    <div class="h-16 sm:h-20 max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a class="font-roboto text-xl sm:text-2xl font-black tracking-wider uppercase text-white hover:text-white/80 transition-colors flex items-center leading-none" href="../index.html">
+          MINH<span class="text-[#00DF89]">.</span>
+        </a>
+        <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold uppercase tracking-wider bg-[#00DF89]/10 text-[#00DF89] border border-[#00DF89]/30">
+          Admin Database
+        </span>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="flex items-center gap-3">
+        <a href="contact.html" class="px-3.5 py-2 rounded-xl bg-[#0A362D] hover:bg-[#0E463A] text-sm text-[#B8D3CB] hover:text-white transition-all border border-[#00DF89]/20 flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-base">send</span>
+          <span class="hidden sm:inline">Trang Gửi Thư</span>
+        </a>
+        <a href="http://localhost/phpmyadmin/index.php?route=/database/structure&db=portfolio_db" target="_blank" rel="noopener" class="px-3.5 py-2 rounded-xl bg-[#072C24] hover:bg-[#0A362D] text-sm text-[#00DF89] transition-all border border-[#00DF89]/40 flex items-center gap-1.5 font-medium shadow-sm hover:border-[#00DF89]">
+          <span class="material-symbols-outlined text-base">database</span>
+          <span>phpMyAdmin</span>
+          <span class="material-symbols-outlined text-xs">open_in_new</span>
+        </a>
+        <a href="../index.html" class="px-3.5 py-2 rounded-xl bg-[#00DF89] hover:bg-[#00c97b] text-[#04201A] text-sm font-bold transition-all flex items-center gap-1">
+          <span class="material-symbols-outlined text-base">arrow_back</span>
+          <span class="hidden sm:inline">Về Trang Chủ</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="w-full pt-24 sm:pt-28 pb-16 px-4 sm:px-8 max-w-7xl mx-auto">
+
+    <!-- Page Title & DB Badge -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#00DF89]/20 mb-8">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#072C24] rounded-full mb-3 border border-[#00DF89]/30 text-xs font-semibold text-[#00DF89]">
+          <span class="w-2 h-2 rounded-full bg-[#00DF89] animate-pulse"></span>
+          <span>HỆ THỐNG CƠ SỞ DỮ LIỆU XAMPP MYSQL</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
+          Hộp Thư &amp; Quản Lý Tin Nhắn
+        </h1>
+        <p class="text-[#B8D3CB] text-sm mt-1">
+          Lưu trữ bảo mật trong MySQL Database: <code class="text-[#00DF89] bg-[#072C24] px-1.5 py-0.5 rounded">portfolio_db.contact_messages</code>
+        </p>
+      </div>
+
+      <!-- Live DB Connection Status Card -->
+      <div id="db-status-badge" class="flex items-center gap-3 p-3.5 rounded-2xl bg-[#072C24]/80 border border-[#00DF89]/30 backdrop-blur-md">
+        <div class="w-3 h-3 rounded-full bg-[#00DF89] shadow-[0_0_10px_#00DF89]"></div>
+        <div>
+          <div class="text-xs text-[#B8D3CB] uppercase tracking-wider font-semibold">Kết Nối MySQL</div>
+          <div id="db-status-text" class="text-sm font-bold text-white flex items-center gap-1.5">
+            <span>127.0.0.1:3306</span>
+            <span class="text-xs text-[#00DF89] bg-[#00DF89]/10 px-1.5 py-0.5 rounded">Đang Hoạt Động</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <!-- Total -->
+      <div class="p-5 rounded-2xl bg-[#072C24]/60 border border-[#00DF89]/20 hover:border-[#00DF89]/50 transition-all backdrop-blur-sm">
+        <div class="flex items-center justify-between text-[#B8D3CB] mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider">Tổng Tin Nhắn</span>
+          <span class="material-symbols-outlined text-xl text-[#00DF89]">all_inbox</span>
+        </div>
+        <div id="stat-total" class="text-3xl font-black text-white">0</div>
+        <div class="text-xs text-[#B8D3CB]/70 mt-1">Trong CSDL MySQL</div>
+      </div>
+
+      <!-- Unread -->
+      <div class="p-5 rounded-2xl bg-[#072C24]/60 border border-red-500/30 hover:border-red-500/60 transition-all backdrop-blur-sm">
+        <div class="flex items-center justify-between text-red-400 mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider">Chưa Đọc</span>
+          <span class="material-symbols-outlined text-xl text-red-400">mark_email_unread</span>
+        </div>
+        <div id="stat-unread" class="text-3xl font-black text-red-400">0</div>
+        <div class="text-xs text-red-300/70 mt-1">Cần phản hồi sớm</div>
+      </div>
+
+      <!-- Read -->
+      <div class="p-5 rounded-2xl bg-[#072C24]/60 border border-blue-500/30 hover:border-blue-500/60 transition-all backdrop-blur-sm">
+        <div class="flex items-center justify-between text-blue-400 mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider">Đã Đọc</span>
+          <span class="material-symbols-outlined text-xl text-blue-400">drafts</span>
+        </div>
+        <div id="stat-read" class="text-3xl font-black text-blue-400">0</div>
+        <div class="text-xs text-blue-300/70 mt-1">Đã kiểm tra</div>
+      </div>
+
+      <!-- Replied -->
+      <div class="p-5 rounded-2xl bg-[#072C24]/60 border border-emerald-500/30 hover:border-emerald-500/60 transition-all backdrop-blur-sm">
+        <div class="flex items-center justify-between text-emerald-400 mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider">Đã Phản Hồi</span>
+          <span class="material-symbols-outlined text-xl text-emerald-400">mark_email_read</span>
+        </div>
+        <div id="stat-replied" class="text-3xl font-black text-emerald-400">0</div>
+        <div class="text-xs text-emerald-300/70 mt-1">Đã gửi email trao đổi</div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="p-4 sm:p-5 rounded-2xl bg-[#072C24]/70 border border-[#00DF89]/25 backdrop-blur-md mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+      
+      <!-- Filter Tabs -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none" id="filter-tabs">
+        <button class="filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-[#00DF89] text-[#04201A]" data-filter="all">
+          Tất cả (<span id="tab-count-all">0</span>)
+        </button>
+        <button class="filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-[#0A362D] text-[#B8D3CB] hover:text-white" data-filter="unread">
+          Chưa đọc (<span id="tab-count-unread">0</span>)
+        </button>
+        <button class="filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-[#0A362D] text-[#B8D3CB] hover:text-white" data-filter="read">
+          Đã đọc
+        </button>
+        <button class="filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-[#0A362D] text-[#B8D3CB] hover:text-white" data-filter="replied">
+          Đã phản hồi
+        </button>
+      </div>
+
+      <!-- Search Box & Export Actions -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <div class="relative flex-1 sm:w-64">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#B8D3CB]">search</span>
+          <input type="text" id="search-input" placeholder="Tìm tên, email, nội dung..." class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-[#04201A] border border-[#00DF89]/30 text-white text-xs sm:text-sm placeholder-[#B8D3CB]/50 focus:outline-none focus:border-[#00DF89]">
+        </div>
+
+        <button id="btn-mark-all" class="px-3 py-2 rounded-xl bg-[#0A362D] hover:bg-[#0E463A] text-xs font-semibold text-[#B8D3CB] hover:text-white border border-[#00DF89]/20 transition-all flex items-center gap-1" title="Đánh dấu tất cả là đã đọc">
+          <span class="material-symbols-outlined text-sm">done_all</span>
+          <span class="hidden sm:inline">Đọc tất cả</span>
+        </button>
+
+        <button id="btn-export-csv" class="px-3 py-2 rounded-xl bg-[#0A362D] hover:bg-[#0E463A] text-xs font-semibold text-[#00DF89] border border-[#00DF89]/30 transition-all flex items-center gap-1" title="Xuất danh sách ra file CSV">
+          <span class="material-symbols-outlined text-sm">download</span>
+          <span>Xuất CSV</span>
+        </button>
+
+        <button id="btn-refresh" class="w-9 h-9 rounded-xl bg-[#0A362D] hover:bg-[#0E463A] text-[#00DF89] border border-[#00DF89]/30 transition-all flex items-center justify-center" title="Làm mới dữ liệu">
+          <span class="material-symbols-outlined text-base">refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="messages-container" class="space-y-3">
+      <!-- Loading Skeleton -->
+      <div class="p-8 text-center text-[#B8D3CB]">
+        <div class="inline-block w-8 h-8 border-3 border-[#00DF89]/30 border-t-[#00DF89] rounded-full animate-spin mb-3"></div>
+        <p class="text-sm">Đang tải dữ liệu từ CSDL MySQL...</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Message Detail Modal -->
+  <div id="message-modal" class="fixed inset-0 z-50 bg-[#04201A]/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-[#072C24] border border-[#00DF89]/40 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl space-y-5 relative">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between pb-4 border-b border-[#00DF89]/20">
+        <div>
+          <span id="modal-purpose" class="px-2.5 py-1 rounded-md text-xs font-bold uppercase bg-[#00DF89]/15 text-[#00DF89] border border-[#00DF89]/30 inline-block mb-2">
+            Mục đích
+          </span>
+          <h3 id="modal-name" class="text-xl sm:text-2xl font-black text-white">Họ và Tên</h3>
+          <p id="modal-email" class="text-sm text-[#00DF89]">email@domain.com</p>
+        </div>
+        <button id="modal-close" class="w-9 h-9 rounded-xl bg-[#0A362D] hover:bg-red-500/20 hover:text-red-400 text-[#B8D3CB] flex items-center justify-center transition-all">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+
+      <!-- Metadata Box -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-[#04201A]/80 border border-[#00DF89]/15 text-xs text-[#B8D3CB]">
+        <div>
+          <span class="block text-white/50 uppercase text-[10px] font-bold">Mã tin nhắn:</span>
+          <span id="modal-id" class="text-white font-mono font-bold">#0</span>
+        </div>
+        <div>
+          <span class="block text-white/50 uppercase text-[10px] font-bold">Thời gian gửi:</span>
+          <span id="modal-time" class="text-white">--</span>
+        </div>
+        <div>
+          <span class="block text-white/50 uppercase text-[10px] font-bold">IP &amp; Nguồn:</span>
+          <span id="modal-ip" class="text-white font-mono">127.0.0.1</span>
+        </div>
+      </div>
+
+      <!-- Message Content -->
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-[#B8D3CB] mb-2">Nội Dung Lời Nhắn:</label>
+        <div id="modal-content" class="p-4 rounded-2xl bg-[#04201A] border border-[#00DF89]/20 text-white text-sm sm:text-base leading-relaxed whitespace-pre-wrap select-text">
+        </div>
+      </div>
+
+      <!-- Action Buttons in Modal -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#00DF89]/20">
+        <div class="flex items-center gap-2">
+          <label class="text-xs text-[#B8D3CB] font-semibold">Trạng thái:</label>
+          <select id="modal-status-select" class="bg-[#04201A] border border-[#00DF89]/30 text-white text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#00DF89]">
+            <option value="unread">Chưa đọc</option>
+            <option value="read">Đã đọc</option>
+            <option value="replied">Đã phản hồi</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="modal-delete-btn" class="px-3.5 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold transition-all flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">delete</span>
+            <span>Xóa</span>
+          </button>
+
+          <a id="modal-reply-btn" href="#" class="px-4 py-2 rounded-xl bg-[#00DF89] hover:bg-[#00c97b] text-[#04201A] text-xs font-black transition-all flex items-center gap-1.5 shadow-md">
+            <span class="material-symbols-outlined text-sm">reply</span>
+            <span>Trả Lời Email</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none px-4 py-3 rounded-2xl bg-[#072C24] border border-[#00DF89]/50 shadow-2xl text-white text-sm flex items-center gap-2.5">
+    <span class="material-symbols-outlined text-[#00DF89]" id="toast-icon">check_circle</span>
+    <span id="toast-msg">Thao tác thành công!</span>
+  </div>
+
+  <script>
+    let allMessages = [];
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let selectedMessage = null;
+
+    const API_URL = '../api/messages.php';
+
+    // Show Toast
+    function showToast(msg, isSuccess = true) {
+      const toast = document.getElementById('toast');
+      const icon = document.getElementById('toast-icon');
+      const text = document.getElementById('toast-msg');
+      
+      text.textContent = msg;
+      icon.textContent = isSuccess ? 'check_circle' : 'error';
+      icon.className = isSuccess ? 'material-symbols-outlined text-[#00DF89]' : 'material-symbols-outlined text-red-400';
+      
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    // Load Messages from API
+    async function loadMessages() {
+      const container = document.getElementById('messages-container');
+      try {
+        let url = `${API_URL}?status=${currentFilter}`;
+        if (currentSearch) {
+          url += `&search=${encodeURIComponent(currentSearch)}`;
+        }
+        
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP Error ${res.status}`);
+        const data = await res.json();
+        
+        if (data.success) {
+          allMessages = data.data || [];
+          
+          // Update stats
+          if (data.stats) {
+            document.getElementById('stat-total').textContent = data.stats.total;
+            document.getElementById('stat-unread').textContent = data.stats.unread;
+            document.getElementById('stat-read').textContent = data.stats.read;
+            document.getElementById('stat-replied').textContent = data.stats.replied;
+            document.getElementById('tab-count-all').textContent = data.stats.total;
+            document.getElementById('tab-count-unread').textContent = data.stats.unread;
+          }
+
+          // DB status
+          if (data.db_connected) {
+            document.getElementById('db-status-text').innerHTML = `<span>127.0.0.1:3306 (${data.db_name})</span><span class="text-xs text-[#00DF89] bg-[#00DF89]/10 px-1.5 py-0.5 rounded">MySQL Online</span>`;
+          } else {
+            document.getElementById('db-status-text').innerHTML = `<span>messages.json fallback</span><span class="text-xs text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded">File Log</span>`;
+          }
+
+          renderMessages(allMessages);
+        } else {
+          container.innerHTML = `<div class="p-8 text-center text-red-400 bg-red-500/10 rounded-2xl border border-red-500/20">Lỗi: ${data.error || 'Không thể tải dữ liệu'}</div>`;
+        }
+      } catch (err) {
+        container.innerHTML = `
+          <div class="p-8 text-center rounded-2xl bg-[#072C24]/60 border border-[#00DF89]/20 space-y-3">
+            <span class="material-symbols-outlined text-4xl text-amber-400">warning</span>
+            <div class="text-base font-bold text-white">Không thể kết nối đến máy chủ PHP/MySQL</div>
+            <p class="text-xs text-[#B8D3CB] max-w-md mx-auto">Vui lòng kiểm tra chắc chắn Apache và MySQL đã được bật trong XAMPP Control Panel.</p>
+            <button onclick="loadMessages()" class="px-4 py-2 rounded-xl bg-[#00DF89] text-[#04201A] text-xs font-bold">Thử lại</button>
+          </div>
+        `;
+      }
+    }
+
+    // Render message list
+    function renderMessages(list) {
+      const container = document.getElementById('messages-container');
+      if (!list || list.length === 0) {
+        container.innerHTML = `
+          <div class="p-12 text-center rounded-2xl bg-[#072C24]/40 border border-[#00DF89]/15">
+            <span class="material-symbols-outlined text-4xl text-[#B8D3CB]/40 mb-2">inbox</span>
+            <div class="text-base font-semibold text-white">Không có tin nhắn nào</div>
+            <p class="text-xs text-[#B8D3CB]/60 mt-1">Khi khách gửi thông tin qua form liên hệ, dữ liệu sẽ tự động xuất hiện tại đây.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map(msg => {
+        const id = msg.id || 0;
+        const name = escapeHtml(msg.name || msg['Họ và tên'] || 'Khách');
+        const email = escapeHtml(msg.email || msg['Email'] || '');
+        const purpose = escapeHtml(msg.purpose || msg['Mục đích'] || 'Liên hệ');
+        const content = escapeHtml(msg.message || msg['Lời nhắn'] || '');
+        const dateStr = msg.created_at || msg.localTime || msg.timestamp || '--';
+        const status = msg.status || 'unread';
+
+        let badgeClass = 'status-badge-unread';
+        let badgeText = 'Chưa đọc';
+        if (status === 'read') {
+          badgeClass = 'status-badge-read';
+          badgeText = 'Đã đọc';
+        } else if (status === 'replied') {
+          badgeClass = 'status-badge-replied';
+          badgeText = 'Đã phản hồi';
+        }
+
+        const mailSubject = encodeURIComponent(`[Cao Ngọc Minh Designer] Phản hồi về: ${purpose}`);
+        const mailBody = encodeURIComponent(`Chào ${name},\n\nCảm ơn bạn đã gửi lời nhắn cho mình về dự án:\n"${content}"\n\n---\nCao Ngọc Minh\nGraphic Designer\nEmail: mngoc1285l@gmail.com`);
+        const mailtoLink = `mailto:${email}?subject=${mailSubject}&body=${mailBody}`;
+
+        return `
+          <div class="p-4 sm:p-5 rounded-2xl bg-[#072C24]/60 border border-[#00DF89]/20 hover:border-[#00DF89]/50 transition-all backdrop-blur-sm table-row-hover flex flex-col md:flex-row items-start md:items-center justify-between gap-4" data-id="${id}">
+            
+            <div class="flex-1 min-w-0 space-y-1.5">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="font-bold text-white text-base">${name}</span>
+                <span class="text-xs text-[#00DF89] font-mono">&lt;${email}&gt;</span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider ${badgeClass}">
+                  ${badgeText}
+                </span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-[#04201A] text-[#B8D3CB] border border-[#00DF89]/20">
+                  ${purpose}
+                </span>
+              </div>
+
+              <p class="text-sm text-[#B8D3CB] line-clamp-2 pr-2 select-text">${content}</p>
+
+              <div class="flex items-center gap-4 text-xs text-[#B8D3CB]/60 pt-1">
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-xs">schedule</span>
+                  ${dateStr}
+                </span>
+                <span class="font-mono text-[11px]">ID: #${id}</span>
+              </div>
+            </div>
+
+            <!-- Row Actions -->
+            <div class="flex items-center gap-2 shrink-0 self-end md:self-center">
+              <button onclick="openMessageDetail(${id})" class="px-3 py-1.5 rounded-xl bg-[#0A362D] hover:bg-[#0E463A] text-xs font-semibold text-white border border-[#00DF89]/30 transition-all flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">visibility</span>
+                <span>Xem</span>
+              </button>
+
+              <a href="javascript:void(0)" onclick="replyDirect(${id})" class="px-3 py-1.5 rounded-xl bg-[#00DF89]/15 hover:bg-[#00DF89] text-[#00DF89] hover:text-[#04201A] text-xs font-bold border border-[#00DF89]/40 transition-all flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">reply</span>
+                <span>Trả lời</span>
+              </a>
+
+              <button onclick="deleteMessage(${id})" class="p-1.5 rounded-xl bg-red-500/10 hover:bg-red-500/25 text-red-400 border border-red-500/20 transition-all" title="Xóa tin nhắn">
+                <span class="material-symbols-outlined text-sm">delete</span>
+              </button>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Open detail modal
+    function openMessageDetail(id) {
+      const msg = allMessages.find(m => m.id == id);
+      if (!msg) return;
+      selectedMessage = msg;
+
+      document.getElementById('modal-id').textContent = `#${msg.id}`;
+      document.getElementById('modal-name').textContent = msg.name || msg['Họ và tên'] || '';
+      document.getElementById('modal-email').textContent = msg.email || msg['Email'] || '';
+      document.getElementById('modal-purpose').textContent = msg.purpose || msg['Mục đích'] || '';
+      document.getElementById('modal-content').textContent = msg.message || msg['Lời nhắn'] || '';
+      document.getElementById('modal-time').textContent = msg.created_at || msg.localTime || '--';
+      document.getElementById('modal-ip').textContent = msg.ip_address || '127.0.0.1';
+      document.getElementById('modal-status-select').value = msg.status || 'unread';
+
+      const mailSubject = encodeURIComponent(`[Cao Ngọc Minh Designer] Phản hồi về: ${msg.purpose || ''}`);
+      const mailBody = encodeURIComponent(`Chào ${msg.name},\n\nCảm ơn bạn đã gửi lời nhắn cho mình qua portfolio website:\n"${msg.message}"\n\n---\nCao Ngọc Minh\nGraphic Designer\nEmail: mngoc1285l@gmail.com`);
+      document.getElementById('modal-reply-btn').href = `mailto:${msg.email}?subject=${mailSubject}&body=${mailBody}`;
+
+      document.getElementById('message-modal').classList.remove('hidden');
+      document.getElementById('message-modal').classList.add('flex');
+
+      // Auto mark as read if currently unread
+      if (msg.status === 'unread') {
+        updateStatus(msg.id, 'read', false);
+      }
+    }
+
+    // Close detail modal
+    document.getElementById('modal-close').addEventListener('click', () => {
+      document.getElementById('message-modal').classList.add('hidden');
+      document.getElementById('message-modal').classList.remove('flex');
+    });
+
+    // Update message status
+    async function updateStatus(id, newStatus, reload = true) {
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'update_status', id: id, status: newStatus })
+        });
+        const data = await res.json();
+        if (data.success) {
+          if (reload) {
+            showToast('Đã cập nhật trạng thái!');
+            loadMessages();
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Reply directly
+    function replyDirect(id) {
+      const msg = allMessages.find(m => m.id == id);
+      if (!msg) return;
+      const name = msg.name || msg['Họ và tên'] || '';
+      const email = msg.email || msg['Email'] || '';
+      const purpose = msg.purpose || msg['Mục đích'] || '';
+      const content = msg.message || msg['Lời nhắn'] || '';
+      const mailSubject = encodeURIComponent(`[Cao Ngọc Minh Designer] Phản hồi về: ${purpose}`);
+      const mailBody = encodeURIComponent(`Chào ${name},\n\nCảm ơn bạn đã gửi lời nhắn cho mình về dự án:\n"${content}"\n\n---\nCao Ngọc Minh\nGraphic Designer\nEmail: mngoc1285l@gmail.com`);
+      markAsReplied(id);
+      window.location.href = `mailto:${email}?subject=${mailSubject}&body=${mailBody}`;
+    }
+
+    // Mark as replied helper
+    function markAsReplied(id) {
+      updateStatus(id, 'replied', true);
+    }
+
+    // Modal status changer
+    document.getElementById('modal-status-select').addEventListener('change', (e) => {
+      if (selectedMessage) {
+        updateStatus(selectedMessage.id, e.target.value, true);
+      }
+    });
+
+    // Delete message
+    async function deleteMessage(id) {
+      if (!confirm(`Bạn có chắc chắn muốn xóa tin nhắn #${id} khỏi cơ sở dữ liệu?`)) return;
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'delete', id: id })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Đã xóa tin nhắn thành công!');
+          document.getElementById('message-modal').classList.add('hidden');
+          document.getElementById('message-modal').classList.remove('flex');
+          loadMessages();
+        } else {
+          alert(data.error || 'Không thể xóa');
+        }
+      } catch (err) {
+        alert('Lỗi kết nối khi xóa tin nhắn');
+      }
+    }
+
+    document.getElementById('modal-delete-btn').addEventListener('click', () => {
+      if (selectedMessage) {
+        deleteMessage(selectedMessage.id);
+      }
+    });
+
+    // Mark all as read
+    document.getElementById('btn-mark-all').addEventListener('click', async () => {
+      if (!confirm('Đánh dấu tất cả tin nhắn chưa đọc là đã đọc?')) return;
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'mark_all_read' })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Đã đánh dấu tất cả là đã đọc!');
+          loadMessages();
+        }
+      } catch (e) {
+        alert('Lỗi cập nhật');
+      }
+    });
+
+    // Filter Tabs
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('active', 'bg-[#00DF89]', 'text-[#04201A]');
+          b.classList.add('bg-[#0A362D]', 'text-[#B8D3CB]');
+        });
+        btn.classList.add('active', 'bg-[#00DF89]', 'text-[#04201A]');
+        btn.classList.remove('bg-[#0A362D]', 'text-[#B8D3CB]');
+        
+        currentFilter = btn.getAttribute('data-filter');
+        loadMessages();
+      });
+    });
+
+    // Search Input with debounce
+    let searchTimeout;
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        currentSearch = e.target.value.trim();
+        loadMessages();
+      }, 300);
+    });
+
+    // Refresh Button
+    document.getElementById('btn-refresh').addEventListener('click', () => {
+      loadMessages();
+      showToast('Đã làm mới dữ liệu!');
+    });
+
+    // Export CSV
+    document.getElementById('btn-export-csv').addEventListener('click', () => {
+      if (!allMessages || allMessages.length === 0) {
+        alert('Không có dữ liệu để xuất CSV.');
+        return;
+      }
+
+      const headers = ['ID', 'Ho va Ten', 'Email', 'Muc dich', 'Loi nhan', 'Trang thai', 'Thoi gian'];
+      const rows = allMessages.map(m => [
+        m.id || '',
+        `"${(m.name || m['Họ và tên'] || '').replace(/"/g, '""')}"`,
+        `"${(m.email || m['Email'] || '').replace(/"/g, '""')}"`,
+        `"${(m.purpose || m['Mục đích'] || '').replace(/"/g, '""')}"`,
+        `"${(m.message || m['Lời nhắn'] || '').replace(/"/g, '""')}"`,
+        m.status || '',
+        m.created_at || m.localTime || ''
+      ]);
+
+      const csvContent = "\uFEFF" + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `portfolio_messages_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', loadMessages);
+  </script>
+</body>
+</html>

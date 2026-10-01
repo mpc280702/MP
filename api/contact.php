@@ -1,9 +1,11 @@
 <?php
-// api/contact.php — XAMPP Apache & PHP Contact Form Handler
+// api/contact.php — XAMPP Apache & PHP Contact Form Handler with MySQL Database Integration
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Accept");
+
+require_once __DIR__ . '/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -12,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['success' => false, 'error' => 'Method not allowed'], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['success' => false, 'error' => 'Method not allowed. Use POST.'], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -41,7 +43,25 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-// 1. Save message log to messages.json in project root
+$ipAddress = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
+
+// 1. Save to MySQL Database
+$dbSaved = false;
+$dbMessageId = null;
+try {
+    $pdo = getDBConnection();
+    if ($pdo) {
+        $stmt = $pdo->prepare("INSERT INTO `contact_messages` (`name`, `email`, `purpose`, `message`, `ip_address`, `user_agent`, `status`, `created_at`) VALUES (?, ?, ?, ?, ?, ?, 'unread', NOW())");
+        $stmt->execute([$name, $email, $purpose, $message, $ipAddress, $userAgent]);
+        $dbMessageId = $pdo->lastInsertId();
+        $dbSaved = true;
+    }
+} catch (Exception $e) {
+    error_log("MySQL insertion failed: " . $e->getMessage());
+}
+
+// 2. Save message log to messages.json in project root (as persistent file backup)
 $messagesFile = __DIR__ . '/../messages.json';
 $messages = [];
 if (file_exists($messagesFile)) {
@@ -52,19 +72,21 @@ if (file_exists($messagesFile)) {
 }
 
 $data = [
+    'id' => $dbMessageId,
     'Họ và tên' => $name,
     'Email' => $email,
     'Mục đích' => $purpose,
     'Lời nhắn' => $message,
+    'ip_address' => $ipAddress,
     'submittedAt' => date('c'),
     'timestamp' => date('c'),
     'localTime' => (new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh')))->format('H:i:s d/m/Y')
 ];
 
 array_unshift($messages, $data);
-$saved = @file_put_contents($messagesFile, json_encode($messages, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+$jsonSaved = @file_put_contents($messagesFile, json_encode($messages, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-// 2. Send email via PHP mail()
+// 3. Send email via PHP mail()
 $to = 'mngoc1285l@gmail.com';
 $encodedSubject = "=?UTF-8?B?" . base64_encode("[Portfolio Website] $purpose - Từ $name") . "?=";
 $headers = "From: $email\r\n";
@@ -79,6 +101,7 @@ $body .= "Email: $email\n";
 $body .= "Mục đích: $purpose\n\n";
 $body .= "Lời nhắn:\n$message\n\n";
 $body .= "---\n";
+$body .= "ID tin nhắn: " . ($dbMessageId ?? 'N/A') . "\n";
 $body .= "Thời gian gửi: " . (new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh')))->format('d/m/Y H:i:s') . "\n";
 
 $mailSent = @mail($to, $encodedSubject, $body, $headers);
@@ -86,8 +109,11 @@ $mailSent = @mail($to, $encodedSubject, $body, $headers);
 http_response_code(200);
 echo json_encode([
     'success' => true, 
-    'message' => 'Đã gửi và lưu lời nhắn thành công!',
-    'saved' => ($saved !== false),
+    'message' => 'Đã lưu lời nhắn vào cơ sở dữ liệu và gửi thông báo thành công!',
+    'db_saved' => $dbSaved,
+    'message_id' => $dbMessageId,
+    'file_backup' => ($jsonSaved !== false),
     'mailSent' => $mailSent
 ], JSON_UNESCAPED_UNICODE);
+
 
