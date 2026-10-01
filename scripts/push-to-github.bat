@@ -3,7 +3,7 @@ title Day Code Len GitHub - Cao Ngoc Minh Portfolio
 cd /d "%~dp0\.."
 
 :: Them duong dan Git vao PATH
-set "PATH=%LOCALAPPDATA%\Programs\Git\cmd;%PATH%"
+set "PATH=%LOCALAPPDATA%\GitHubDesktop\app-3.6.5\resources\app\git\cmd;%LOCALAPPDATA%\Programs\Git\cmd;%PATH%"
 
 echo =========================================================
 echo       CHUONG TRINH TU DONG DAY CODE LEN GITHUB

@@ -1,0 +1,18 @@
+{
+  "elements": [
+    "html5"
+  ],
+  "extends": [
+    "html-validate:recommended"
+  ],
+  "rules": {
+    "void-style": ["error", { "style": "omit" }],
+    "no-trailing-whitespace": "error",
+    "no-inline-style": "off",
+    "prefer-native-element": "off",
+    "long-title": "off",
+    "no-implicit-button-type": "off",
+    "empty-heading": "off",
+    "attribute-allowed-values": "off"
+  }
+}

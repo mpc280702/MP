@@ -260,10 +260,16 @@ async function attachContactFormHandler(
       '_captcha': 'false'
     };
 
+    let submittedSuccessfully = false;
+
+    // 1. Thử lưu vào PHP Backend (dành cho XAMPP Apache local lưu messages.json)
+    const isPagesFolder = window.location.pathname.includes('/pages/');
+    const phpEndpoint = isPagesFolder ? '../api/contact.php' : 'api/contact.php';
+
+    let savedLocally = false;
     try {
-      // Gửi dữ liệu tới PHP backend
       await postJSON(
-        '/api/contact.php',
+        phpEndpoint,
         {
           'Họ và tên': rawData.name,
           'Email': rawData.email,
@@ -272,7 +278,24 @@ async function attachContactFormHandler(
         },
         SUBMIT_TIMEOUT_MS
       );
+      savedLocally = true;
+    } catch (phpErr) {
+      console.info('PHP endpoint unreachable or failed:', phpErr);
+    }
 
+    // 2. Gửi Email tới Gmail (mngoc1285l@gmail.com) qua FormSubmit
+    try {
+      await postJSON(FORM_SUBMIT_URL, formPayload, SUBMIT_TIMEOUT_MS);
+      submittedSuccessfully = true;
+    } catch (fsErr) {
+      console.warn('FormSubmit submission failed:', fsErr);
+      // Nếu FormSubmit không kết nối được nhưng đã lưu PHP local thì vẫn báo thành công
+      if (savedLocally) {
+        submittedSuccessfully = true;
+      }
+    }
+
+    if (submittedSuccessfully) {
       showStatus(
         statusBox,
         'success',
@@ -283,9 +306,8 @@ async function attachContactFormHandler(
       );
 
       form.reset();
-    } catch (error) {
-      console.warn('Automatic submission failed:', error);
-
+    } else {
+      // 3. Fallback cuối cùng: Hướng dẫn mở Email Client trực tiếp
       const mailtoSubject = encodeURIComponent(
         `[Portfolio] ${rawData.purpose} - ${rawData.name}`
       );
@@ -314,9 +336,8 @@ async function attachContactFormHandler(
         `<span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>` +
         `</a></div>`
       );
-    } finally {
-      setSubmittingState(submitBtn, false, originalBtnHTML);
     }
+    setSubmittingState(submitBtn, false, originalBtnHTML);
   });
 }
 
