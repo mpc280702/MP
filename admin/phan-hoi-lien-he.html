@@ -146,12 +146,24 @@
         <div style="font-size: 14px; color: #1E293B; line-height: 1.6;" id="modal-content">...</div>
       </div>
 
-      <div style="display: flex; justify-content: flex-end; gap: 10px;">
-        <button onclick="closeContactModal()" class="btn-secondary-action">Đóng</button>
-        <a id="modal-reply-btn" href="#" class="btn-primary-action">
-          <span>Gửi Email Phản Hồi</span>
-          <span class="material-symbols-outlined" style="font-size: 16px;">outgoing_mail</span>
-        </a>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; gap: 8px;">
+          <button type="button" onclick="copyContactToClipboard()" class="btn-secondary-action" title="Sao chép nội dung">
+            <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+            <span>Sao chép</span>
+          </button>
+          <button type="button" onclick="forwardToAdminGmail()" class="btn-secondary-action" title="Chuyển tiếp yêu cầu này về Gmail cá nhân" style="color: #EA4335; border-color: #FECACA;">
+            <span class="material-symbols-outlined" style="font-size: 16px;">forward_to_inbox</span>
+            <span>Về Gmail của tôi</span>
+          </button>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" onclick="closeContactModal()" class="btn-secondary-action">Đóng</button>
+          <button type="button" onclick="replyViaGmail()" class="btn-primary-action" id="modal-reply-btn" style="background-color: #00DF89; color: #04201A; font-weight: 800;">
+            <span>Gửi Email Phản Hồi</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">outgoing_mail</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

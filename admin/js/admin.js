@@ -25,6 +25,8 @@ function escapeHtml(text) {
     .replace(/"/g, '&quot;');
 }
 
+let currentContactModalData = null;
+
 function ensureContactModalExists() {
   let modal = document.getElementById('contactModal');
   if (modal) return modal;
@@ -33,7 +35,7 @@ function ensureContactModalExists() {
   modal.className = 'modal-backdrop';
   modal.id = 'contactModal';
   modal.innerHTML = `
-    <div class="modal-content-card" style="max-width: 540px;">
+    <div class="modal-content-card" style="max-width: 580px;">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #E2E8F0;">
         <div>
           <span style="font-size: 11px; font-weight: 800; color: #00875A; text-transform: uppercase;" id="modal-category">LIÊN HỆ KHÁCH HÀNG</span>
@@ -48,16 +50,24 @@ function ensureContactModalExists() {
         <div style="font-size: 14px; color: #1E293B; line-height: 1.6; white-space: pre-wrap;" id="modal-content">...</div>
       </div>
 
-      <div style="display: flex; justify-content: flex-end; gap: 10px;">
-        <button onclick="closeContactModal()" class="btn-secondary-action">Đóng</button>
-        <button onclick="markContactAsHandled()" class="btn-secondary-action" style="color: #00875A; border-color: #00875A;">
-          <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
-          <span>Đã phản hồi</span>
-        </button>
-        <a id="modal-reply-btn" href="#" class="btn-primary-action">
-          <span>Gửi Email Phản Hồi</span>
-          <span class="material-symbols-outlined" style="font-size: 16px;">outgoing_mail</span>
-        </a>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; gap: 8px;">
+          <button onclick="copyContactToClipboard()" class="btn-secondary-action" title="Sao chép nội dung">
+            <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+            <span>Sao chép</span>
+          </button>
+          <button onclick="forwardToAdminGmail()" class="btn-secondary-action" title="Chuyển tiếp yêu cầu này về Gmail cá nhân" style="color: #EA4335; border-color: #FECACA;">
+            <span class="material-symbols-outlined" style="font-size: 16px;">forward_to_inbox</span>
+            <span>Về Gmail của tôi</span>
+          </button>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button onclick="closeContactModal()" class="btn-secondary-action">Đóng</button>
+          <button onclick="replyViaGmail()" class="btn-primary-action" id="modal-reply-btn" style="background-color: #00DF89; color: #04201A; font-weight: 800;">
+            <span>Gửi Email Phản Hồi</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">outgoing_mail</span>
+          </button>
+        </div>
       </div>
     </div>
   `;
@@ -67,22 +77,68 @@ function ensureContactModalExists() {
 
 function openContactDetail(id, name, email, purpose, content, date) {
   const modal = ensureContactModalExists();
+  currentContactModalData = { id, name, email, purpose, content, date };
+
   const nameEl = document.getElementById('modal-name');
   const emailEl = document.getElementById('modal-email');
   const catEl = document.getElementById('modal-category');
   const contentEl = document.getElementById('modal-content');
+
   if (nameEl) nameEl.textContent = name || 'Khách hàng';
   if (emailEl) emailEl.textContent = email || 'N/A';
   if (catEl) catEl.textContent = purpose || 'LIÊN HỆ KHÁCH HÀNG';
   if (contentEl) contentEl.textContent = content || '(Chưa có nội dung)';
-  const replyBtn = document.getElementById('modal-reply-btn');
-  if (replyBtn) {
-    replyBtn.href = `mailto:${email}?subject=Re: [Cao Ngọc Minh] Phản hồi trao đổi: ${encodeURIComponent(purpose || 'Dự án')}`;
-  }
+
   modal.classList.add('show');
   if (typeof showToast === 'function') {
     showToast(`Đang mở lời nhắn từ: ${name}`);
   }
+}
+
+function replyViaGmail() {
+  if (!currentContactModalData) return;
+  const { name, email, purpose, content } = currentContactModalData;
+  const targetEmail = email && email !== 'N/A' ? email : '';
+  const subject = `Re: [Cao Ngọc Minh Portfolio] Phản hồi trao đổi: ${purpose || 'Dự án'}`;
+  const body = `Chào bạn ${name || 'bạn'},\n\nCảm ơn bạn đã liên hệ qua Portfolio của mình (Mục đích: ${purpose || 'Liên hệ'}).\n\n--- Trích dẫn yêu cầu của bạn ---\n"${content || ''}"\n--------------------------------\n\nMình xin phép phản hồi thông tin như sau:\n[Nhập nội dung trao đổi của bạn tại đây]\n\nTrân trọng,\nCao Ngọc Minh — Graphic & UI/UX Designer\nPortfolio: https://mpc280702.github.io\nEmail: mngoc1285l@gmail.com`;
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+  window.open(gmailUrl, '_blank');
+  if (typeof showToast === 'function') {
+    showToast(`✉ Đã mở cửa sổ soạn thư Gmail phản hồi tới ${name}!`);
+  }
+}
+
+function forwardToAdminGmail() {
+  if (!currentContactModalData) return;
+  const { name, email, purpose, content, date, id } = currentContactModalData;
+  const myGmail = 'mngoc1285l@gmail.com';
+  const subject = `[Lưu trữ yêu cầu] ${purpose || 'Liên hệ'} — Từ ${name || 'Khách hàng'} (#${id || 'ID'})`;
+  const body = `Chào Minh,\n\nThông tin chi tiết yêu cầu liên hệ từ website Portfolio:\n\n- Khách hàng: ${name || 'N/A'}\n- Email: ${email || 'N/A'}\n- Mục đích: ${purpose || 'N/A'}\n- Thời gian gửi: ${date || 'Mới gửi'}\n- Mã phản hồi: #${id || 'N/A'}\n\nNội dung lời nhắn / yêu cầu:\n"${content || ''}"\n\n----------------------------------------\nHệ thống quản trị MINH. Portfolio Admin`;
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(myGmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+  window.open(gmailUrl, '_blank');
+  if (typeof showToast === 'function') {
+    showToast(`📥 Đã mở Gmail chuyển tiếp yêu cầu về hộp thư cá nhân!`);
+  }
+}
+
+function copyContactToClipboard() {
+  if (!currentContactModalData) return;
+  const { name, email, purpose, content } = currentContactModalData;
+  const text = `Khách hàng: ${name}\nEmail: ${email}\nMục đích: ${purpose}\nNội dung:\n${content}`;
+  
+  navigator.clipboard.writeText(text).then(() => {
+    if (typeof showToast === 'function') {
+      showToast(`📋 Đã sao chép thông tin và nội dung của ${name} vào bộ nhớ tạm!`);
+    }
+  }).catch(() => {
+    if (typeof showToast === 'function') {
+      showToast(`Không thể tự động sao chép. Vui lòng copy thủ công.`);
+    }
+  });
 }
 
 function openContactDetailById(id) {
