@@ -1322,6 +1322,53 @@ body {
   background: #FFFFFF;
 }
 
+/* Password Toggle Eye Component */
+.password-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-input-group input {
+  width: 100%;
+  padding-right: 42px !important;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  user-select: none;
+  padding: 0;
+}
+
+.toggle-password-btn:hover {
+  color: var(--color-primary-dark);
+  background-color: rgba(0, 223, 137, 0.12);
+}
+
+.toggle-password-btn:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.toggle-password-btn .material-symbols-outlined {
+  font-size: 20px;
+  line-height: 1;
+}
+
 /* Modals */
 .modal-backdrop {
   position: fixed;

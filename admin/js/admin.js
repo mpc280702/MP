@@ -2336,4 +2336,25 @@ function exportAnalyticsPdf() {
   }, 300);
 }
 
+/**
+ * Toggle Password Visibility (Eye icon helper)
+ */
+function togglePasswordVisibility(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const isPass = input.type === 'password';
+  input.type = isPass ? 'text' : 'password';
+  
+  if (btn) {
+    const icon = btn.querySelector('.material-symbols-outlined');
+    if (icon) {
+      icon.textContent = isPass ? 'visibility_off' : 'visibility';
+    }
+    const newTitle = isPass ? 'Ẩn mật khẩu' : 'Hiện mật khẩu';
+    btn.setAttribute('aria-label', newTitle);
+    btn.setAttribute('title', newTitle);
+  }
+}
+
+
 
