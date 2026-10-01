@@ -447,3 +447,9 @@ i.material-symbols-outlined {
     pointer-events: none !important;
   }
 }
+
+/* Responsive utilities safeguard */
+.hidden {
+  display: none !important;
+}
+
