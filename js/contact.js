@@ -1,16 +1,9 @@
 /**
- * CAO NGOC MINH PORTFOLIO — CONTACT FORM HANDLER (FIXED)
- * Production-safe client logic for GitHub Pages + FormSubmit.
- *
- * Notes:
- * - GitHub Pages cannot run Node.js server.js.
- * - Production therefore uses FormSubmit.
- * - localhost can still use /api/contact when server.js is running.
- * - User-controlled strings are escaped before being inserted into status HTML.
+ * CAO NGOC MINH PORTFOLIO — CONTACT FORM HANDLER
+ * Production backend logic communicating with PHP API (MySQL + PHPMailer SMTP).
  */
 
 const CONTACT_TARGET_EMAIL = 'mngoc1285l@gmail.com';
-const FORM_SUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_TARGET_EMAIL}`;
 const SUBMIT_TIMEOUT_MS = 8000;
 
 function escapeHTML(value) {
@@ -248,66 +241,39 @@ async function attachContactFormHandler(
       );
     }
 
-    const formPayload = {
-      'Họ và tên': rawData.name,
-      'Email người gửi': rawData.email,
-      '_replyto': rawData.email,
-      'Mục đích liên hệ': rawData.purpose,
-      'Nội dung lời nhắn': rawData.message,
-      '_subject':
-        `[Portfolio Website] ${rawData.purpose} - Từ ${rawData.name}`,
-      '_template': 'table',
-      '_captcha': 'false'
+    // Determine PHP API Endpoint (Relative for local/hosting, or global override)
+    const isPagesFolder = window.location.pathname.includes('/pages/');
+    const apiEndpoint = window.PORTFOLIO_API_URL || (isPagesFolder ? '../api/contact.php' : 'api/contact.php');
+
+    const payload = {
+      name: rawData.name,
+      email: rawData.email,
+      purpose: rawData.purpose,
+      message: rawData.message,
+      hp_check: honeypot ? honeypot.value : ''
     };
 
-    let submittedSuccessfully = false;
-
-    // 1. Thử lưu vào PHP Backend (dành cho XAMPP Apache local lưu messages.json)
-    const isPagesFolder = window.location.pathname.includes('/pages/');
-    const phpEndpoint = isPagesFolder ? '../api/contact.php' : 'api/contact.php';
-
-    let savedLocally = false;
     try {
-      await postJSON(
-        phpEndpoint,
-        {
-          'Họ và tên': rawData.name,
-          'Email': rawData.email,
-          'Mục đích': rawData.purpose,
-          'Lời nhắn': rawData.message
-        },
-        SUBMIT_TIMEOUT_MS
-      );
-      savedLocally = true;
-    } catch (phpErr) {
-      console.info('PHP endpoint unreachable or failed:', phpErr);
-    }
+      const result = await postJSON(apiEndpoint, payload, SUBMIT_TIMEOUT_MS);
 
-    // 2. Gửi Email tới Gmail (mngoc1285l@gmail.com) qua FormSubmit
-    try {
-      await postJSON(FORM_SUBMIT_URL, formPayload, SUBMIT_TIMEOUT_MS);
-      submittedSuccessfully = true;
-    } catch (fsErr) {
-      console.warn('FormSubmit submission failed:', fsErr);
-      // Nếu FormSubmit không kết nối được nhưng đã lưu PHP local thì vẫn báo thành công
-      if (savedLocally) {
-        submittedSuccessfully = true;
+      if (result && result.success === true) {
+        showStatus(
+          statusBox,
+          'success',
+          'Đã Gửi Lời Nhắn Thành Công! 🎉',
+          `Cảm ơn <strong>${safe.name}</strong> đã liên hệ. ` +
+          `Lời nhắn của bạn đã được ghi nhận vào hệ thống. ` +
+          `Minh sẽ phản hồi qua email <strong>${safe.email}</strong> trong thời gian sớm nhất.`
+        );
+
+        form.reset();
+      } else {
+        throw new Error(result?.message || 'Không thể gửi form. Vui lòng thử lại sau.');
       }
-    }
+    } catch (err) {
+      console.error('Contact submission error:', err);
 
-    if (submittedSuccessfully) {
-      showStatus(
-        statusBox,
-        'success',
-        'Đã Gửi Lời Nhắn Thành Công! 🎉',
-        `Cảm ơn <strong>${safe.name}</strong> đã liên hệ. ` +
-        `Lời nhắn đã được chuyển tới hộp thư của Cao Ngọc Minh. ` +
-        `Minh sẽ phản hồi qua email <strong>${safe.email}</strong> sớm nhất.`
-      );
-
-      form.reset();
-    } else {
-      // 3. Fallback cuối cùng: Hướng dẫn mở Email Client trực tiếp
+      // Direct mailto fallback if backend is unreachable
       const mailtoSubject = encodeURIComponent(
         `[Portfolio] ${rawData.purpose} - ${rawData.name}`
       );
@@ -326,13 +292,14 @@ async function attachContactFormHandler(
       showStatus(
         statusBox,
         'error',
-        'Chưa Gửi Tự Động Được',
-        `Bạn có thể gửi email trực tiếp tới ` +
+        'Chưa Thể Gửi Tự Động',
+        `Lỗi: ${escapeHTML(err.message || 'Không thể kết nối đến máy chủ.')}<br>` +
+        `Bạn có thể gửi thư trực tiếp tới ` +
         `<strong>${escapeHTML(CONTACT_TARGET_EMAIL)}</strong>:` +
         `<div class="mt-3">` +
         `<a href="${mailtoLink}" class="btn-primary inline-flex items-center gap-1.5 px-4 py-2 text-xs" ` +
         `aria-label="Mở ứng dụng email để gửi trực tiếp">` +
-        `<span>Mở Email Gửi Trực Tiếp</span>` +
+        `<span>Mở Ứng Dụng Email</span>` +
         `<span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>` +
         `</a></div>`
       );

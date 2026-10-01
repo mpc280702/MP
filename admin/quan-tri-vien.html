@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>MINH. ADMIN PANEL — Quản Trị Viên</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css?v=2.2">
+</head>
+
+<body>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-header">
+        <a href="tong-quan.html" class="sidebar-logo">MINH.</a>
+        <div><span class="sidebar-badge">ADMIN PANEL</span></div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="tong-quan.html" class="nav-item">
+          <span class="material-symbols-outlined">home</span>
+          <span>Tổng quan</span>
+        </a>
+        <a href="quan-ly-du-an.html" class="nav-item">
+          <span class="material-symbols-outlined">folder</span>
+          <span>Quản lý dự án</span>
+        </a>
+        <a href="quan-ly-khach-hang.html" class="nav-item">
+          <span class="material-symbols-outlined">group</span>
+          <span>Quản lý khách hàng</span>
+        </a>
+        <a href="bai-viet-blog.html" class="nav-item">
+          <span class="material-symbols-outlined">article</span>
+          <span>Bài viết / Blog</span>
+        </a>
+        <a href="hinh-anh-media.html" class="nav-item">
+          <span class="material-symbols-outlined">image</span>
+          <span>Hình ảnh / Media</span>
+        </a>
+        <a href="dich-vu.html" class="nav-item">
+          <span class="material-symbols-outlined">tune</span>
+          <span>Dịch vụ</span>
+        </a>
+        <a href="phan-hoi-lien-he.html" class="nav-item">
+          <span class="material-symbols-outlined">description</span>
+          <span>Phản hồi liên hệ</span>
+        </a>
+        <a href="thong-ke.html" class="nav-item">
+          <span class="material-symbols-outlined">bar_chart</span>
+          <span>Thống kê</span>
+        </a>
+        <a href="cai-dat.html" class="nav-item">
+          <span class="material-symbols-outlined">settings</span>
+          <span>Cài đặt</span>
+        </a>
+        <a href="quan-tri-vien.html" class="nav-item active">
+          <span class="material-symbols-outlined">person</span>
+          <span>Quản trị viên</span>
+        </a>
+      </nav>
+    </div>
+
+    <a href="quan-tri-vien.html" class="sidebar-profile">
+      <img src="../assets/images/cao-ngoc-minh-portrait.jpg" alt="Cao Ngọc Minh" class="profile-avatar" width="40"
+        height="40"
+        style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid var(--color-primary); flex-shrink:0;">
+      <div class="profile-info">
+        <div class="profile-name">Cao Ngọc Minh</div>
+        <div class="profile-role">Quản trị viên</div>
+        <div class="profile-status">
+          <span class="status-dot"></span>
+          <span>Online</span>
+        </div>
+      </div>
+    </a>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="search-box">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Tìm kiếm...">
+      </div>
+      <div class="topbar-actions">
+        <button class="notification-btn" onclick="showToast('Hệ thống có 2 phản hồi liên hệ mới cần xử lý.')">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="notification-badge">2</span>
+        </button>
+        <a href="quan-tri-vien.html" class="topbar-user">
+          <img src="../assets/images/cao-ngoc-minh-portrait.jpg" alt="Cao Ngọc Minh" class="topbar-avatar" width="36"
+            height="36" style="width:36px; height:36px; border-radius:50%; object-fit:cover; flex-shrink:0;">
+          <div class="topbar-user-info">
+            <div class="topbar-user-name">Cao Ngọc Minh</div>
+            <div class="topbar-user-role">Quản trị viên</div>
+          </div>
+          <span class="material-symbols-outlined" style="font-size: 18px; color: #94A3B8;">expand_more</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <div class="page-title-row">
+        <div>
+          <h1 class="page-title">Hồ sơ Quản Trị Viên</h1>
+          <p class="page-subtitle">Thông tin tài khoản và đổi mật khẩu bảo vệ trang Admin.</p>
+        </div>
+        <button class="btn-secondary-action" onclick="showToast('Đã đăng xuất an toàn!')">
+          <span class="material-symbols-outlined" style="font-size:16px;">logout</span>
+          <span>Đăng xuất</span>
+        </button>
+      </div>
+
+      <div class="tables-grid">
+        <div class="dashboard-card">
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+            <img src="../assets/images/cao-ngoc-minh-portrait.jpg" alt="Cao Ngọc Minh"
+              style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid var(--color-primary);">
+            <div>
+              <h3 style="font-size: 18px; font-weight: 800; color: #0F172A;">Cao Ngọc Minh</h3>
+              <p style="font-size: 13px; color: #64748B;">Senior Graphic Designer &amp; Web Creator</p>
+              <div style="display: flex; gap: 8px; margin-top: 6px;">
+                <span class="badge-status badge-done">Admin Master</span>
+                <span class="badge-status badge-doing">Hà Nội</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group-row">
+            <div class="form-control-box">
+              <label>Họ và Tên</label>
+              <input type="text" value="Cao Ngọc Minh" readonly>
+            </div>
+            <div class="form-control-box">
+              <label>Email cá nhân</label>
+              <input type="email" value="mngoc1285l@gmail.com" readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <h3 style="font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 16px;">Đổi Mật Khẩu Quản Trị</h3>
+          <div class="form-control-box" style="margin-bottom: 12px;">
+            <label>Mật khẩu hiện tại</label>
+            <input type="password" id="admin-curr-pass" placeholder="••••••••">
+          </div>
+          <div class="form-control-box" style="margin-bottom: 12px;">
+            <label>Mật khẩu mới</label>
+            <input type="password" id="admin-new-pass" placeholder="Nhập tối thiểu 6 ký tự">
+          </div>
+          <button class="btn-primary-action" style="width: 100%; justify-content: center; margin-top: 10px;"
+            onclick="showToast('Đã đổi mật khẩu Admin thành công!')">
+            <span>Lưu mật khẩu mới</span>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+
+</html>

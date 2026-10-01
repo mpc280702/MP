@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>MINH. ADMIN PANEL — Quản Lý Dự Án</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css?v=2.2">
+</head>
+<body>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-header">
+        <a href="tong-quan.html" class="sidebar-logo">MINH.</a>
+        <div><span class="sidebar-badge">ADMIN PANEL</span></div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="tong-quan.html" class="nav-item">
+          <span class="material-symbols-outlined">home</span>
+          <span>Tổng quan</span>
+        </a>
+        <a href="quan-ly-du-an.html" class="nav-item active">
+          <span class="material-symbols-outlined">folder</span>
+          <span>Quản lý dự án</span>
+        </a>
+        <a href="quan-ly-khach-hang.html" class="nav-item">
+          <span class="material-symbols-outlined">group</span>
+          <span>Quản lý khách hàng</span>
+        </a>
+        <a href="bai-viet-blog.html" class="nav-item">
+          <span class="material-symbols-outlined">article</span>
+          <span>Bài viết / Blog</span>
+        </a>
+        <a href="hinh-anh-media.html" class="nav-item">
+          <span class="material-symbols-outlined">image</span>
+          <span>Hình ảnh / Media</span>
+        </a>
+        <a href="dich-vu.html" class="nav-item">
+          <span class="material-symbols-outlined">tune</span>
+          <span>Dịch vụ</span>
+        </a>
+        <a href="phan-hoi-lien-he.html" class="nav-item">
+          <span class="material-symbols-outlined">description</span>
+          <span>Phản hồi liên hệ</span>
+        </a>
+        <a href="thong-ke.html" class="nav-item">
+          <span class="material-symbols-outlined">bar_chart</span>
+          <span>Thống kê</span>
+        </a>
+        <a href="cai-dat.html" class="nav-item">
+          <span class="material-symbols-outlined">settings</span>
+          <span>Cài đặt</span>
+        </a>
+        <a href="quan-tri-vien.html" class="nav-item">
+          <span class="material-symbols-outlined">person</span>
+          <span>Quản trị viên</span>
+        </a>
+      </nav>
+    </div>
+
+    <a href="quan-tri-vien.html" class="sidebar-profile">
+      <img src="../assets/images/cao-ngoc-minh-portrait.jpg" alt="Cao Ngọc Minh" class="profile-avatar" width="40" height="40" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid var(--color-primary); flex-shrink:0;">
+      <div class="profile-info">
+        <div class="profile-name">Cao Ngọc Minh</div>
+        <div class="profile-role">Quản trị viên</div>
+        <div class="profile-status">
+          <span class="status-dot"></span>
+          <span>Online</span>
+        </div>
+      </div>
+    </a>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="search-box">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Tìm dự án...">
+      </div>
+      <div class="topbar-actions">
+        <button class="notification-btn" onclick="showToast('Hệ thống có 2 phản hồi liên hệ mới cần xử lý.')">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="notification-badge">2</span>
+        </button>
+        <a href="quan-tri-vien.html" class="topbar-user">
+          <img src="../assets/images/cao-ngoc-minh-portrait.jpg" alt="Cao Ngọc Minh" class="topbar-avatar" width="36" height="36" style="width:36px; height:36px; border-radius:50%; object-fit:cover; flex-shrink:0;">
+          <div class="topbar-user-info">
+            <div class="topbar-user-name">Cao Ngọc Minh</div>
+            <div class="topbar-user-role">Quản trị viên</div>
+          </div>
+          <span class="material-symbols-outlined" style="font-size: 18px; color: #94A3B8;">expand_more</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <div class="page-title-row">
+        <div>
+          <h1 class="page-title">Quản lý dự án Portfolio</h1>
+          <p class="page-subtitle">Quản lý toàn bộ danh sách Case Studies, Brand Identity, Packaging và Web UI/UX.</p>
+        </div>
+        <div class="action-header-group">
+          <a href="../pages/selected-work.html" target="_blank" class="btn-secondary-action">
+            <span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span>
+            <span>Trang Portfolio</span>
+          </a>
+          <button class="btn-primary-action" onclick="document.getElementById('addProjectModal').classList.add('show')">
+            <span class="material-symbols-outlined" style="font-size:16px;">add</span>
+            <span>+ Thêm dự án mới</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="filter-toolbar">
+          <div class="filter-pills-row">
+            <button class="filter-tag-btn active">Tất cả (52)</button>
+            <button class="filter-tag-btn">Brand Identity</button>
+            <button class="filter-tag-btn">Packaging</button>
+            <button class="filter-tag-btn">Key Visual</button>
+            <button class="filter-tag-btn">UI/UX Design</button>
+          </div>
+          <input type="text" class="table-search-input" placeholder="Tìm tên dự án, khách hàng...">
+        </div>
+
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th style="width: 60px; text-align: center;">Ảnh</th>
+              <th style="min-width: 170px;">Tên dự án</th>
+              <th style="min-width: 150px;">Danh mục</th>
+              <th style="min-width: 140px;">Khách hàng</th>
+              <th style="width: 80px; text-align: center;">Năm</th>
+              <th style="width: 130px; text-align: center;">Trạng thái</th>
+              <th style="width: 160px; text-align: center;">Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-preset-id="ulibee">
+              <td style="text-align: center;"><img src="../assets/images/ulibee-product-campaign-kv.jpg" alt="ULIBEE" class="project-img-cell" width="44" height="44"></td>
+              <td><span class="project-name-text">ULIBEE Campaign</span></td>
+              <td><span class="category-tag-cell">Product &amp; Campaign</span></td>
+              <td>ULIBEE Co.</td>
+              <td style="text-align: center; font-weight: 600; color: #475569;">2026</td>
+              <td style="text-align: center;"><span class="badge-status badge-doing">Đang thực hiện</span></td>
+              <td style="text-align: center;">
+                <div class="table-action-cell">
+                  <a href="../pages/selected-work.html" target="_blank" class="btn-table-view" title="Xem trên Website">
+                    <span class="material-symbols-outlined" style="font-size:15px;">visibility</span>
+                    <span>Xem</span>
+                  </a>
+                  <button type="button" class="btn-table-delete" onclick="confirmDeleteProject('ulibee', 'ULIBEE Campaign', this.closest('tr'))" title="Xóa dự án này">
+                    <span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+                    <span>Xóa</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-preset-id="net-que">
+              <td style="text-align: center;"><img src="../assets/images/net-que-isometric-mockup.jpg" alt="Nét Quê" class="project-img-cell" width="44" height="44"></td>
+              <td><span class="project-name-text">Nét Quê F&amp;B</span></td>
+              <td><span class="category-tag-cell">Brand Identity &amp; Packaging</span></td>
+              <td>Nét Quê Restaurant</td>
+              <td style="text-align: center; font-weight: 600; color: #475569;">2026</td>
+              <td style="text-align: center;"><span class="badge-status badge-done">Hoàn thành</span></td>
+              <td style="text-align: center;">
+                <div class="table-action-cell">
+                  <a href="../pages/case-study-net-que.html" target="_blank" class="btn-table-view" title="Xem trên Website">
+                    <span class="material-symbols-outlined" style="font-size:15px;">visibility</span>
+                    <span>Xem</span>
+                  </a>
+                  <button type="button" class="btn-table-delete" onclick="confirmDeleteProject('net-que', 'Nét Quê F&amp;B', this.closest('tr'))" title="Xóa dự án này">
+                    <span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+                    <span>Xóa</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-preset-id="lamee">
+              <td style="text-align: center;"><img src="../assets/images/lamee-isometric-mockup.jpg" alt="Lamée" class="project-img-cell" width="44" height="44"></td>
+              <td><span class="project-name-text">Lamée Skincare</span></td>
+              <td><span class="category-tag-cell">Cosmetics &amp; Beauty</span></td>
+              <td>Lamée Paris</td>
+              <td style="text-align: center; font-weight: 600; color: #475569;">2026</td>
+              <td style="text-align: center;"><span class="badge-status badge-doing">Đang thực hiện</span></td>
+              <td style="text-align: center;">
+                <div class="table-action-cell">
+                  <a href="../pages/case-study-lamee.html" target="_blank" class="btn-table-view" title="Xem trên Website">
+                    <span class="material-symbols-outlined" style="font-size:15px;">visibility</span>
+                    <span>Xem</span>
+                  </a>
+                  <button type="button" class="btn-table-delete" onclick="confirmDeleteProject('lamee', 'Lamée Skincare', this.closest('tr'))" title="Xóa dự án này">
+                    <span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+                    <span>Xóa</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-preset-id="vortex">
+              <td style="text-align: center;"><img src="../assets/images/vortex-kinetic.jpg" alt="Vortex" class="project-img-cell" width="44" height="44"></td>
+              <td><span class="project-name-text">VORTEX Apparel</span></td>
+              <td><span class="category-tag-cell">Fashion Streetwear</span></td>
+              <td>Vortex Fashion</td>
+              <td style="text-align: center; font-weight: 600; color: #475569;">2026</td>
+              <td style="text-align: center;"><span class="badge-status badge-done">Hoàn thành</span></td>
+              <td style="text-align: center;">
+                <div class="table-action-cell">
+                  <a href="../pages/case-study-vortex.html" target="_blank" class="btn-table-view" title="Xem trên Website">
+                    <span class="material-symbols-outlined" style="font-size:15px;">visibility</span>
+                    <span>Xem</span>
+                  </a>
+                  <button type="button" class="btn-table-delete" onclick="confirmDeleteProject('vortex', 'VORTEX Apparel', this.closest('tr'))" title="Xóa dự án này">
+                    <span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+                    <span>Xóa</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-preset-id="portfolio">
+              <td style="text-align: center;"><img src="../assets/images/portfolio-3d-screens.jpg" alt="Portfolio" class="project-img-cell" width="44" height="44"></td>
+              <td><span class="project-name-text">Portfolio Design System</span></td>
+              <td><span class="category-tag-cell">UI/UX &amp; Web App</span></td>
+              <td>Cao Ngọc Minh</td>
+              <td style="text-align: center; font-weight: 600; color: #475569;">2026</td>
+              <td style="text-align: center;"><span class="badge-status badge-done">Hoàn thành</span></td>
+              <td style="text-align: center;">
+                <div class="table-action-cell">
+                  <a href="../pages/case-study-portfolio.html" target="_blank" class="btn-table-view" title="Xem trên Website">
+                    <span class="material-symbols-outlined" style="font-size:15px;">visibility</span>
+                    <span>Xem</span>
+                  </a>
+                  <button type="button" class="btn-table-delete" onclick="confirmDeleteProject('portfolio', 'Portfolio Design System', this.closest('tr'))" title="Xóa dự án này">
+                    <span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+                    <span>Xóa</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD PROJECT QUICK MODAL (FULL PROFESSIONAL FORM) -->
+  <div class="modal-backdrop" id="addProjectModal">
+    <div class="modal-content-card" style="max-width: 680px; max-height: 92vh; padding: 28px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid #E2E8F0;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="material-symbols-outlined" style="color: var(--color-primary-dark); font-size: 24px;">add_photo_alternate</span>
+          <h2 style="font-size: 20px; font-weight: 800; color: #0F172A; margin: 0;">Thêm Dự Án Portfolio Mới</h2>
+        </div>
+        <button type="button" onclick="document.getElementById('addProjectModal').classList.remove('show')" style="background: #F1F5F9; border: none; width: 32px; height: 32px; border-radius: 8px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+      </div>
+
+      <!-- Section 1: Tên & Danh mục -->
+      <div class="form-group-row">
+        <div class="form-control-box">
+          <label>Tên Dự Án <span style="color:#EF4444;">*</span></label>
+          <input type="text" id="new-project-name" placeholder="Ví dụ: Ulibee Product Campaign" required>
+        </div>
+        <div class="form-control-box">
+          <label>Danh Mục Chính <span style="color:#EF4444;">*</span></label>
+          <select id="new-project-category" onchange="updateDefaultMockupImage(this.value)">
+            <option value="Brand Identity">Brand Identity (Nhận diện thương hiệu)</option>
+            <option value="Packaging & Label">Packaging &amp; Label (Bao bì &amp; Nhãn mác)</option>
+            <option value="Key Visual">Key Visual (Chiến dịch truyền thông &amp; 3D)</option>
+            <option value="UI/UX Design">UI/UX &amp; Web Design (Thiết kế ứng dụng &amp; Web)</option>
+            <option value="Menu & POSM">Menu &amp; POSM (Ấn phẩm F&amp;B &amp; Sự kiện)</option>
+            <option value="Đồ Họa & Poster">Đồ Họa &amp; Poster (Typography / Motion)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section 2: Khách hàng & Vai trò -->
+      <div class="form-group-row">
+        <div class="form-control-box">
+          <label>Tên Khách Hàng / Thương Hiệu</label>
+          <input type="text" id="new-project-client" placeholder="Ví dụ: Ulibee Group / Lamée Paris">
+        </div>
+        <div class="form-control-box">
+          <label>Vai Trò Đảm Nhận (Role)</label>
+          <input type="text" id="new-project-role" placeholder="Ví dụ: Lead Graphic Designer / UI UX Designer" value="Graphic Designer">
+        </div>
+      </div>
+
+      <!-- Section 3: Năm & Trạng thái -->
+      <div class="form-group-row">
+        <div class="form-control-box">
+          <label>Năm Thực Hiện</label>
+          <input type="text" id="new-project-year" placeholder="Ví dụ: 2026 hoặc 2024 - 2025" value="2026">
+        </div>
+        <div class="form-control-box">
+          <label>Trạng Thái</label>
+          <select id="new-project-status">
+            <option value="Hoàn thành">Hoàn thành (Đã nghiệm thu)</option>
+            <option value="Đang thực hiện">Đang thực hiện (In Progress)</option>
+            <option value="Bản nháp">Bản nháp (Draft)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section 4: Ảnh bìa Mockup Thumbnail (Có Preview) -->
+      <div style="background: #F8FAFC; border: 1px dashed #CBD5E1; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+        <label style="font-size: 12px; font-weight: 700; color: #334155; text-transform: uppercase; letter-spacing: 0.3px; display: block; margin-bottom: 10px;">
+          Ảnh Bìa / Mockup Dự Án (Thumbnail)
+        </label>
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+          <div style="width: 100px; height: 75px; border-radius: 8px; overflow: hidden; border: 2px solid var(--color-primary); background: #04201A; flex-shrink: 0;">
+            <img id="new-project-img-preview" src="../assets/images/ulibee-product-campaign-kv.jpg" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div style="flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 8px;">
+            <select id="new-project-preset-image" onchange="handlePresetImageChange(this.value)" style="padding: 8px 10px; border-radius: 6px; border: 1px solid #CBD5E1; font-size: 12px;">
+              <option value="assets/images/ulibee-product-campaign-kv.jpg">Mockup 1: Key Visual Ulibee 3D</option>
+              <option value="assets/images/net-que-isometric-mockup.jpg">Mockup 2: Nét Quê F&amp;B Branding</option>
+              <option value="assets/images/lamee-isometric-mockup.jpg">Mockup 3: Lamée Eco Skincare Packaging</option>
+              <option value="assets/images/portfolio-3d-screens.jpg">Mockup 4: UI/UX Multi-screens App</option>
+              <option value="assets/images/vortex-kinetic.jpg">Mockup 5: Vortex Kinetic Typography</option>
+              <option value="assets/images/portfolio-workspace-mockup.jpg">Mockup 6: F&amp;B Menu &amp; POSM Workspace</option>
+              <option value="assets/images/vincent-holdings.jpg">Mockup 7: Corporate Stationery Identity</option>
+            </select>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <label for="new-project-upload-file" style="font-size: 11px; padding: 6px 12px; background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; font-weight: 600; color: #475569;">
+                <span class="material-symbols-outlined" style="font-size: 16px;">upload_file</span>
+                <span>Tải ảnh từ máy tính</span>
+              </label>
+              <input type="file" id="new-project-upload-file" accept="image/*" onchange="handleProjectImageUpload(event)" style="display: none;">
+              <span id="upload-filename-text" style="font-size: 11px; color: #64748B;">(Hỗ trợ PNG, JPG, WebP)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Huy hiệu & Tags -->
+      <div class="form-group-row">
+        <div class="form-control-box">
+          <label>Huy Hiệu Lĩnh Vực (Badge)</label>
+          <input type="text" id="new-project-badge" placeholder="Ví dụ: FMCG / F&B / Lifestyle" value="Branding">
+        </div>
+        <div class="form-control-box">
+          <label>Tags Kỹ Năng / Ấn Phẩm</label>
+          <input type="text" id="new-project-tags" placeholder="Ví dụ: Key Visual, Packaging, 3D Mockup" value="Brand Identity, Portfolio 2026">
+        </div>
+      </div>
+
+      <!-- Section 6: Đường dẫn chi tiết -->
+      <div class="form-control-box" style="margin-bottom: 16px;">
+        <label>Đường Dẫn Chi Tiết (Case Study Link / Google Drive / Behance)</label>
+        <input type="text" id="new-project-link" placeholder="Ví dụ: pages/case-study-net-que.html hoặc link Drive" value="pages/selected-work.html">
+      </div>
+
+      <!-- Section 7: Mô tả ngắn -->
+      <div class="form-control-box" style="margin-bottom: 16px;">
+        <label>Mô Tả Tổng Quan Dự Án</label>
+        <textarea id="new-project-desc" rows="3" placeholder="Nhập tóm tắt ý tưởng, giải pháp thiết kế và giá trị mang lại cho khách hàng..."></textarea>
+      </div>
+
+      <!-- Section 8: Tùy chọn hiển thị & Hành động -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 16px;">
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: #0F172A; cursor: pointer;">
+          <input type="checkbox" id="new-project-featured" checked style="accent-color: var(--color-primary-dark); width: 16px; height: 16px;">
+          <span>🌟 Ghim hiển thị nổi bật trên Trang Chủ</span>
+        </label>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" onclick="document.getElementById('addProjectModal').classList.remove('show')" class="btn-secondary-action">Hủy</button>
+          <button type="button" onclick="saveNewProject()" class="btn-primary-action" style="box-shadow: 0 4px 12px rgba(0, 223, 137, 0.3);">Lưu &amp; Xuất bản</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin.js?v=3.2"></script>
+</body>
+</html>
+

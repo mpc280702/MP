@@ -1,6 +1,15 @@
 /**
- * SELECTED WORK FILTER SCRIPT (CAO NGỌC MINH)
+ * SELECTED WORK FILTER & DYNAMIC PORTFOLIO SCRIPT (CAO NGỌC MINH)
  */
+
+function escapeHtml(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
 
 function filterProjects(category, event) {
   const buttons = document.querySelectorAll('.filter-btn');
@@ -12,11 +21,11 @@ function filterProjects(category, event) {
   // Update button active state
   buttons.forEach(btn => {
     btn.classList.remove('btn-accent-gradient', 'shadow-md', 'bg-white', 'text-primary-green', 'text-[#04201A]');
-    btn.classList.add('bg-[#0B3B30]', 'text-[#DDE8E4]', 'border', 'border-white/15');
+    btn.classList.add('bg-[#072C24]', 'text-[#DDE8E4]', 'border', 'border-white/15');
   });
 
   if (activeBtn) {
-    activeBtn.classList.remove('bg-[#0B3B30]', 'text-[#DDE8E4]', 'border-white/15');
+    activeBtn.classList.remove('bg-[#072C24]', 'text-[#DDE8E4]', 'border-white/15');
     activeBtn.classList.add('btn-accent-gradient', 'shadow-md');
   }
 
@@ -40,7 +49,7 @@ function filterProjects(category, event) {
 }
 
 /* ==========================================================================
-   PROJECT LIGHTBOX MODAL PREVIEW (PROJECTS 5 - 12)
+   PROJECT LIGHTBOX MODAL PREVIEW (PROJECTS 5 - 12 & DYNAMIC CUSTOM PROJECTS)
    ========================================================================== */
 const PROJECT_DETAILS = {
   5: {
@@ -148,22 +157,37 @@ function openProjectModal(id) {
   const modal = document.getElementById('project-modal');
   if (!modal) return;
 
-  document.getElementById('modal-img').src = data.image;
-  document.getElementById('modal-img').alt = data.title;
-  document.getElementById('modal-client').textContent = data.client;
-  document.getElementById('modal-role').textContent = 'Role: ' + data.role;
-  document.getElementById('modal-title').textContent = data.title;
-  document.getElementById('modal-desc').textContent = data.desc;
+  const modalImg = document.getElementById('modal-img');
+  if (modalImg) {
+    modalImg.src = data.image;
+    modalImg.alt = data.title;
+  }
+  
+  const clientEl = document.getElementById('modal-client');
+  if (clientEl) clientEl.textContent = data.client;
+
+  const roleEl = document.getElementById('modal-role');
+  if (roleEl) roleEl.textContent = 'Role: ' + (data.role || 'Graphic Designer');
+
+  const titleEl = document.getElementById('modal-title');
+  if (titleEl) titleEl.textContent = data.title;
+
+  const descEl = document.getElementById('modal-desc');
+  if (descEl) descEl.textContent = data.desc;
 
   const badgesContainer = document.getElementById('modal-badges');
-  badgesContainer.innerHTML = data.badges.map(b => 
-    `<span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold uppercase border ${b.class}">${b.text}</span>`
-  ).join('');
+  if (badgesContainer && Array.isArray(data.badges)) {
+    badgesContainer.innerHTML = data.badges.map(b => 
+      `<span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold uppercase border ${b.class || 'border-white/20 text-white'}">${b.text}</span>`
+    ).join('');
+  }
 
   const tagsContainer = document.getElementById('modal-tags');
-  tagsContainer.innerHTML = data.tags.map(t => 
-    `<span class="text-[11px] font-bold bg-[#04201A] text-[#B8D3CB] px-2.5 py-1 rounded border border-[#00DF89]/20">${t}</span>`
-  ).join('');
+  if (tagsContainer && Array.isArray(data.tags)) {
+    tagsContainer.innerHTML = data.tags.map(t => 
+      `<span class="text-[11px] font-bold bg-[#04201A] text-[#B8D3CB] px-2.5 py-1 rounded border border-[#00DF89]/20">${t}</span>`
+    ).join('');
+  }
 
   modal.classList.remove('hidden');
   modal.classList.add('flex');
@@ -206,5 +230,211 @@ document.addEventListener('click', (e) => {
     closeProjectModal();
   }
 });
+
+/* ==========================================================================
+   DYNAMIC PROJECT LOADER FOR SELECTED WORK PAGE
+   ========================================================================== */
+function loadDynamicPortfolioProjects() {
+  const grid = document.getElementById('projects-grid');
+  if (!grid) return;
+
+  // Remove previously appended dynamic cards to avoid duplicates on re-render
+  document.querySelectorAll('.dynamic-project-card').forEach(el => el.remove());
+
+  let customProjects = [];
+  try {
+    customProjects = JSON.parse(localStorage.getItem('mp_custom_projects') || '[]');
+  } catch (e) {
+    console.error('Error loading custom projects from localStorage', e);
+  }
+
+  // Update counter always (even if 0 custom projects)
+  const totalCount = 12 + (Array.isArray(customProjects) ? customProjects.length : 0);
+  const countEl = document.getElementById('project-count');
+  if (countEl) countEl.textContent = totalCount;
+
+  const allFilterBtn = document.querySelector('.filter-btn');
+  if (allFilterBtn && allFilterBtn.textContent.includes('Tất Cả')) {
+    allFilterBtn.textContent = `Tất Cả (${totalCount})`;
+  }
+
+  if (!Array.isArray(customProjects) || customProjects.length === 0) return;
+
+  // Prepend each custom project (reverse order so newest is at the very top)
+  [...customProjects].reverse().forEach((p, idx) => {
+    if (!p || !p.name) return;
+    const modalKey = `custom_${p.id || idx}`;
+    
+    // Determine category slug safely
+    const cat = String(p.category || 'Brand Identity');
+    let catSlug = 'brand';
+    let catBadge = p.badge || 'Branding';
+    let subBadge = cat;
+
+    if (cat.includes('Packaging')) {
+      catSlug = 'brand editorial';
+      if (!p.badge) catBadge = 'Packaging';
+      subBadge = 'Eco / Commercial';
+    } else if (cat.includes('Key Visual')) {
+      catSlug = 'brand motion';
+      if (!p.badge) catBadge = 'Key Visual';
+      subBadge = 'Digital Ads';
+    } else if (cat.includes('UI/UX')) {
+      catSlug = 'uiux';
+      if (!p.badge) catBadge = 'UI/UX';
+      subBadge = 'Web & Mobile';
+    } else if (cat.includes('Menu') || cat.includes('POSM')) {
+      catSlug = 'brand editorial';
+      if (!p.badge) catBadge = 'Menu & POSM';
+      subBadge = 'F&B Design';
+    } else if (cat.includes('Đồ Họa') || cat.includes('Poster')) {
+      catSlug = 'motion';
+      if (!p.badge) catBadge = 'Motion Poster';
+      subBadge = 'Typography';
+    }
+
+    // Split tags if string
+    let tagList = [];
+    if (typeof p.tags === 'string' && p.tags.trim()) {
+      tagList = p.tags.split(',').map(t => t.trim()).filter(Boolean);
+    } else if (Array.isArray(p.tags)) {
+      tagList = p.tags;
+    }
+    if (tagList.length === 0) {
+      tagList = [cat, p.status || 'Hoàn thành', 'Portfolio 2026'];
+    }
+
+    // Determine correct image path
+    let rawImg = p.image || 'assets/images/ulibee-product-campaign-kv.jpg';
+    let imgPath = rawImg;
+    if (!imgPath.startsWith('http') && !imgPath.startsWith('data:') && !imgPath.startsWith('../')) {
+      imgPath = '../' + imgPath.replace(/^\.\//, '');
+    }
+
+    // Register into modal registry
+    PROJECT_DETAILS[modalKey] = {
+      title: p.name,
+      client: `${p.client || 'Khách hàng'} • ${p.year || '2026'}`,
+      role: p.role || 'Graphic Designer',
+      image: imgPath,
+      badges: [
+        { text: catBadge, class: 'text-white border-white/15' },
+        { text: subBadge, class: 'text-[#00DF89] border-[#00DF89]/30' }
+      ],
+      tags: tagList,
+      desc: p.description || 'Dự án thiết kế sáng tạo hoàn thiện bởi Cao Ngọc Minh.'
+    };
+
+    // Create Card element
+    const card = document.createElement('div');
+    card.className = 'project-card dynamic-project-card group flex flex-col bg-[#072C24] rounded-2xl overflow-hidden shadow-xl border border-[#00DF89]/40 hover:border-[#00DF89] hover:shadow-2xl hover:shadow-[#00DF89]/20 transition-all duration-300 cursor-pointer text-left';
+    card.setAttribute('data-category', catSlug);
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `Xem preview dự án ${escapeHtml(p.name)}`);
+    card.onclick = () => openProjectModal(modalKey);
+    card.onkeydown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') openProjectModal(modalKey);
+    };
+
+    const tagsHtml = tagList.slice(0, 3).map(t => 
+      `<span class="text-[10px] font-bold bg-[#04201A] text-[#B8D3CB] px-2 py-0.5 rounded border border-[#00DF89]/20">${escapeHtml(t)}</span>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="relative w-full h-72 sm:h-80 overflow-hidden bg-[#04201A]">
+        <img src="${imgPath}" alt="${escapeHtml(p.name)}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" draggable="false" width="400" height="320">
+        <div class="badge-overlay absolute top-4 left-4 flex gap-2 pointer-events-none">
+          <span class="px-3 py-1 rounded-full bg-[#04201A]/90 backdrop-blur font-roboto text-[10px] font-bold text-white uppercase border border-white/15">${catBadge}</span>
+          <span class="px-3 py-1 rounded-full bg-[#00DF89]/20 backdrop-blur font-roboto text-[10px] font-bold text-[#00DF89] uppercase border border-[#00DF89]/40">${subBadge}</span>
+        </div>
+      </div>
+      <div class="p-6 flex flex-col flex-grow justify-between">
+        <div>
+          <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+            <span>${escapeHtml(p.client || 'Khách hàng')} • ${escapeHtml(p.year || '2026')}</span>
+            <span class="text-[#00DF89] font-bold">Role: ${escapeHtml(p.role || 'Graphic Designer')}</span>
+          </div>
+          <h3 class="font-roboto text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">${escapeHtml(p.name)}</h3>
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            ${tagsHtml}
+          </div>
+          <p class="text-xs sm:text-sm text-[#DDE8E4] line-clamp-2 leading-relaxed">${escapeHtml(p.description || 'Dự án thiết kế sáng tạo hoàn thiện bởi Cao Ngọc Minh.')}</p>
+        </div>
+        <div class="mt-6 pt-4 flex items-center justify-between text-white font-roboto text-xs font-bold uppercase tracking-wider border-t border-white/15 group-hover:text-[#00DF89] transition-colors">
+          <span>Xem Preview Chi Tiết</span>
+          <span class="material-symbols-outlined text-sm group-hover:scale-125 transition-transform">visibility</span>
+        </div>
+      </div>
+    `;
+
+    grid.insertBefore(card, grid.firstChild);
+  });
+}
+
+// Background sync from MySQL PHP API or Node API with multiple fallbacks
+async function syncProjectsFromApi() {
+  const endpoints = [
+    '../api/projects.php',
+    '/MP/api/projects.php',
+    '../api/projects',
+    '/api/projects.php',
+    '/api/projects'
+  ];
+
+  for (const url of endpoints) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const data = await res.json();
+      if (data && data.success && Array.isArray(data.data) && data.data.length > 0) {
+        let local = [];
+        try {
+          local = JSON.parse(localStorage.getItem('mp_custom_projects') || '[]');
+        } catch (_) {
+          local = [];
+        }
+        const localNames = new Set(local.map(p => String(p.name).toLowerCase().trim()));
+        let added = false;
+        data.data.forEach(dbItem => {
+          if (!localNames.has(String(dbItem.name).toLowerCase().trim())) {
+            local.unshift(dbItem);
+            localNames.add(String(dbItem.name).toLowerCase().trim());
+            added = true;
+          }
+        });
+        if (added || local.length > 0) {
+          localStorage.setItem('mp_custom_projects', JSON.stringify(local));
+          loadDynamicPortfolioProjects();
+        }
+        break; // Successfully synced from first working endpoint
+      }
+    } catch (_) {
+      // try next endpoint
+    }
+  }
+}
+
+// Auto-run on DOM load and immediately
+loadDynamicPortfolioProjects();
+syncProjectsFromApi();
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadDynamicPortfolioProjects();
+  syncProjectsFromApi();
+});
+
+window.addEventListener('load', () => {
+  loadDynamicPortfolioProjects();
+  syncProjectsFromApi();
+});
+
+// Sync cross-tab when added from Admin tab
+window.addEventListener('storage', (e) => {
+  if (e.key === 'mp_custom_projects') {
+    loadDynamicPortfolioProjects();
+  }
+});
+
 
 

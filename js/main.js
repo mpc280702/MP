@@ -727,6 +727,134 @@ function initProjectCardNavigation() {
   });
 }
 
+function escapeHtml(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function loadDynamicHomeProjects() {
+  const selectedWorkSection = document.getElementById('selected-work');
+  if (!selectedWorkSection) return;
+
+  const grid = selectedWorkSection.querySelector('.grid');
+  if (!grid) return;
+
+  document.querySelectorAll('.home-dynamic-project-card').forEach(el => el.remove());
+
+  let customProjects = [];
+  try {
+    customProjects = JSON.parse(localStorage.getItem('mp_custom_projects') || '[]');
+  } catch (e) {
+    console.error('Error reading mp_custom_projects', e);
+  }
+
+  if (customProjects.length === 0) return;
+
+  customProjects.forEach((p) => {
+    if (!p || !p.name) return;
+    const cat = String(p.category || 'Brand Identity');
+    let catBadge = p.badge || 'Branding';
+    let subBadge = cat;
+
+    if (cat.includes('Packaging')) {
+      if (!p.badge) catBadge = 'Packaging';
+      subBadge = 'Eco / Commercial';
+    } else if (cat.includes('Key Visual')) {
+      if (!p.badge) catBadge = 'Key Visual';
+      subBadge = 'Digital Ads';
+    } else if (cat.includes('UI/UX')) {
+      if (!p.badge) catBadge = 'UI/UX';
+      subBadge = 'Web & Mobile';
+    } else if (cat.includes('Menu') || cat.includes('POSM')) {
+      if (!p.badge) catBadge = 'Menu & POSM';
+      subBadge = 'F&B Design';
+    }
+
+    // Split tags if string
+    let tagList = [];
+    if (typeof p.tags === 'string' && p.tags.trim()) {
+      tagList = p.tags.split(',').map(t => t.trim()).filter(Boolean);
+    } else if (Array.isArray(p.tags)) {
+      tagList = p.tags;
+    }
+    if (tagList.length === 0) {
+      tagList = [cat, 'Portfolio 2026'];
+    }
+
+    let rawImg = p.image || 'assets/images/ulibee-product-campaign-kv.jpg';
+    let imgPath = rawImg;
+    if (!imgPath.startsWith('http') && !imgPath.startsWith('data:')) {
+      imgPath = imgPath.replace(/^\.\.\//, '').replace(/^\.\//, '');
+    }
+
+    const tagsHtml = tagList.slice(0, 3).map(t => 
+      `<span class="badge-tag">${escapeHtml(t)}</span>`
+    ).join('');
+
+    const card = document.createElement('a');
+    card.href = 'pages/selected-work.html';
+    card.className = 'project-card home-dynamic-project-card group';
+    card.innerHTML = `
+      <div class="relative w-full h-64 sm:h-72 overflow-hidden bg-[#04201A]">
+        <img src="${imgPath}" alt="${escapeHtml(p.name)}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" draggable="false" width="400" height="320">
+        <div class="badge-overlay absolute top-3.5 left-3.5 flex gap-2">
+          <span class="badge-pill">${catBadge}</span>
+          <span class="badge-pill badge-accent">${subBadge}</span>
+        </div>
+      </div>
+      <div class="p-5 sm:p-6 flex flex-col justify-between flex-grow">
+        <div>
+          <div class="flex items-center justify-between text-xs text-[#B8D3CB] mb-1.5 font-medium">
+            <span>${escapeHtml(p.client || 'Khách hàng')} • ${escapeHtml(p.year || '2026')}</span>
+            <span class="text-[#00DF89] font-bold">Role: ${escapeHtml(p.role || 'Graphic Designer')}</span>
+          </div>
+          <h3 class="font-roboto text-lg sm:text-xl font-bold text-white group-hover:text-[#00DF89] transition-colors mb-2">${escapeHtml(p.name)}</h3>
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            ${tagsHtml}
+          </div>
+          <p class="body-text line-clamp-2">${escapeHtml(p.description || 'Dự án thiết kế sáng tạo hoàn thiện bởi Cao Ngọc Minh.')}</p>
+        </div>
+        <div class="flex items-center justify-between mt-5 pt-3.5 border-t border-[#00DF89]/15">
+          <span class="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#00DF89] gap-1 group-hover:underline">
+            <span>Xem Chi Tiết</span>
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </span>
+          <span class="material-symbols-outlined text-[#00DF89] text-base group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">north_east</span>
+        </div>
+      </div>
+    `;
+
+    grid.insertBefore(card, grid.firstChild);
+  });
+}
+
+// Background sync from MySQL API for root
+async function syncHomeProjectsFromApi() {
+  try {
+    const res = await fetch('api/projects.php');
+    const data = await res.json();
+    if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+      let local = JSON.parse(localStorage.getItem('mp_custom_projects') || '[]');
+      const localIds = new Set(local.map(p => String(p.id)));
+      let added = false;
+      data.data.forEach(dbItem => {
+        if (!localIds.has(String(dbItem.id))) {
+          local.push(dbItem);
+          added = true;
+        }
+      });
+      if (added) {
+        localStorage.setItem('mp_custom_projects', JSON.stringify(local));
+        loadDynamicHomeProjects();
+      }
+    }
+  } catch (e) {}
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initScrollProgressBar();
   initBackToTop();
@@ -740,6 +868,8 @@ document.addEventListener('DOMContentLoaded', () => {
   animateCounters();
   initNavigation();
   initProjectCardNavigation();
+  loadDynamicHomeProjects();
+  syncHomeProjectsFromApi();
 
   const yearEl =
     document.getElementById('current-year');
@@ -753,3 +883,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.dataset.reducedMotion =
     String(prefersReducedMotion);
 });
+
+window.addEventListener('storage', (e) => {
+  if (e.key === 'mp_custom_projects') {
+    loadDynamicHomeProjects();
+  }
+});
+

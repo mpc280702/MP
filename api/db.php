@@ -3,11 +3,7 @@
  * Database Connection & Configuration (XAMPP MySQL PDO)
  */
 
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'portfolio_db');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_CHARSET', 'utf8mb4');
+require_once __DIR__ . '/config.php';
 
 function getDBConnection() {
     static $pdo = null;

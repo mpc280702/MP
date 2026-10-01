@@ -119,26 +119,21 @@ function sanitizeContactPayload(data) {
 
   return {
     'Họ và tên': toSafeString(
-      data['Họ và tên'],
+      data['Họ và tên'] || data.name || data.fullname || '',
       120
     ),
     'Email': toSafeString(
-      data.Email,
+      data.Email || data.email || '',
       180
     ),
     'Mục đích': toSafeString(
-      data['Mục đích'],
+      data['Mục đích'] || data.purpose || 'Tư vấn',
       180
     ),
     'Lời nhắn': toSafeString(
-      data['Lời nhắn'],
+      data['Lời nhắn'] || data.message || data.content || '',
       5000
-    ),
-    submittedAt:
-      toSafeString(
-        data.submittedAt,
-        80
-      )
+    )
   };
 }
 
@@ -161,13 +156,13 @@ const server = http.createServer((req, res) => {
   }
 
   if (
-    !['GET', 'HEAD', 'OPTIONS', 'POST']
+    !['GET', 'HEAD', 'OPTIONS', 'POST', 'DELETE']
       .includes(req.method)
   ) {
     res.writeHead(405, {
       'Content-Type':
         'text/plain; charset=utf-8',
-      Allow: 'GET, HEAD, OPTIONS, POST',
+      Allow: 'GET, HEAD, OPTIONS, POST, DELETE',
       ...SECURITY_HEADERS
     });
 
@@ -179,7 +174,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(204, {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods':
-        'GET, HEAD, POST, OPTIONS',
+        'GET, HEAD, POST, DELETE, OPTIONS',
       'Access-Control-Allow-Headers':
         'Content-Type',
       ...SECURITY_HEADERS
@@ -237,7 +232,7 @@ const server = http.createServer((req, res) => {
 
   if (
     req.method === 'POST' &&
-    reqPath === '/api/contact'
+    (reqPath === '/api/contact' || reqPath === '/api/contact.php')
   ) {
     if (
       req.headers['content-type']?.includes(
@@ -268,6 +263,14 @@ const server = http.createServer((req, res) => {
             );
           }
 
+          if (parsed.hp_check || parsed.honeypot) {
+            sendJSON(res, 200, {
+              success: true,
+              message: 'Đã lưu lời nhắn thành công!'
+            });
+            return;
+          }
+
           const data =
             sanitizeContactPayload(parsed);
 
@@ -295,6 +298,9 @@ const server = http.createServer((req, res) => {
               messages = [];
             }
           }
+
+          const maxId = messages.reduce((max, m) => Math.max(max, Number(m.id) || 0), 0);
+          data.id = maxId + 1;
 
           data.timestamp =
             new Date().toISOString();
@@ -335,6 +341,143 @@ const server = http.createServer((req, res) => {
     );
 
     return;
+  }
+
+  // Handle /api/messages or /api/messages.php (GET)
+  if (req.method === 'GET' && (reqPath === '/api/messages' || reqPath === '/api/messages.php')) {
+    const messagesFile = path.join(ROOT_DIR, 'messages.json');
+    let messages = [];
+    if (fs.existsSync(messagesFile)) {
+      try {
+        messages = JSON.parse(fs.readFileSync(messagesFile, 'utf8')) || [];
+      } catch (_) {
+        messages = [];
+      }
+    }
+    sendJSON(res, 200, {
+      success: true,
+      data: messages,
+      stats: { total: messages.length }
+    });
+    return;
+  }
+
+  // Handle /api/projects or /api/projects.php (GET, POST, DELETE)
+  if (reqPath === '/api/projects' || reqPath === '/api/projects.php') {
+    const projectsFile = path.join(ROOT_DIR, 'projects.json');
+    let projects = [];
+    if (fs.existsSync(projectsFile)) {
+      try {
+        projects = JSON.parse(fs.readFileSync(projectsFile, 'utf8')) || [];
+      } catch (_) {
+        projects = [];
+      }
+    }
+
+    if (req.method === 'GET') {
+      sendJSON(res, 200, {
+        success: true,
+        data: projects,
+        total: projects.length
+      });
+      return;
+    }
+
+    if (req.method === 'DELETE') {
+      let parsedUrl = null;
+      try {
+        parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+      } catch (_) {}
+      const qId = parsedUrl ? parsedUrl.searchParams.get('id') : null;
+      const qName = parsedUrl ? parsedUrl.searchParams.get('name') : null;
+
+      collectRequestBody(req, res, (body) => {
+        let delId = qId;
+        let delName = qName;
+        if (body) {
+          try {
+            const b = JSON.parse(body);
+            if (b.id) delId = b.id;
+            if (b.name) delName = b.name;
+          } catch (_) {}
+        }
+
+        projects = projects.filter(p => {
+          const matchId = delId && String(p.id) === String(delId);
+          const matchName = delName && String(p.name).toLowerCase().trim() === String(delName).toLowerCase().trim();
+          return !(matchId || matchName);
+        });
+
+        fs.writeFileSync(projectsFile, JSON.stringify(projects, null, 2), 'utf8');
+        sendJSON(res, 200, {
+          success: true,
+          message: 'Đã xóa dự án thành công!',
+          total: projects.length
+        });
+      });
+      return;
+    }
+
+    if (req.method === 'POST') {
+      collectRequestBody(req, res, (body) => {
+        try {
+          const parsed = JSON.parse(body);
+          if (!parsed) {
+            sendJSON(res, 400, { success: false, message: 'Invalid payload.' });
+            return;
+          }
+
+          // Handle action=delete via POST
+          if (parsed.action === 'delete') {
+            const delId = parsed.id || parsed.delete_id;
+            const delName = parsed.name;
+            projects = projects.filter(p => {
+              const matchId = delId && String(p.id) === String(delId);
+              const matchName = delName && String(p.name).toLowerCase().trim() === String(delName).toLowerCase().trim();
+              return !(matchId || matchName);
+            });
+            fs.writeFileSync(projectsFile, JSON.stringify(projects, null, 2), 'utf8');
+            sendJSON(res, 200, {
+              success: true,
+              message: 'Đã xóa dự án thành công!',
+              total: projects.length
+            });
+            return;
+          }
+
+          if (!parsed.name) {
+            sendJSON(res, 400, { success: false, message: 'Vui lòng nhập tên dự án.' });
+            return;
+          }
+          const newProject = {
+            id: parsed.id || Date.now(),
+            name: parsed.name,
+            category: parsed.category || 'Brand Identity',
+            client: parsed.client || 'Doanh Nghiệp Mới',
+            role: parsed.role || 'Graphic Designer',
+            status: parsed.status || 'Đang thực hiện',
+            badge: parsed.badge || 'Branding',
+            tags: parsed.tags || 'Brand Identity, Portfolio 2026',
+            description: parsed.description || '',
+            image: parsed.image || 'assets/images/ulibee-product-campaign-kv.jpg',
+            year: parsed.year || '2026',
+            link: parsed.link || 'pages/selected-work.html',
+            is_featured: parsed.is_featured !== undefined ? parsed.is_featured : 1,
+            created_at: parsed.created_at || new Date().toISOString()
+          };
+          projects.unshift(newProject);
+          fs.writeFileSync(projectsFile, JSON.stringify(projects, null, 2), 'utf8');
+          sendJSON(res, 200, {
+            success: true,
+            message: 'Dự án mới đã được lưu thành công!',
+            project: newProject
+          });
+        } catch (e) {
+          sendJSON(res, 400, { success: false, error: 'Invalid JSON payload.' });
+        }
+      });
+      return;
+    }
   }
 
   const safePath =

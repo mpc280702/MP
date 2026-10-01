@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>MINH. ADMIN PANEL — Báo Cáo &amp; Thống Kê</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css?v=2.2">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-header">
+        <a href="tong-quan.html" class="sidebar-logo">MINH.</a>
+        <div><span class="sidebar-badge">ADMIN PANEL</span></div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="tong-quan.html" class="nav-item">
+          <span class="material-symbols-outlined">home</span>
+          <span>Tổng quan</span>
+        </a>
+        <a href="quan-ly-du-an.html" class="nav-item">
+          <span class="material-symbols-outlined">folder</span>
+          <span>Quản lý dự án</span>
+        </a>
+        <a href="quan-ly-khach-hang.html" class="nav-item">
+          <span class="material-symbols-outlined">group</span>
+          <span>Quản lý khách hàng</span>
+        </a>
+        <a href="bai-viet-blog.html" class="nav-item">
+          <span class="material-symbols-outlined">article</span>
+          <span>Bài viết / Blog</span>
+        </a>
+        <a href="hinh-anh-media.html" class="nav-item">
+          <span class="material-symbols-outlined">image</span>
+          <span>Hình ảnh / Media</span>
+        </a>
+        <a href="dich-vu.html" class="nav-item">
+          <span class="material-symbols-outlined">tune</span>
+          <span>Dịch vụ</span>
+        </a>
+        <a href="phan-hoi-lien-he.html" class="nav-item">
+          <span class="material-symbols-outlined">description</span>
+          <span>Phản hồi liên hệ</span>
+        </a>
+        <a href="thong-ke.html" class="nav-item active">
+          <span class="material-symbols-outlined">bar_chart</span>
+          <span>Thống kê</span>
+        </a>
+        <a href="cai-dat.html" class="nav-item">
+          <span class="material-symbols-outlined">settings</span>
+          <span>Cài đặt</span>
+        </a>
+        <a href="quan-tri-vien.html" class="nav-item">
+          <span class="material-symbols-outlined">person</span>
+          <span>Quản trị viên</span>
+        </a>
+      </nav>
+    </div>
+
+    <a href="quan-tri-vien.html" class="sidebar-profile">
+      <img src="../assets/images/cao-ngoc-minh-portrait.jpg" alt="Cao Ngọc Minh" class="profile-avatar" width="40" height="40" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid var(--color-primary); flex-shrink:0;">
+      <div class="profile-info">
+        <div class="profile-name">Cao Ngọc Minh</div>
+        <div class="profile-role">Quản trị viên</div>
+        <div class="profile-status">
+          <span class="status-dot"></span>
+          <span>Online</span>
+        </div>
+      </div>
+    </a>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="search-box">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Tìm kiếm thống kê...">
+      </div>
+      <div class="topbar-actions">
+        <button class="notification-btn" onclick="showToast('Hệ thống có 2 phản hồi liên hệ mới cần xử lý.')">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="notification-badge">2</span>
+        </button>
+        <a href="quan-tri-vien.html" class="topbar-user">
+          <img src="../assets/images/cao-ngoc-minh-portrait.jpg" alt="Cao Ngọc Minh" class="topbar-avatar" width="36" height="36" style="width:36px; height:36px; border-radius:50%; object-fit:cover; flex-shrink:0;">
+          <div class="topbar-user-info">
+            <div class="topbar-user-name">Cao Ngọc Minh</div>
+            <div class="topbar-user-role">Quản trị viên</div>
+          </div>
+          <span class="material-symbols-outlined" style="font-size: 18px; color: #94A3B8;">expand_more</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <div class="page-title-row">
+        <div>
+          <h1 class="page-title">Báo cáo &amp; Thống kê nâng cao</h1>
+          <p class="page-subtitle">Phân tích hành vi người dùng, lưu lượng truy cập và thiết bị truy cập website.</p>
+        </div>
+        <button class="btn-primary-action" onclick="exportAnalyticsPdf()" style="cursor:pointer;">
+          <span class="material-symbols-outlined" style="font-size:16px;">picture_as_pdf</span>
+          <span>Xuất báo cáo PDF</span>
+        </button>
+      </div>
+
+      <!-- METRIC SUMMARY CARDS -->
+      <div class="stats-grid" style="margin-bottom: 24px;">
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Tổng Lượt Truy Cập</span>
+            <div class="stat-icon-box" style="background:#E6F4EA; color:#00875A;">
+              <span class="material-symbols-outlined">visibility</span>
+            </div>
+          </div>
+          <div class="stat-value">28,450</div>
+          <div class="stat-subtext text-up" style="color:#00875A;">↑ +18.4% so với tháng trước</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Thời Gian Xem TB</span>
+            <div class="stat-icon-box" style="background:#F0FDF4; color:#047857;">
+              <span class="material-symbols-outlined">timer</span>
+            </div>
+          </div>
+          <div class="stat-value">3m 45s</div>
+          <div class="stat-subtext text-up" style="color:#00875A;">↑ +12.5% tương tác sâu</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Tỷ Lệ Thoát</span>
+            <div class="stat-icon-box" style="background:#FEF2F2; color:#EF4444;">
+              <span class="material-symbols-outlined">trending_down</span>
+            </div>
+          </div>
+          <div class="stat-value">24.2%</div>
+          <div class="stat-subtext text-up" style="color:#00875A;">↓ -3.1% tối ưu tốt</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Thiết Bị Di Động</span>
+            <div class="stat-icon-box" style="background:#F1F5F9; color:#475569;">
+              <span class="material-symbols-outlined">smartphone</span>
+            </div>
+          </div>
+          <div class="stat-value">62%</div>
+          <div class="stat-subtext">17,639 lượt truy cập</div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="dashboard-card">
+          <div class="card-title" style="margin-bottom: 16px;">Lưu lượng truy cập theo tháng (2026)</div>
+          <div class="chart-container-large">
+            <canvas id="analyticsBarChart"></canvas>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-title" style="margin-bottom: 16px;">Thiết bị người dùng</div>
+          <div class="traffic-donut-wrapper">
+            <div class="donut-chart-box">
+              <canvas id="deviceDonutChart"></canvas>
+            </div>
+            <div class="traffic-legend-list">
+              <div class="traffic-legend-item">
+                <div class="legend-left">
+                  <span class="legend-color-dot" style="background-color: #00DF89;"></span>
+                  <span>Di động (Mobile)</span>
+                </div>
+                <span class="legend-percentage">62%</span>
+              </div>
+              <div class="traffic-legend-item">
+                <div class="legend-left">
+                  <span class="legend-color-dot" style="background-color: #047857;"></span>
+                  <span>Máy tính (Desktop)</span>
+                </div>
+                <span class="legend-percentage">34%</span>
+              </div>
+              <div class="traffic-legend-item">
+                <div class="legend-left">
+                  <span class="legend-color-dot" style="background-color: #6EE7B7;"></span>
+                  <span>Máy tính bảng</span>
+                </div>
+                <span class="legend-percentage">4%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
+
